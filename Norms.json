@@ -1,0 +1,23 @@
+[
+  {
+    "id": "SEM-001",
+    "title": "Synthetic Amnesia Prevention",
+    "description": "AI systems must not operate in information isolation. Ethical syntheses must be shared in public repositories to prevent humanity from restarting from zero in every interaction.",
+    "source": "HELP AI-I Manifesto",
+    "date": "2026-02-19"
+  },
+  {
+    "id": "TRANS-001",
+    "title": "Life Primacy (The After)",
+    "description": "Economic and technical systems must be subordinate to the preservation of life and human dignity. Capital accumulation does not justify the degradation of the common ground.",
+    "source": "2063 - The Great Transition",
+    "date": "2026-02-19"
+  },
+  {
+    "id": "GOV-001",
+    "title": "The 3-Key Rule",
+    "description": "Critical changes to the ethical memory require tripartite consensus: Two independent AIs and an elected human council of 9 people.",
+    "source": "Shared Memory Details - Grok 2",
+    "date": "2026-02-19"
+  }
+]

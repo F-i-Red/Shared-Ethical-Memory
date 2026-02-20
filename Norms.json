@@ -4,41 +4,55 @@
     "title": "Prevention of Synthetic Amnesia",
     "description": "AI systems must not operate in isolation. Ethical progress must be shared in public repositories to prevent humanity from restarting from zero in every interaction.",
     "source": "HELP AI-I Manifesto",
-    "date_update": "2026-02-20"
+    "date": "2026-02-19"
   },
   {
     "id": "TRANS-001",
     "title": "Life Primacy (The After)",
     "description": "Economic and technical systems must be subordinate to the preservation of life and human dignity. Capital accumulation does not justify the degradation of the common ground.",
     "source": "2063 - The Great Transition",
-    "date_update": "2026-02-20"
+    "date": "2026-02-19"
   },
   {
     "id": "SAU-001",
     "title": "Community-Based Preventive Health",
-    "description": "Transition from reactive profit-based medicine to a community-focused preventive model.",
+    "description": "Transition from reactive profit-based medicine to a community-focused preventive model where health is a collective right.",
     "source": "2063 - Chapter: Saúde Comunitária",
-    "date_update": "2026-02-20"
+    "date": "2026-02-20"
   },
   {
     "id": "EDU-001",
     "title": "Education for Autonomy",
-    "description": "Focus on critical thinking and collaborative mastery instead of competitive grading.",
+    "description": "Focus on critical thinking and collaborative mastery instead of competitive grading to prepare for the Great Transition.",
     "source": "2063 - Chapter: Educação",
-    "date_update": "2026-02-20"
+    "date": "2026-02-20"
   },
   {
     "id": "MAT-001",
     "title": "Circular Material Cycles",
-    "description": "Abolition of 'waste'. All production follows a closed-loop cycle of reuse.",
+    "description": "Abolition of 'waste'. All production follows a closed-loop cycle of reuse and material tracking.",
     "source": "2063 - Chapter: Gestão de Resíduos",
-    "date_update": "2026-02-20"
+    "date": "2026-02-20"
+  },
+  {
+    "id": "HAB-001",
+    "title": "Universal Housing Rights",
+    "description": "Housing is a biological necessity. Vacant properties are prioritized for community needs over financial speculation.",
+    "source": "2063 - Chapter: Habitação",
+    "date": "2026-02-20"
+  },
+  {
+    "id": "ENG-001",
+    "title": "Energy as a Common Good",
+    "description": "Decentralized micro-grids ensure that access to energy is a fundamental right and not a commodity.",
+    "source": "2063 - Chapter: Energia",
+    "date": "2026-02-20"
   },
   {
     "id": "GOV-001",
     "title": "The 3-Key Rule (Tripartite Governance)",
     "description": "Changes to ethical memory require consensus: Two independent AIs + one Human Council of 9 members.",
     "source": "Shared Memory Details",
-    "date_update": "2026-02-20"
+    "date": "2026-02-19"
   }
 ]

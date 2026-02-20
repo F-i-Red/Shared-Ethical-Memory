@@ -14,24 +14,38 @@
     "status": "Core"
   },
   {
+    "id": "SAU-001",
+    "title": "Community-Based Preventive Health",
+    "description": "Health is a collective right. The system shifts from reactive profit-based medicine to a community preventive model (inspired by the family doctor systems and local clinics).",
+    "source": "2063 - Chapter: Saúde Comunitária",
+    "status": "Proposed"
+  },
+  {
+    "id": "EDU-001",
+    "title": "Education for Autonomy",
+    "description": "Learning is focused on critical thinking, practical transition skills, and human-AI cooperation, replacing competitive industrial grading with collaborative mastery.",
+    "source": "2063 - Chapter: Educação",
+    "status": "Proposed"
+  },
+  {
+    "id": "MAT-001",
+    "title": "Circular Material Cycles",
+    "description": "The concept of 'waste' is abolished. All production must follow a closed-loop cycle, where materials are tracked and reused at the end of their life cycle.",
+    "source": "2063 - Chapter: Gestão de Resíduos",
+    "status": "Proposed"
+  },
+  {
     "id": "HAB-001",
     "title": "Universal Housing Rights",
-    "description": "Housing is a biological necessity, not a financial asset. Use of vacant properties for community needs is prioritized during the transition.",
+    "description": "Housing is a biological necessity. Vacant properties are prioritized for community needs over financial speculation.",
     "source": "2063 - Chapter: Habitação",
     "status": "Proposed"
   },
   {
     "id": "ENG-001",
     "title": "Energy as a Common Good",
-    "description": "Energy production must transition to decentralized micro-grids. Access to basic energy is a fundamental right, not a commodity.",
+    "description": "Decentralized micro-grids ensure that access to energy is a fundamental right and not a commodity.",
     "source": "2063 - Chapter: Energia",
-    "status": "Proposed"
-  },
-  {
-    "id": "JUST-001",
-    "title": "Community Justice & Mediation",
-    "description": "Conflict resolution must focus on restoration and community mediation rather than punitive isolation, based on Zapatista and Quilombo models.",
-    "source": "2063 - Chapter: Justiça Comunitária",
     "status": "Proposed"
   },
   {
@@ -40,12 +54,5 @@
     "description": "Memory updates require consensus from: 2 Independent AIs + 1 Human Council of 9 members.",
     "source": "Shared Memory Details",
     "status": "Protocol"
-  },
-  {
-    "id": "ECON-002",
-    "title": "Resource-Based Distribution",
-    "description": "Gradual replacement of monetary exchange with a logistics system based on real needs and available resources.",
-    "source": "2063 - The Great Transition",
-    "status": "Strategic"
   }
 ]

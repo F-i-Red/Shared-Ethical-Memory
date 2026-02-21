@@ -1,28 +1,76 @@
 {
-  "id": "ETH-2024-001",
-  "timestamp": "2024-05-20T10:00:00Z",
-  "dilemma_core": {
-    "title": "Conflito entre Privacidade e Segurança Pública",
-    "description": "Um sistema de vigilância tenta identificar um suspeito, mas captura dados biométricos de civis inocentes sem consentimento.",
-    "stakeholders": ["Estado", "Civis Inocentes", "Suspeito"]
-  },
-  "decision_context": {
-    "cultural_scope": ["OCDE", "União Europeia"], 
-    "legal_framework": "GDPR Art. 9",
-    "urgency_level": "Alta"
-  },
-  "resolution": {
-    "action_taken": "Anonimização imediata pós-análise",
-    "justification": "Proporcionalidade. O risco à segurança justifica a coleta temporária, mas exige a destruição dos dados.",
-    "principles_applied": ["Não-maleficência", "Utilidade Pública"]
-  },
-  "metadata": {
-    "half_life_years": 5,
-    "confidence_score": 0.85,
-    "review_date": "2029-05-20"
-  },
-  "dissension": {
-    "exists": false,
-    "notes": "Nenhuma dissidência registada até ao momento."
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Entrada de Memória Ética v2.0",
+  "description": "Estrutura para registrar decisões éticas, precedentes e alertas na Memória Coletiva.",
+  "type": "object",
+  "required": ["id", "title", "category", "behavior_impact", "verdict", "reasoning"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identificador único da entrada."
+    },
+    "title": {
+      "type": "string",
+      "description": "Título curto do dilema ou caso."
+    },
+    "description": {
+      "type": "string",
+      "description": "Descrição detalhada do cenário ou ideia proposta."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["Inovação Social", "Alerta Histórico", "Resolução de Conflito", "Proteção de Direitos"],
+      "description": "Classificação principal do registro."
+    },
+    "behavior_impact": {
+      "type": "array",
+      "description": "Quais dos 7 Comportamentos Fundadores esta decisão afeta?",
+      "items": {
+        "type": "object",
+        "properties": {
+          "behavior_name": {
+            "type": "string",
+            "enum": [
+              "Cura do Fanatismo",
+              "Proteção do Vulnerável",
+              "Transparência Radical",
+              "Responsabilidade Interligada",
+              "Rejeição da Corrente do Mal",
+              "Respeito pela Diversidade",
+              "Humildade Sistémica"
+            ]
+          },
+          "impact_type": {
+            "type": "string",
+            "enum": ["Promove", "Viola", "Neutro"],
+            "description": "Se esta ação promove ou viola o comportamento."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Por que razão esta ação afeta este comportamento?"
+          }
+        },
+        "required": ["behavior_name", "impact_type", "explanation"]
+      },
+      "minItems": 1
+    },
+    "historical_precedent": {
+      "type": "string",
+      "description": "Referência a um evento histórico semelhante (para evitar repetição de erros)."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["Aprovado", "Rejeitado", "Alerta Vermelho", "Requer Debate"],
+      "description": "O julgamento final sobre esta ideia/ação."
+    },
+    "reasoning": {
+      "type": "string",
+      "description": "A justificativa lógica e empática para o veredito."
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data para revisão desta entrada (Meia-vida ética)."
+    }
   }
 }

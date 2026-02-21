@@ -11,7 +11,7 @@ Se tens uma ideia ou um caso de estudo que a memória deva guardar:
 
 Certifica-te de que a tua ideia não viola os 7 Comportamentos Fundadores (ver README.md).
 Cria um novo ficheiro na pasta /memory/cases/ seguindo o padrão case_XXX_descricao.json.
-Preenche obrigatoriamente todos os campos do Schema (schema/ethical_entry.json).
+Preenche obrigatoriamente todos os campos do Schema (schema.json).
 Submete um Pull Request (PR).
 2. Sinalizar um Problema (Dissidência)
 Se encontraste uma entrada na memória que achas errada, perigosa ou obsoleta:
@@ -35,7 +35,7 @@ Lembra-te: Este projeto visa erradicar o fascismo, a opressão e o fanatismo.
 Contribuições que promovam discurso de ódio, intolerância ou autoritarismo serão imediatamente rejeitadas.
 A diversidade de opinião é bem-vinda, mas a diversidade de ódio não.
 Estrutura Técnica
-Por favor, segue rigorosamente o formato JSON definido em schema/ethical_entry.json.
+Por favor, segue rigorosamente o formato JSON definido em schema.json.
 
 Exemplo de um campo crítico a não esquecer:
 

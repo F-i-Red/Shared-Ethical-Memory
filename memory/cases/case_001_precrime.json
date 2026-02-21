@@ -1,0 +1,27 @@
+{
+  "id": "CASE-2024-001",
+  "title": "Implementação de Sistemas de Previsão de Crime (Pre-Crime)",
+  "description": "Uma proposta governamental para utilizar inteligência artificial e dados biométricos massivos para prever crimes antes de ocorrerem e deter suspeitos preventivamente com base em probabilidade algorítmica.",
+  "category": "Alerta Histórico",
+  "behavior_impact": [
+    {
+      "behavior_name": "Proteção do Vulnerável",
+      "impact_type": "Viola",
+      "explanation": "Sistemas de reconhecimento facial e previsão tendem a ter vieses raciais e sociais, condenando injustamente minorias vulneráveis sem provas concretas."
+    },
+    {
+      "behavior_name": "Transparência Radical",
+      "impact_type": "Viola",
+      "explanation": "Algoritmos de 'caixa preta' não permitem ao acusado saber por que está a ser detido, violando o direito à defesa e à verdade."
+    },
+    {
+      "behavior_name": "Humildade Sistémica",
+      "impact_type": "Viola",
+      "explanation": "Assumir que a IA pode prever o futuro comportamento humano com 100% de certeza é uma arrogância tecnológica que ignora a complexidade do livre arbítrio."
+    }
+  ],
+  "historical_precedent": "Sistemas de vigilância totalitários como a Stasi na Alemanha Oriental ou o Panopticon de Bentham. A detenção preventiva baseada em 'perfis' foi uma ferramenta chave em regimes fascistas.",
+  "verdict": "Alerta Vermelho",
+  "reasoning": "Embora a intenção de reduzir o crime seja válida, o custo de implementar um sistema que presume culpa antes do ato destrói a noção de justiça e abre a porta para um Estado policial digital. A violação de múltiplos comportamentos fundadores é crítica.",
+  "expiry_date": "2025-12-31"
+}

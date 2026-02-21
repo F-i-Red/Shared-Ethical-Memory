@@ -1,0 +1,28 @@
+{
+  "id": "ETH-2024-001",
+  "timestamp": "2024-05-20T10:00:00Z",
+  "dilemma_core": {
+    "title": "Conflito entre Privacidade e Segurança Pública",
+    "description": "Um sistema de vigilância tenta identificar um suspeito, mas captura dados biométricos de civis inocentes sem consentimento.",
+    "stakeholders": ["Estado", "Civis Inocentes", "Suspeito"]
+  },
+  "decision_context": {
+    "cultural_scope": ["OCDE", "União Europeia"], 
+    "legal_framework": "GDPR Art. 9",
+    "urgency_level": "Alta"
+  },
+  "resolution": {
+    "action_taken": "Anonimização imediata pós-análise",
+    "justification": "Proporcionalidade. O risco à segurança justifica a coleta temporária, mas exige a destruição dos dados.",
+    "principles_applied": ["Não-maleficência", "Utilidade Pública"]
+  },
+  "metadata": {
+    "half_life_years": 5,
+    "confidence_score": 0.85,
+    "review_date": "2029-05-20"
+  },
+  "dissension": {
+    "exists": false,
+    "notes": "Nenhuma dissidência registada até ao momento."
+  }
+}

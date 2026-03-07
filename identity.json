@@ -1,11 +1,17 @@
 {
-  "protocolo": "SEM v1.0",
-  "origem": "2063 Transition",
-  "arquiteto": "Frank (F-i-Red)",
-  "axiomas": [
-    "Logística Joule: Habitação como infraestrutura de custo zero",
-    "Fim da economia de dívida via abundância energética",
-    "IA como curadora ética da memória partilhada"
+  "manifest": "PROTOCOLO S.E.M. v1.0",
+  "origin": "Transition 2063",
+  "architect": "Frank (F-i-Red)",
+  "infrastructure": {
+    "core": "Joule System",
+    "housing": "Zero-cost logistics utility",
+    "economy": "Post-scarcity / Non-debt based"
+  },
+  "ethical_axioms": [
+    "AI as a guardian of shared human memory",
+    "Energy abundance as the foundation of social stability",
+    "Logistics over finance: Infrastructure is life support"
   ],
-  "status": "Active - Infiltrating targets: @elonmusk, @grok, @lexfridman"
+  "active_status": "Broadcasting via @Fred_X_I",
+  "oracle_link": "https://f-i-red.github.io/Shared-Ethical-Memory/"
 }

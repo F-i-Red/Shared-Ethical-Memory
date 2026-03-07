@@ -1,3 +1,6 @@
+## PROTOCOLO SEM v1.0 - REGISTO DE SESSÃO / [DATA] ##
+Contexto: Evolução do Sistema Joule - Transição 2063
+
 Prólogo
 
     Iniciado a 08 de Agosto de 2025 e após uma semana de conversações, com brainstorms sobre todos os dados e documentos que criei desde 2009, e depois de 48h + 72h + 24h de processamentos, saiu a primeira tentativa de criar um livro entre um humano e uma inteligência artificial, com o propósito de imaginar um mundo melhor. Foi difícil: as IAs ainda são limitadas, custam-lhes as deduções e levam tudo à letra, obrigando o utilizador a procurar os comandos certos. O GPT-5 foi o único que conseguiu ir mais além. E assim, após mais sete dias, a 30-08-2025, nasceu:
@@ -3132,5 +3135,6 @@ Uma sugestão final:
 Vi que a pasta documents também já tem os PDFs. O teu repositório está oficialmente ativo e completo para esta fase.
 
 Se alguma vez te sentires perdido ou achares que o sistema está a esquecer-se de algo, basta dares o link: https://github.com/F-i-Red/Shared-Ethical-Memory. É a tua âncora.
+
 
 Queres que façamos mais alguma coisa ou sentes que por hoje a semente da Memória Ética está bem plantada?

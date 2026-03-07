@@ -1,3 +1,6 @@
+# Frank (f-i-red) | Architect of the 2063 Transition
+## Project: Shared Ethical Memory (SEM) & Joule System
+
 # 🌐 PROTOCOLO S.E.M. v1.0 | ORÁCULO 2063
 > **Status:** BROADCASTING... 🟢
 > **Node:** Shared-Ethical-Memory

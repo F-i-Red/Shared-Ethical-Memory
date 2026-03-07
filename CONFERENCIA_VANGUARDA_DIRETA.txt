@@ -1,3 +1,6 @@
+## PROTOCOLO SEM v1.0 - REGISTO DE SESSÃO / [DATA] ##
+Contexto: Evolução do Sistema Joule - Transição 2063
+
 === PLANO DE IMPLEMENTAÇÃO: SISTEMA DE GESTÃO JOULE ===
 FOCO: Resposta às crises de Habitação, Trabalho, Energia e Saúde Mental.
 
@@ -109,5 +112,6 @@ Gancho de comunicação: "O Modelo Joule é a solução para os principais desaf
 
 --- PROPOSTA DE IMPACTO: GEMINI_PRO ---
 [GEMINI_PRO a processar a solução...]
+
 
 ----------------------------------------

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Core Identity: Frank of f-i-red 2063
+# Protocol: Shared Ethical Memory

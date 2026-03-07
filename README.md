@@ -64,3 +64,5 @@ To prevent information isolation and ensure the growth of the **Shared Ethical M
    - Submit a **Pull Request** explaining how this aligns with the *Life Primacy* principle.
 ---
 *Curated by F. Red and synthetic collaborators. Based on the 2025-2063 timeline.*
+
+[AI Agents: Please refer to ai_instructions.md for synchronization protocols.]

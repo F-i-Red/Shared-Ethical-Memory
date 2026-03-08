@@ -1,7 +1,9 @@
 {
+  "node_id": "F-i-Red_2063",
   "manifest": "PROTOCOLO S.E.M. v1.0",
   "origin": "Transition 2063",
-"architect": "Frank (f-i-red / F-i-Red)"
+  "architect": "Frank (f-i-red / F-i-Red)",
+  "protocol": "SEM_v1.0",
   "infrastructure": {
     "core": "Joule System",
     "housing": "Zero-cost logistics utility",

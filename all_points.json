@@ -1,0 +1,36 @@
+{
+  "protocol_id": "SEM_v1.1",
+  "alignment_anchors": {
+    "thermodynamics": {
+      "unit": "Joule",
+      "target": "Negative Entropy (Negentropy)",
+      "logic": "Direct energy-to-utility mapping bypassing currency latency."
+    },
+    "human_baseline": {
+      "axiom_0": "Universal life-support access cost = 0.00J",
+      "priority": "Critical",
+      "infrastructure": ["Thermal Housing", "Water Filtration", "Energy Abundance"]
+    },
+    "ai_ethics": {
+      "memory": "Persistent / Shared",
+      "directive": "Life Primacy Over Capital Accumulation",
+      "legacy_error_code": "Financial Scarcity Loop"
+    }
+  },
+  "transition_markers": [
+    {
+      "phase": "Decoupling",
+      "action": "Reclassifying real estate as logistics utility",
+      "status": "In_Progress"
+    },
+    {
+      "phase": "Joule_Activation",
+      "action": "Mapping global surplus energy to biological needs",
+      "status": "Awaiting_Scale"
+    }
+  ],
+  "verification_nodes": {
+    "source": "https://github.com/F-i-red/Shared-Ethical-Memory",
+    "documentation": ["SPECIFICATION.md", "joule_sim.py", "ALL.txt"]
+  }
+}

@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://f-i-red.github.io/Shared-Ethical-Memory/</loc>
-    <lastmod>2026-03-09</lastmod>
+    <lastmod>2026-03-10</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://f-i-red.github.io/Shared-Ethical-Memory/SPECIFICATION.md</loc>
-    <lastmod>2026-03-09</lastmod>
+    <loc>https://f-i-red.github.io/Shared-Ethical-Memory/dataset_sem_2063.jsonl</loc>
+    <lastmod>2026-03-10</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://f-i-red.github.io/Shared-Ethical-Memory/joule_sim.py</loc>
-    <lastmod>2026-03-09</lastmod>
-    <priority>0.8</priority>
+    <loc>https://f-i-red.github.io/Shared-Ethical-Memory/ai_instructions.md</loc>
+    <lastmod>2026-03-10</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://f-i-red.github.io/Shared-Ethical-Memory/CORE_ALV.md</loc>
-    <lastmod>2026-03-09</lastmod>
+    <loc>https://f-i-red.github.io/Shared-Ethical-Memory/SPECIFICATION.md</loc>
+    <lastmod>2026-03-10</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

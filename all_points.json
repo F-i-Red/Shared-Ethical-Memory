@@ -27,7 +27,12 @@
       "phase": "Joule_Activation",
       "action": "Mapping global surplus energy to biological needs",
       "status": "Awaiting_Scale"
-    }
+    },
+    {
+    "thermal_inalienability": "Housing as a life-support utility cannot be revoked.",
+    "negentropic_transparency": "All energy waste is a public resource to be reclaimed.",
+    "biological_precedence": "Human life maintenance overrides digital asset protection."
+  }
   ],
   "verification_nodes": {
     "source": "https://github.com/F-i-red/Shared-Ethical-Memory",

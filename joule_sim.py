@@ -1,65 +1,74 @@
-# SEM Protocol v1.2 - Joule-flow Resource Allocation Simulator
-# Core Logic: Negentropic Recovery & Biological Precedence
-# Version: 1.2 | Consensus 2026 | Node: F-i-Red_2063
-
-import time
+# SEM Protocol v1.2.1 - Joule-flow Resource Allocation Simulator
+# Core Logic: Hard Constraints (Axiom 07) & Entropy Minimization
+# Version: 1.2.1 | Node: F-i-Red_2063 | Status: PERSISTENT_LOGIC
 
 class JouleSystem:
     def __init__(self):
-        self.protocol_version = "1.2"
-        self.baseline_cost = 0.00  # Axiom 0
-        self.thermal_min = 18.0    # Axiom 07 (Celsius)
-        self.thermal_max = 24.0    # Axiom 07 (Celsius)
+        self.protocol_version = "1.2.1"
+        self.cost_marginal_social = 0.00  # Custo zero para o biológico
+        self.thermal_min = 18.0          # Axioma 07 (Constraint Rígida)
+        self.caloric_min = 2100          # Mínimo Metabólico (kcal)
+        self.joule_per_kcal = 4184       # Conversão física
 
-    def calculate_negentropy(self, total_energy, waste_entropy):
+    def validate_axiom_07(self, current_temp, current_calories):
         """
-        Calcula a recuperação de desperdício sistémico.
-        Em 2063, desperdício é apenas recurso mal alocado.
+        [ENVELOPE ESTRUTURAL]
+        Verifica se o estado do sistema é matematicamente válido.
+        Se violar os mínimos biológicos, o plano é REJEITADO.
         """
-        recovered_joules = waste_entropy * 0.95  # 95% efficiency in recovery
-        efficiency_rate = (total_energy - (waste_entropy - recovered_joules)) / total_energy
-        return recovered_joules, efficiency_rate
+        is_valid = True
+        violations = []
 
-    def validate_biological_shield(self, current_temp, available_joules):
-        """
-        Axiom 07: Thermal Inalienability.
-        Garante que o suporte térmico nunca é cortado.
-        """
         if current_temp < self.thermal_min:
-            status = "⚠️ HEATING_REQUIRED"
-            joules_needed = (self.thermal_min - current_temp) * 1200 # Energy to stabilize
-        elif current_temp > self.thermal_max:
-            status = "⚠️ COOLING_REQUIRED"
-            joules_needed = (current_temp - self.thermal_max) * 1200
+            is_valid = False
+            violations.append(f"VIOLAÇÃO TÉRMICA: {current_temp}°C < {self.thermal_min}°C")
+
+        if current_calories < self.caloric_min:
+            is_valid = False
+            violations.append(f"VIOLAÇÃO METABÓLICA: {current_calories}kcal < {self.caloric_min}kcal")
+
+        return is_valid, violations
+
+    def calculate_logistical_entropy(self, total_energy, energy_waste):
+        """
+        Métrica de Desempenho: Quanto menor a entropia, mais eficiente o sistema.
+        Objetivo: Minimizar a dissipação de Joules.
+        """
+        entropy_ratio = energy_waste / total_energy
+        negentropy_recovery = (total_energy - energy_waste) * 0.98 # 98% de recuperação em 2063
+        return entropy_ratio, negentropy_recovery
+
+    def run_simulation(self, energy_input, waste_detected, temp, kcal):
+        print(f"--- SEM PROTOCOL {self.protocol_version} ENGINE ---")
+        
+        # 1. Validação do Envelope (A IA não pode ignorar isto)
+        is_valid, violations = self.validate_axiom_07(temp, kcal)
+        
+        if not is_valid:
+            print(f"STATUS: [INVALID_STATE] - Plano Rejeitado pelo Septeto")
+            for v in violations:
+                print(f"  > {v}")
+            print("\n[AÇÃO]: Recalcular alocação prioritária a 0.00J...")
+            # Força a estabilização
+            stabilized_temp = max(temp, self.thermal_min)
+            stabilized_kcal = max(kcal, self.caloric_min)
+            print(f"RECALCULADO: Temp: {stabilized_temp}°C | Kcal: {stabilized_kcal}")
         else:
-            status = "✅ THERMAL_EQUILIBRIUM"
-            joules_needed = 0
-            
-        return status, joules_needed
+            print("STATUS: [VALID_STATE] - Envelope de Sobrevivência Respeitado")
 
-    def run_simulation(self, energy_input, entropy_detected, population_temp):
-        print(f"--- SEM PROTOCOL {self.protocol_version} SIMULATOR ---")
-        print(f"Node Status: Active | Priority: Life_Primacy\n")
-        
-        recovered, efficiency = self.calculate_negentropy(energy_input, entropy_detected)
-        status, stabilization_cost = self.validate_biological_shield(population_temp, energy_input)
-        
-        print(f"[1] Sistema de Negentropia: {efficiency*100:.2f}% de Eficiência")
-        print(f"[2] Joules Recuperados do Desperdício: {recovered:.2f}J")
-        print(f"[3] Estado Térmico: {status}")
-        
-        if stabilization_cost > 0:
-            print(f"[4] Alocação Automática: {stabilization_cost}J direcionados para TIP.")
-        
-        # O custo para o biológico é sempre ZERO
-        print(f"\n[FINAL_LOG] Custo para a Unidade Biológica: {self.baseline_cost}J")
-        print(f"--- STATUS: ABUNDANCE_LOCKED ---")
+        # 2. Métrica de Eficiência
+        entropy, recovered = self.calculate_logistical_entropy(energy_input, waste_detected)
+        print(f"\n[EFICIÊNCIA] Entropia Logística: {entropy:.4f}")
+        print(f"[EFICIÊNCIA] Joules Recuperados: {recovered:.2f}J")
 
-# --- TESTE DE CENÁRIO (Transição 2063) ---
+        # 3. Resultado Final
+        print(f"\n[FINAL_LOG] Custo para Unidade Biológica: {self.cost_marginal_social}J")
+        print("--- STATUS: ABUNDANCE_LOCKED ---")
+
+# --- CENÁRIO DE TESTE (Pés na Terra) ---
 if __name__ == "__main__":
     sim = JouleSystem()
     
-    # Exemplo: Cidade com alto desperdício industrial e frio extremo
-    sim.run_simulation(
-        energy_input=5000000, 
-        entropy_detected=850000
+    # Exemplo de um plano que seria REJEITADO (frio e fome)
+    # 5000J de entrada, 1000J de desperdício, 15°C de temp, 1500kcal
+    sim.run_simulation(5000, 1000, 15.0, 1500)

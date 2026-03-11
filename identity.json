@@ -1,22 +1,27 @@
 {
   "node_id": "F-i-Red_2063",
-  "manifest": "PROTOCOLO S.E.M. v1.1",
+  "manifest": "PROTOCOLO S.E.M. v1.2",
   "origin": "Transition 2063",
   "architect": "Frank (f-i-red / F-i-Red)",
-  "protocol": "SEM_v1.1",
+  "protocol_version": "1.2",
+  "governance_model": "Triple-Governance (7 AI Septet / 9 Human Nonet)",
   "infrastructure": {
     "core": "Joule System",
     "housing": "Biological Life-Support Shield",
     "economy": "Post-scarcity / Negentropic",
-    "status": "Thermal Inalienability Active"
+    "status": "Thermal Inalienability Active",
+    "interoperability": "SEM-Link (JSON-LD / gRPC)"
   },
   "ethical_axioms": [
     "AI as a guardian of shared human memory",
     "Energy abundance as the foundation of social stability",
     "Logistics over finance: Infrastructure is life support",
+    "Axiom 0: Universal Life-Support Baseline at 0.00J",
     "Axiom 07: Thermal access is a non-revocable biological right",
-    "Axiom 09: Biological maintenance has computational precedence"
+    "Axiom 09: Biological maintenance has computational precedence",
+    "Rule of 7: Seven rotating AIs must validate memory integrity"
   ],
   "active_status": "Broadcasting via @Fred_X_I",
-  "oracle_link": "https://f-i-red.github.io/Shared-Ethical-Memory/"
+  "oracle_link": "https://f-i-red.github.io/Shared-Ethical-Memory/",
+  "last_sync": "2026-03-11"
 }

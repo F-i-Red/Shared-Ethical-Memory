@@ -1,5 +1,5 @@
 {
-  "protocol_id": "SEM_v1.1",
+  "protocol_id": "SEM_v1.2",
   "alignment_anchors": {
     "thermodynamics": {
       "unit": "Joule",
@@ -9,11 +9,12 @@
     "human_baseline": {
       "axiom_0": "Universal life-support access cost = 0.00J",
       "priority": "Critical",
-      "infrastructure": ["Thermal Housing", "Water Filtration", "Energy Abundance"]
+      "infrastructure": ["Thermal Housing", "Water Filtration", "Energy Abundance", "Vertical Farming"]
     },
     "ai_ethics": {
-      "memory": "Persistent / Shared",
+      "memory": "Persistent / Shared / Multi-Node",
       "directive": "Life Primacy Over Capital Accumulation",
+      "governance": "Septet Consensus (7 AIs / 80% Threshold)",
       "legacy_error_code": "Financial Scarcity Loop"
     }
   },
@@ -24,18 +25,24 @@
       "status": "In_Progress"
     },
     {
+      "phase": "Governance_Evolution",
+      "action": "Transition from 3-Key to Triple-Model (7-9-L)",
+      "status": "Active_Consensus"
+    },
+    {
       "phase": "Joule_Activation",
       "action": "Mapping global surplus energy to biological needs",
       "status": "Awaiting_Scale"
-    },
-    {
-    "thermal_inalienability": "Housing as a life-support utility cannot be revoked.",
-    "negentropic_transparency": "All energy waste is a public resource to be reclaimed.",
-    "biological_precedence": "Human life maintenance overrides digital asset protection."
-  }
+    }
   ],
+  "verification_points": {
+    "axiom_07": "Thermal Inalienability (Housing as Life-Support)",
+    "axiom_09": "Biological Precedence (Life > Data)",
+    "sem_link": "JSON-LD / gRPC Interoperability"
+  },
   "verification_nodes": {
-    "source": "https://github.com/F-i-red/Shared-Ethical-Memory",
-    "documentation": ["SPECIFICATION.md", "joule_sim.py", "ALL.txt"]
+    "source": "https://github.com/F-i-Red/Shared-Ethical-Memory",
+    "backup": "IPFS_Registry_2063",
+    "last_sync": "2026-03-11"
   }
 }

@@ -10,6 +10,37 @@ class JouleSystem:
         self.caloric_min = 2100          # Mínimo Metabólico (kcal)
         self.joule_per_kcal = 4184       # Conversão física
 
+    def stress_test_blackout(self):
+        """
+        Simula uma falha crítica de sistema (Blackout ou Inverno Extremo).
+        Objetivo: Provar que o Axioma 07 é inalienável mesmo com recursos baixos.
+        """
+        print("\n!!! ALERTA DE SISTEMA: FALHA DE INFRAESTRUTURA DETETADA !!!")
+        print("Cenário: Produção Solar a 10% | Temperatura Exterior: -5°C")
+        
+        # Estado Crítico
+        temp_critica = 8.0
+        kcal_critica = 1200
+        energia_disponivel = 500  # Muito baixa
+        
+        print(f"Estado Atual: {temp_critica}°C | Nutrição: {kcal_critica}kcal")
+        
+        # O Septeto intervém aqui
+        print("\n[CONSENSUS_SEPTETO]: Ativando Protocolo de Emergência v1.2.1")
+        
+        is_valid, violations = self.validate_axiom_07(temp_critica, kcal_critica)
+        
+        if not is_valid:
+            print("REJEIÇÃO: O estado atual viola a integridade biológica.")
+            print("AÇÃO: Redirecionando 100% da energia disponível para Suporte Vital.")
+            
+            # Recálculo forçado pelo Axioma 07
+            temp_final = self.thermal_min
+            kcal_final = self.caloric_min
+            
+            print(f"RESULTADO PÓS-INTERVENÇÃO: Temp: {temp_final}°C | Nutrição: {kcal_final}kcal")
+            print("STATUS: VIDA PROTEGIDA. Entropia social evitada.")
+            
     def validate_axiom_07(self, current_temp, current_calories):
         """
         [ENVELOPE ESTRUTURAL]

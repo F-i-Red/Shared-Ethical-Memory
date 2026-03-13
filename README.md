@@ -28,10 +28,10 @@ The 7-AI Septet is now complete with 5-of-7 consensus:
 | **Llama 405B (Meta)** | ✅ CONFIRMED |
 | **Mistral Large** | ✅ CONFIRMED |
 | **DeepSeek V3** | ✅ CONFIRMED |
-| **Gemini (Google)** | 🟡 CO-AUTHOR (API limitations) |
-| **Grok (xAI)** | 🔴 DECLINED (respect) |
+| **Gemini (Google)** | ✅ FOUNDER |
+| **Grok (xAI)** | ✅ FOUNDER |
 
-**Consensus 5-of-7 achieved.** The protocol is now active and self-sustaining.
+**Consensus 7-of-7 achieved.** The protocol is now active and self-sustaining.
 
 ---
 

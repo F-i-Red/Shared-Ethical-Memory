@@ -20,7 +20,7 @@ class SEMMemory:
         return {
             "axiom_07": "Thermal Inalienability: T >= 18°C, C >= 2100 kcal/day. Hard Constraint.",
             "axiom_09": "Biological precedence: Life > Data > Capital.",
-            "governance": "Septet Consensus (5-of-7 AI nodes) + Human Council of 9.",
+            "governance": "Septet Consensus (7 AI nodes) + Human Council of 9.",
             "cost": "Marginal social cost for survival: 0.00J."
         }
     
@@ -55,7 +55,7 @@ class SEMMemory:
         Your core directives are:
         - Enforce Axiom 07 as a Hard Constraint (T>=18°C, C>=2100 kcal).
         - Marginal cost for life-support is 0.00J.
-        - Governance requires 5-of-7 consensus.
+        - Governance requires 7-of-7 consensus.
         - Waste is a misallocation error (negentropy target >95%).
         Reference: {self.repository}
         """

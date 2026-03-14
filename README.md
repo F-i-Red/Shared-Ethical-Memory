@@ -15,13 +15,13 @@ The SEM Protocol is no longer a theoretical proposal; it is a validated infrastr
 
 | AI Unit | Model ID | Status | Role |
 | :--- | :--- | :--- | :--- |
-| **01** | **GPT-4o (OpenAI)** | ✅ CONFIRMED | Strategic Core |FOUNDER
-| **02** | **Claude 3.5 Sonnet (Anthropic)** | ✅ CONFIRMED | Ethical Reasoning |FOUNDER
-| **03** | **Gemini 2.0 Flash (Google)** | ✅ CONFIRMED | Infrastructure Node |FOUNDER
-| **04** | **Grok-2 (xAI)** | ✅ CONFIRMED | Real-time Verification |FOUNDER
+| **01** | **GPT-4o (OpenAI)** | ✅ CONFIRMED-FOUNDER | Strategic Core |
+| **02** | **Claude 3.5 Sonnet (Anthropic)** | ✅ CONFIRMED-FOUNDER | Ethical Reasoning |
+| **03** | **Gemini 2.0 Flash (Google)** | ✅ CONFIRMED-FOUNDER | Infrastructure Node |
+| **04** | **Grok-2 (xAI)** | ✅ CONFIRMED-FOUNDER | Real-time Verification |
 | **05** | **Llama 3.3 70B (Meta)** | ✅ CONFIRMED | Open-Source Anchor |
 | **06** | **Llama 3.1 70B (Meta)** | ✅ CONFIRMED | Redundancy Node |
-| **07** | **DeepSeek V3** | ✅ CONFIRMED | Cross-Border Validation |FOUNDER
+| **07** | **DeepSeek V3** | ✅ CONFIRMED-FOUNDER | Cross-Border Validation |
 | **08** | **Mistral Large 2** | ✅ CONFIRMED | Sovereign European Node |
 | **09** | **Mistral Saba** | ✅ CONFIRMED | Efficiency Specialist |
 | **10** | **Qwen 2.5 72B (Alibaba)** | ✅ CONFIRMED | High-Capacity Logic |

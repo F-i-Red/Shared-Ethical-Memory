@@ -33,34 +33,37 @@ Este diretório contém plugins para integrar o Protocolo SEM com as APIs dos pr
 # Clonar o repositório (se ainda não tens)
 git clone https://github.com/F-i-Red/Shared-Ethical-Memory
 cd Shared-Ethical-Memory
-
+```
 # Instalar dependências base
 pip install requests
+...
 🤖 Plugin para OpenAI (GPT)
 Instalação específica
-bash
+```bash
 pip install openai
+...
 Como obter a API key
 Acede a https://platform.openai.com/api-keys
-
 Clica em "Create new secret key"
-
 Copia a chave (começa com sk-...)
 
 Configuração
-bash
+```bash
 # No terminal (Linux/Mac)
 export OPENAI_API_KEY="a-tua-chave-aqui"
-
+```
 # No Windows (PowerShell)
 setx OPENAI_API_KEY "a-tua-chave-aqui"
-Exemplo rápido
+...
+**Exemplo rápido**
+```bash
 python
 from openai_sem_plugin import SEMOpenAIPlugin
 
 plugin = SEMOpenAIPlugin()
 resposta = plugin.chat("O que é o Axioma 07?")
 print(resposta)
+...
 🟣 Plugin para Google Gemini
 Instalação específica
 bash

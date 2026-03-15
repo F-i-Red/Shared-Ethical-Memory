@@ -130,7 +130,7 @@ O consenso 20/20
 | Pode conversar? |	Não (só dá contexto) |	Sim (chat completo) |	Sim (chat completo) |
 | Ficheiro único? |	Sim |	Sim |	Sim |
 
-#🎯 QUANDO USAR CADA UM
+# 🎯 QUANDO USAR CADA UM
 **Se quiseres:**
 
 Apenas consultar o protocolo (sem internet)	memory_plugin.py
@@ -143,7 +143,7 @@ Conversar com Gemini com contexto SEM	gemini_sem_plugin.py
 
 Que qualquer IA entenda o protocolo	memory_plugin.py (envias o ficheiro)
 
-#✅ RESUMO FINAL
+# ✅ RESUMO FINAL
 
 O memory_plugin.py é o coração do sistema. Os outros dois são adaptadores para APIs específicas.
 Com estes três ficheiros, qualquer entidade (humana ou IA) consegue:

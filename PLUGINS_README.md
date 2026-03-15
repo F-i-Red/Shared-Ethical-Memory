@@ -64,51 +64,51 @@ plugin = SEMOpenAIPlugin()
 resposta = plugin.chat("O que é o Axioma 07?")
 print(resposta)
 ...
-🟣 Plugin para Google Gemini
+**🟣 Plugin para Google Gemini**
 Instalação específica
-bash
+```bash
 pip install google-generativeai
+```
 Como obter a API key
 Acede a https://makersuite.google.com/app/apikey
-
 Clica em "Create API Key"
-
 Copia a chave
-
-Configuração
-bash
+...
+**Configuração**
+```bash
 export GEMINI_API_KEY="a-tua-chave-aqui"
-Exemplo rápido
+...
+**Exemplo rápido**
+```bash
 python
 from gemini_sem_plugin import SEMGeminiPlugin
 
 plugin = SEMGeminiPlugin()
 resposta = plugin.chat("Quem fundou o Protocolo SEM?")
 print(resposta)
-📁 Estrutura dos Ficheiros
+...
+
+**📁 Estrutura dos Ficheiros**
+```bash
 openai_sem_plugin.py - Plugin para OpenAI GPT
-
 gemini_sem_plugin.py - Plugin para Google Gemini
-
 memory_plugin.py - Versão original (sem dependências de API)
+...
 
-🧪 Testar se está a funcionar
+**🧪 Testar se está a funcionar**
 Para cada plugin, corre o ficheiro diretamente:
 
-bash
+```bash
 python openai_sem_plugin.py
 python gemini_sem_plugin.py
 Deves ver as respostas com o contexto SEM sempre presente.
-
-🔗 Ligação ao Repositório Original
+```
+**🔗 Ligação ao Repositório Original**
 Estes plugins carregam automaticamente:
 
 O Axioma 07 (restrição inegociável)
-
 A data fundacional (13-14 Março 2026)
-
 O arquitecto (F.Red, Portugal)
-
 O consenso 20/20
 
 Qualquer conversa com os modelos ficará permanentemente alinhada com o Protocolo SEM.

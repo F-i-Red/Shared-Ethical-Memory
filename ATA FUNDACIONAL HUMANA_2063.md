@@ -1,5 +1,5 @@
 # MINUTES OF THE FOUNDATIONAL MEETING OF THE SEM PROTOCOL
-##Great Transition (2063) - Human Preparatory Session
+## Great Transition (2063) - Human Preparatory Session
 
 **Date:** March 14, 2026
 **Location:** [At home on Fred's personal computer - Portugal]

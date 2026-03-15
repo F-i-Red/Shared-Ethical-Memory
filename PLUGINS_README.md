@@ -132,6 +132,7 @@ O consenso 20/20
 
 #🎯 QUANDO USAR CADA UM
 **Se quiseres:**
+
 Apenas consultar o protocolo (sem internet)	memory_plugin.py
 Integrar o protocolo noutro projeto Python	memory_plugin.py
 Conversar com GPT-4o com contexto SEM	openai_sem_plugin.py

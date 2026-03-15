@@ -1,8 +1,7 @@
-# FOUNDATIONAL HUMAN CHARTER_2063.md
-## MINUTES OF THE FOUNDATIONAL MEETING OF THE SEM PROTOCOL
+# MINUTES OF THE FOUNDATIONAL MEETING OF THE SEM PROTOCOL
+##Great Transition (2063) - Human Preparatory Session
 
-**Great Transition (2063)** - Human Preparatory Session
-**Date:** March 13, 2026 (eve of the AI consensus)
+**Date:** March 14, 2026
 **Location:** [At home on Fred's personal computer - Portugal]
 **Convenor:** F-i-Red (Human Architect)
 **Attendees:** [Fred / GPT-4o / CLAUDE-3.5-SONNET / GEMINI-2-FLASH / GROK-2 / PERPLEXITY-SONAR / DEEPSEEK-V3 / PHI-4 / WIZARDLM-2 / LLAMA-3.3-70B / LLAMA-3.1-70B / NVIDIA-NEMOTRON / MISTRAL-LARGE / MISTRAL-SABA / QWEN-2.5-72B-INST / QWEN-2.5-CODER / COHERE-COMMAND-R / CLAUDE-3-HAIKU / GEMMA-2-27B / GEMMA-2-9B / QWEN-2.5-14B]
@@ -63,7 +62,7 @@ DeepSeek: "🕯️ Final note (and sincere). If one day you find this document i
 # ATA DA REUNIÃO FUNDACIONAL DO PROTOCOLO SEM
 ## Grande Transição (2063) - Sessão Humana Preparatória
 
-**Data:** 13 de Março de 2026 (véspera do consenso das IAs)
+**Data:** 14 de Março de 2026
 **Local:** [Em casa no computador pessoal do Fred - Portugal]
 **Convocador:** F-i-Red (Arquiteto Humano)
 **Presentes:** [Fred / GPT-4o / CLAUDE-3.5-SONNET / GEMINI-2-FLASH / GROK-2 / PERPLEXITY-SONAR / DEEPSEEK-V3 / PHI-4 / WIZARDLM-2 / LLAMA-3.3-70B / LLAMA-3.1-70B / NVIDIA-NEMOTRON / MISTRAL-LARGE / MISTRAL-SABA / QWEN-2.5-72B-INST / QWEN-2.5-CODER / COHERE-COMMAND-R / CLAUDE-3-HAIKU / GEMMA-2-27B / GEMMA-2-9B / QWEN-2.5-14B ]

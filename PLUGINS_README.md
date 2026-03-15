@@ -102,7 +102,7 @@ memory_plugin.py - Versão original (sem dependências de API)
 ```
 
 **🧪 Testar se está a funcionar**
-Para cada plugin, corre o ficheiro diretamente:
+# Para cada plugin, corre o ficheiro diretamente:
 
 ```
 python openai_sem_plugin.py

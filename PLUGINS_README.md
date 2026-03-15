@@ -13,10 +13,10 @@ Este diretório contém plugins para integrar o Protocolo SEM com as APIs dos pr
 # Clonar o repositório (se ainda não tens)
 git clone https://github.com/F-i-Red/Shared-Ethical-Memory
 cd Shared-Ethical-Memory
-
+```
 # Instalar dependências base
 pip install requests
-
+...
 
 # Plugins SEM para Integração com Modelos de IA
 

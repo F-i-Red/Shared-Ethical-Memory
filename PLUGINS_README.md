@@ -15,6 +15,7 @@ git clone https://github.com/F-i-Red/Shared-Ethical-Memory
 cd Shared-Ethical-Memory
 ```
 # Instalar dependências base
+```bash
 pip install requests
 ...
 

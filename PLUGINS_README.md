@@ -122,6 +122,7 @@ O consenso 20/20
 
 # 📊 COMPARAÇÃO DOS TRÊS PLUGINS
 | Característica |	memory_plugin.py |	openai_sem_plugin.py |	gemini_sem_plugin.py |
+| :--- | :--- | :--- | :--- |
 | Público-alvo |	Todas as IAs e humanos |	Apenas OpenAI |	Apenas Gemini |
 | Precisa de API key? |	Não |	Sim (OpenAI) |	Sim (Google) |
 | Precisa de internet? |	Não |	Sim |	Sim |

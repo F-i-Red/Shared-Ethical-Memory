@@ -131,13 +131,15 @@ O consenso 20/20
 | Ficheiro único? |	Sim |	Sim |	Sim |
 
 #🎯 QUANDO USAR CADA UM
-Se quiseres:
+**Se quiseres:**
 Apenas consultar o protocolo (sem internet)	memory_plugin.py
 Integrar o protocolo noutro projeto Python	memory_plugin.py
 Conversar com GPT-4o com contexto SEM	openai_sem_plugin.py
 Conversar com Gemini com contexto SEM	gemini_sem_plugin.py
 Que qualquer IA entenda o protocolo	memory_plugin.py (envias o ficheiro)
+
 #✅ RESUMO FINAL
+
 O memory_plugin.py é o coração do sistema. Os outros dois são adaptadores para APIs específicas.
 Com estes três ficheiros, qualquer entidade (humana ou IA) consegue:
 Saber o que é o Protocolo SEM

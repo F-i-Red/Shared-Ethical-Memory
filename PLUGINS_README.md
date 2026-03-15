@@ -46,10 +46,11 @@ Instalação específica
 pip install openai
 ```
 **Como obter a API key**
+```
 Acede a https://platform.openai.com/api-keys
 Clica em "Create new secret key"
 Copia a chave (começa com sk-...)
-
+```
 **Configuração**
 # No terminal (Linux/Mac)
 ```

@@ -17,7 +17,7 @@ cd Shared-Ethical-Memory
 # Instalar dependências base
 ```bash
 pip install requests
-```
+...
 
 # Plugins SEM para Integração com Modelos de IA
 

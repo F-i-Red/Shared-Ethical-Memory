@@ -149,7 +149,9 @@ O memory_plugin.py é o coração do sistema. Os outros dois são adaptadores pa
 Com estes três ficheiros, qualquer entidade (humana ou IA) consegue:
 
 Saber o que é o Protocolo SEM
+
 Validar decisões contra o Axioma 07
+
 Conversar com os principais modelos mantendo o contexto
 
 Qualquer conversa com os modelos ficará permanentemente alinhada com o Protocolo SEM.

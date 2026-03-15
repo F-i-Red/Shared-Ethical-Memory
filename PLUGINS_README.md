@@ -107,6 +107,7 @@ memory_plugin.py - Versão original (sem dependências de API)
 ```
 python openai_sem_plugin.py
 python gemini_sem_plugin.py
+python memory_plugin.py (para as outras IAs)
 Deves ver as respostas com o contexto SEM sempre presente.
 ```
 **🔗 Ligação ao Repositório Original**

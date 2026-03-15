@@ -35,15 +35,17 @@ Este diretório contém plugins para integrar o Protocolo SEM com as APIs dos pr
 git clone https://github.com/F-i-Red/Shared-Ethical-Memory
 cd Shared-Ethical-Memory
 ```
+
 # Instalar dependências base
+```bash
 pip install requests
 ...
-🤖 Plugin para OpenAI (GPT)
+**🤖 Plugin para OpenAI (GPT)**
 Instalação específica
 ```bash
 pip install openai
 ...
-Como obter a API key
+**Como obter a API key**
 Acede a https://platform.openai.com/api-keys
 Clica em "Create new secret key"
 Copia a chave (começa com sk-...)

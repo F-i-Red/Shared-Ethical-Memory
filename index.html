@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ORÁCULO 2063 | SEM PROTOCOL v1.3</title>
+<title>ORACLE 2063 | SEM PROTOCOL v1.3</title>
 <style>
 body { background-color: #050505; color: #00ff41; font-family: 'Courier New', Courier, monospace; padding: 15px; line-height: 1.3; font-size: 13px; }
 .terminal { max-width: 1200px; margin: auto; border: 1px solid #00ff41; padding: 25px; box-shadow: 0 0 30px #00ff4122; }
@@ -20,16 +20,21 @@ h3 { font-size: 0.95em; text-transform: uppercase; margin-bottom: 5px; color: #f
 a { color: #00ff41; text-decoration: none; border-bottom: 1px solid #00ff41; padding: 2px; }
 a:hover { background-color: #00ff41; color: #050505; }
 p { margin-bottom: 12px; text-align: justify; }
+
 .tool-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 20px; }
 .tool-card { border: 1px solid #00ff41; background-color: #001a09; padding: 16px 20px; text-align: center; }
-.tool-card a { font-size: 1.0em; font-weight: bold; letter-spacing: 1px; border-bottom: none; display: block; margin-bottom: 8px; }
+.tool-card a { font-size: 1.0em; font-weight: bold; letter-spacing: 1px; border-bottom: none; display: block; margin-bottom: 6px; }
 .tool-card a:hover { background-color: transparent; color: #ffffff; }
-.tool-card p { font-size: 0.78em; opacity: 0.65; margin-bottom: 0; text-align: center; line-height: 1.6; }
 .tool-card .tag { display: inline-block; background: #00ff4122; border: 1px solid #00ff4144; padding: 2px 8px; font-size: 0.7em; margin-bottom: 8px; letter-spacing: 2px; }
+.tool-card .desc-en { font-size: 0.78em; opacity: 0.8; margin-bottom: 4px; text-align: center; line-height: 1.6; color: #00ff41; }
+.tool-card .desc-pt { font-size: 0.72em; opacity: 0.45; margin-bottom: 0; text-align: center; line-height: 1.6; font-style: italic; }
 .tool-card.quorum { border-color: #aa66ff; }
 .tool-card.quorum .tag { background: #aa66ff22; border-color: #aa66ff44; color: #aa66ff; }
 .tool-card.quorum a { color: #aa66ff; }
 .tool-card.quorum:hover { background-color: #0e0418; }
+
+.nav-label { font-size: 0.75em; opacity: 0.5; margin-left: 6px; font-style: italic; }
+
 @media (max-width: 700px) {
   .grid { grid-template-columns: 1fr; }
   .column { border-right: none; padding: 0; }
@@ -40,7 +45,7 @@ p { margin-bottom: 12px; text-align: justify; }
 <body>
 <div class="terminal">
 
-  <h1>Oráculo: Shared Ethical Memory</h1>
+  <h1>Oracle / Oráculo: Shared Ethical Memory</h1>
   <div class="status-bar">SYSTEM: ACTIVE | SEPTET AI GOVERNANCE | VERSION: 1.3 | NODE: F-I-RED_2063</div>
 
   <div class="grid">
@@ -85,7 +90,11 @@ p { margin-bottom: 12px; text-align: justify; }
   </div>
 
   <div class="nav-center">
-    <p class="highlight">> PROTOCOLS & ARCHIVES / PROTOCOLOS E ARQUIVOS:</p>
+
+    <p class="highlight">
+      &gt; PROTOCOLS &amp; ARCHIVES
+      <span class="nav-label">/ PROTOCOLOS E ARQUIVOS</span>
+    </p>
     <p>
       [ <a href="SPECIFICATION.md">SPEC</a> ]
       [ <a href="dataset_sem_2063.jsonl">DATASET</a> ]
@@ -94,27 +103,38 @@ p { margin-bottom: 12px; text-align: justify; }
       [ <a href="Norms.json">NORMS</a> ]
     </p>
 
-    <p class="highlight" style="margin-top: 24px;">> LIVE TOOLS / FERRAMENTAS EM TEMPO REAL:</p>
+    <p class="highlight" style="margin-top: 24px;">
+      &gt; LIVE TOOLS
+      <span class="nav-label">/ FERRAMENTAS EM TEMPO REAL</span>
+    </p>
+
     <div class="tool-grid">
+
       <div class="tool-card">
-        <span class="tag">AXIOMA 07</span>
-        <a href="Simulator Real Data.html">⚡ SIMULADOR — DADOS REAIS</a>
-        <p>Temperatura em tempo real · Calorias per capita (FAO)<br>Valida o Axioma 07 para qualquer localização · Output JSONL</p>
+        <span class="tag">AXIOM 07 / AXIOMA 07</span>
+        <a href="Simulator Real Data.html">⚡ REAL DATA VALIDATOR</a>
+        <p class="desc-en">Live temperature · FAO caloric data<br>Validates Axiom 07 for any location · JSONL output</p>
+        <p class="desc-pt">Temperatura em tempo real · Calorias per capita (FAO)<br>Valida o Axioma 07 · Output JSONL auditável</p>
       </div>
+
       <div class="tool-card">
-        <span class="tag">9 AXIOMAS</span>
-        <a href="SEM Dashboard.html">🌍 DASHBOARD GLOBAL SEM</a>
-        <p>Diagnóstico civilizacional completo por país<br>Ar · Água · Alimentação · Desigualdade · Saúde · Clima · Energia</p>
+        <span class="tag">9 AXIOMS / 9 AXIOMAS</span>
+        <a href="SEM Dashboard.html">🌍 GLOBAL DASHBOARD</a>
+        <p class="desc-en">Full civilizational diagnosis by country<br>Air · Water · Food · Inequality · Health · Climate · Energy</p>
+        <p class="desc-pt">Diagnóstico civilizacional completo por país<br>Ar · Água · Alimentação · Desigualdade · Saúde · Clima · Energia</p>
       </div>
+
       <div class="tool-card quorum">
-        <span class="tag">QUÓRUM · IAs</span>
-        <a href="SEM_Quorum.html">🧠 QUÓRUM DE CONSENSO</a>
-        <p>Submete um cenário · vários modelos de IA deliberam<br>Votos reais com argumentos · OpenRouter · JSONL auditável</p>
+        <span class="tag">AI QUORUM / QUÓRUM IA</span>
+        <a href="SEM_Quorum.html">🧠 CONSENSUS ENGINE</a>
+        <p class="desc-en">Submit a scenario · multiple AI models deliberate independently<br>Real votes with reasoning · OpenRouter · auditable JSONL</p>
+        <p class="desc-pt">Submete um cenário · vários modelos de IA deliberam<br>Votos reais com argumentos · OpenRouter · JSONL auditável</p>
       </div>
+
     </div>
 
     <p style="font-size: 0.8em; opacity: 0.8; margin-top: 24px;">
-      Evolution of: "Guide to a Zeitgeist" &amp; "@Estado do Sistema" &amp; "2063: From Before to After-The Great Transition" by F.red
+      Evolution of: "Guide to a Zeitgeist" &amp; "@Estado do Sistema" &amp; "2063:From Before to After-The Great Transition" by F.red
     </p>
   </div>
 

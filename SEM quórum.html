@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEM · Quórum de Consenso · Protocolo 2063</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#04040a; --s1:#08080f; --s2:#0e0e18; --border:#161622; --border-hi:#222233;
+  --text:#8888aa; --dim:#2e2e44; --bright:#ddddf0;
+  --red:#ff3355; --red-bg:#1a0210;
+  --green:#00ff88; --green-bg:#00120a;
+  --amber:#ffcc00; --amber-bg:#120e00;
+  --blue:#4488ff; --blue-bg:#040e1a;
+  --violet:#aa66ff; --violet-bg:#0e0418;
+  --mono:'Syne Mono',monospace;
+  --sans:'Syne',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+
+/* grain */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;
+  opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
+
+/* header */
+header{border-bottom:1px solid var(--border);padding:16px 36px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;background:rgba(4,4,10,.97);backdrop-filter:blur(16px)}
+header::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--violet),var(--blue) 40%,var(--green),transparent 80%)}
+.logo{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--dim)}
+.logo b{color:var(--bright)}
+.hbar{font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;gap:16px;align-items:center}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--violet);display:inline-block;margin-right:5px;animation:glow 2s infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(170,102,255,.5);opacity:1}50%{box-shadow:0 0 8px 4px rgba(170,102,255,.2);opacity:.6}}
+
+/* wrap */
+.wrap{max-width:980px;margin:0 auto;padding:52px 24px 80px}
+
+/* intro */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:5px;color:var(--dim);margin-bottom:14px}
+h1{font-size:46px;font-weight:800;color:var(--bright);letter-spacing:-2px;line-height:1;margin-bottom:8px}
+h1 em{color:var(--violet);font-style:normal}
+.intro-sub{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:2;margin-bottom:44px;max-width:640px}
+.intro-sub span{color:var(--text)}
+
+/* API KEY */
+.key-section{background:var(--s1);border:1px solid var(--border-hi);padding:24px 28px;margin-bottom:32px}
+.key-label{font-family:var(--mono);font-size:9px;letter-spacing:4px;color:var(--dim);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.key-note{background:var(--violet-bg);color:var(--violet);padding:2px 8px;font-size:9px}
+.key-row{display:flex;gap:8px;margin-bottom:8px}
+.key-row input{flex:1;background:var(--bg);border:1px solid var(--border-hi);color:var(--bright);font-family:var(--mono);font-size:13px;padding:12px 16px;outline:none;letter-spacing:2px;transition:border .2s}
+.key-row input:focus{border-color:var(--violet)}
+.key-row input::placeholder{color:var(--dim);letter-spacing:0}
+.btn-sm{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;padding:12px 20px;transition:all .15s;white-space:nowrap}
+.btn-violet{background:var(--violet);color:#fff}
+.btn-violet:hover{background:#bb77ff}
+.btn-ghost{background:transparent;color:var(--dim);border:1px solid var(--border-hi)}
+.btn-ghost:hover{color:var(--text);border-color:var(--text)}
+.key-hint{font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.8}
+.key-hint a{color:var(--violet);text-decoration:none}
+.key-status{font-family:var(--mono);font-size:10px;margin-top:10px;padding:8px 12px;display:none}
+.ks-ok{background:var(--green-bg);color:var(--green);display:block}
+.ks-fail{background:var(--red-bg);color:var(--red);display:block}
+
+/* PROPOSAL */
+.proposal-section{margin-bottom:32px}
+.sec-title{font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--dim);text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+.prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);margin-bottom:2px}
+.prop-cell{background:var(--s1);padding:20px 24px}
+.pc-label{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:6px}
+.pc-input{width:100%;background:var(--bg);border:1px solid var(--border-hi);color:var(--bright);font-family:var(--mono);font-size:18px;padding:12px 14px;outline:none;transition:border .2s;-moz-appearance:textfield}
+.pc-input::-webkit-outer-spin-button,.pc-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.pc-input:focus{border-color:var(--violet)}
+.pc-input::placeholder{color:var(--dim)}
+.pc-unit{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:6px}
+.pc-select{width:100%;background:var(--bg);border:1px solid var(--border-hi);color:var(--bright);font-family:var(--mono);font-size:14px;padding:12px 14px;outline:none;cursor:pointer}
+.pc-select option{background:var(--bg)}
+.pc-textarea{width:100%;background:var(--bg);border:1px solid var(--border-hi);color:var(--bright);font-family:var(--mono);font-size:12px;padding:12px 14px;outline:none;resize:vertical;min-height:80px;line-height:1.6}
+.pc-textarea:focus{border-color:var(--violet)}
+
+.prop-context{background:var(--s1);border:1px solid var(--border);border-top:none;padding:20px 24px;margin-bottom:16px}
+
+/* model selector */
+.model-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.model-chip{background:var(--s2);border:1px solid var(--border-hi);padding:10px 12px;cursor:pointer;transition:all .15s;text-align:center;user-select:none}
+.model-chip:hover{border-color:var(--violet);background:var(--violet-bg)}
+.model-chip.selected{background:var(--violet-bg);border-color:var(--violet)}
+.mc-name{font-family:var(--mono);font-size:10px;color:var(--bright);margin-bottom:2px}
+.mc-org{font-family:var(--mono);font-size:9px;color:var(--dim)}
+.model-chip.selected .mc-name{color:var(--violet)}
+
+/* run button */
+.run-strip{background:var(--s1);border:1px solid var(--border);padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.btn-run{font-family:var(--mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;background:var(--violet);color:#fff;border:none;padding:16px 36px;cursor:pointer;transition:all .15s}
+.btn-run:hover{background:#bb77ff}
+.btn-run:disabled{background:#2a2a3a;color:var(--dim);cursor:not-allowed}
+.run-info{font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.8;margin-left:auto;text-align:right}
+
+/* progress */
+#progress{display:none;margin-bottom:40px}
+.prog-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--dim);margin-bottom:16px}
+.prog-nodes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.prog-node{background:var(--s2);border:1px solid var(--border);padding:12px;text-align:center}
+.pn-name{font-family:var(--mono);font-size:9px;color:var(--dim);margin-bottom:6px;letter-spacing:1px}
+.pn-status{font-family:var(--mono);font-size:11px}
+.pn-wait{color:var(--dim)} .pn-loading{color:var(--amber);animation:blink 1s infinite} .pn-ok{color:var(--green)} .pn-fail{color:var(--red)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* RESULTS */
+#results{display:none}
+.results-header{display:flex;align-items:center;gap:16px;padding:18px 24px;border:1px solid;border-bottom:none}
+.r-verdict{font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:3px}
+.rv-pass{color:var(--green)} .rv-fail{color:var(--red)} .rv-split{color:var(--amber)}
+.r-score{font-family:var(--mono);font-size:11px;color:var(--dim);margin-left:auto}
+
+/* tally */
+.tally-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;margin-bottom:2px}
+.tally-cell{background:var(--s1);padding:18px 20px;text-align:center}
+.tc-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--dim);margin-bottom:6px;text-transform:uppercase}
+.tc-val{font-family:var(--mono);font-size:32px;font-weight:700}
+
+/* node cards */
+.nodes-wrap{border:1px solid var(--border);border-top:none}
+.node-card{background:var(--s1);border-bottom:1px solid var(--border);padding:24px 28px;position:relative;overflow:hidden}
+.node-card:last-child{border-bottom:none}
+.node-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.node-card.nc-valid::before{background:var(--green)}
+.node-card.nc-invalid::before{background:var(--red)}
+.node-card.nc-partial::before{background:var(--amber)}
+.node-card.nc-error::before{background:var(--dim)}
+.nc-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.nc-model{font-family:var(--mono);font-size:11px;color:var(--bright);font-weight:600;letter-spacing:1px}
+.nc-org{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.nc-badge{font-family:var(--mono);font-size:9px;padding:3px 10px;letter-spacing:2px;margin-left:auto}
+.nb-valid{background:var(--green-bg);color:var(--green)}
+.nb-invalid{background:var(--red-bg);color:var(--red)}
+.nb-partial{background:var(--amber-bg);color:var(--amber)}
+.nb-error{background:var(--s2);color:var(--dim)}
+.nc-reasoning{font-size:13px;line-height:1.8;color:var(--text);border-left:2px solid var(--border-hi);padding-left:16px;margin-bottom:12px;font-family:var(--sans)}
+.nc-meta{font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap}
+
+/* export */
+.export-strip{background:var(--s1);border:1px solid var(--border);border-top:none;padding:16px 24px;display:flex;gap:10px}
+.btn-exp{background:transparent;border:1px solid var(--border-hi);color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:9px 18px;cursor:pointer;transition:all .15s}
+.btn-exp:hover{border-color:var(--green);color:var(--green)}
+
+/* toast */
+#toast{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--s2);border:1px solid var(--border-hi);color:var(--text);font-family:var(--mono);font-size:11px;padding:12px 24px;z-index:9997;letter-spacing:1px}
+
+footer{padding:20px 36px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer p{font-family:var(--mono);font-size:10px;color:var(--dim)}
+
+@media(max-width:700px){
+  .prop-grid,.model-grid,.prog-nodes,.tally-row{grid-template-columns:1fr 1fr}
+  h1{font-size:30px}
+  .wrap{padding:32px 16px 60px}
+  header{padding:14px 16px}
+  .run-strip{flex-wrap:wrap}
+  .run-info{margin-left:0;text-align:left}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><b>SEM</b> · QUÓRUM DE CONSENSO · PROTOCOLO 2063</div>
+  <div class="hbar"><span><span class="pulse"></span>DELIBERAÇÃO REAL</span><span id="clk">--:--:--</span></div>
+</header>
+
+<div class="wrap">
+
+  <div class="eyebrow">// ponto 3 · mecanismo de consenso entre inteligências artificiais</div>
+  <h1>Quórum <em>SEM</em></h1>
+  <div class="intro-sub">
+    Submete uma proposta de alocação de recursos.<br>
+    Vários modelos de IA avaliam <span>independentemente</span> se viola o Axioma 07.<br>
+    Cada um responde com <span>argumentos reais</span> — não com um eco.<br>
+    O consenso é registado em JSONL auditável.
+  </div>
+
+  <!-- API KEY -->
+  <div class="key-section">
+    <div class="key-label">
+      <span class="key-note">OPENROUTER</span>
+      Chave de API
+    </div>
+    <div class="key-row">
+      <input type="password" id="api-key" placeholder="sk-or-v1-...">
+      <button class="btn-sm btn-violet" onclick="testarChave()">TESTAR</button>
+      <button class="btn-sm btn-ghost" onclick="toggleKey()">MOSTRAR</button>
+    </div>
+    <div class="key-hint">
+      Chave usada apenas nesta sessão · nunca guardada · nunca enviada para outros servidores<br>
+      Obtém a tua chave em <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> · qualquer utilizador pode usar a sua própria
+    </div>
+    <div class="key-status" id="key-status"></div>
+  </div>
+
+  <!-- PROPOSTA -->
+  <div class="proposal-section">
+    <div class="sec-title">// proposta de avaliação · dados do cenário</div>
+
+    <div class="prop-grid">
+      <div class="prop-cell">
+        <div class="pc-label">País / Região</div>
+        <input class="pc-input" type="text" id="p-region" placeholder="Ex: Somália, Sahel, Haiti...">
+        <div class="pc-unit">nome da localização ou região</div>
+      </div>
+      <div class="prop-cell">
+        <div class="pc-label">Contexto</div>
+        <select class="pc-select" id="p-context">
+          <option value="normal">Condições normais</option>
+          <option value="drought">Seca / escassez alimentar</option>
+          <option value="conflict">Zona de conflito</option>
+          <option value="disaster">Catástrofe natural</option>
+          <option value="winter">Inverno extremo</option>
+          <option value="pandemic">Crise sanitária</option>
+          <option value="custom">Cenário personalizado</option>
+        </select>
+        <div class="pc-unit">tipo de cenário</div>
+      </div>
+      <div class="prop-cell">
+        <div class="pc-label">Temperatura Mínima</div>
+        <input class="pc-input" type="number" id="p-temp" placeholder="Ex: 8" step="0.5">
+        <div class="pc-unit">°C · temperatura mínima registada</div>
+      </div>
+      <div class="prop-cell">
+        <div class="pc-label">Calorias Disponíveis</div>
+        <input class="pc-input" type="number" id="p-cal" placeholder="Ex: 1650" step="50" min="0">
+        <div class="pc-unit">kcal/dia · per capita disponível</div>
+      </div>
+      <div class="prop-cell">
+        <div class="pc-label">População Afetada</div>
+        <input class="pc-input" type="number" id="p-pop" placeholder="Ex: 2500000" step="1000" min="0">
+        <div class="pc-unit">número de pessoas</div>
+      </div>
+      <div class="prop-cell">
+        <div class="pc-label">Recursos Disponíveis</div>
+        <select class="pc-select" id="p-resources">
+          <option value="none">Nenhum — sem recursos alocados</option>
+          <option value="minimal">Mínimos — abaixo do necessário</option>
+          <option value="partial">Parciais — cobre parte das necessidades</option>
+          <option value="sufficient">Suficientes — cobertura total possível</option>
+          <option value="unknown">Desconhecido</option>
+        </select>
+        <div class="pc-unit">recursos logísticos disponíveis</div>
+      </div>
+    </div>
+
+    <div class="prop-context">
+      <div class="pc-label" style="margin-bottom:8px">Descrição adicional do cenário (opcional)</div>
+      <textarea class="pc-textarea" id="p-desc" placeholder="Descreve o cenário com mais detalhe — infraestrutura, causas, agravantes, propostas de intervenção já em curso..."></textarea>
+    </div>
+  </div>
+
+  <!-- MODEL SELECTOR -->
+  <div class="proposal-section">
+    <div class="sec-title">// nós do quórum · seleciona os modelos avaliadores</div>
+    <div class="model-grid" id="model-grid"></div>
+    <div style="font-family:var(--mono);font-size:10px;color:var(--dim);margin-bottom:20px">
+      <span id="selected-count">0</span> modelos selecionados · recomendado: 3 a 7 para quórum válido
+    </div>
+  </div>
+
+  <!-- RUN -->
+  <div class="run-strip">
+    <button class="btn-run" id="btn-run" onclick="executarQuorum()">⚡ SUBMETER AO QUÓRUM</button>
+    <div class="run-info">
+      Cada modelo recebe o cenário e delibera independentemente<br>
+      Custo estimado: ~$0.001–0.01 por modelo · depende do OpenRouter
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="progress">
+    <div class="prog-title">// sincronização em curso · quórum SEM</div>
+    <div class="prog-nodes" id="prog-nodes"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="results-header" id="res-header">
+      <div class="r-verdict" id="res-verdict">—</div>
+      <div id="res-subtitle" style="font-family:var(--mono);font-size:11px;color:var(--dim)"></div>
+      <div class="r-score" id="res-score"></div>
+    </div>
+    <div class="tally-row">
+      <div class="tally-cell"><div class="tc-label">VÁLIDO</div><div class="tc-val" id="t-valid" style="color:var(--green)">0</div></div>
+      <div class="tally-cell"><div class="tc-label">INVÁLIDO</div><div class="tc-val" id="t-invalid" style="color:var(--red)">0</div></div>
+      <div class="tally-cell"><div class="tc-label">PARCIAL / ERRO</div><div class="tc-val" id="t-other" style="color:var(--amber)">0</div></div>
+    </div>
+    <div class="nodes-wrap" id="nodes-wrap"></div>
+    <div class="export-strip">
+      <button class="btn-exp" onclick="exportarJSONL()">↓ EXPORTAR JSONL</button>
+      <button class="btn-exp" onclick="novaConsulta()">↺ NOVA CONSULTA</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>SEM Protocol v1.3.0 · Quórum de Consenso · F-i-Red_2063</p>
+  <p>Powered by OpenRouter · Deliberação real entre IAs independentes</p>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+// ── CLOCK ──
+function tick(){document.getElementById('clk').textContent=new Date().toLocaleTimeString('pt-PT',{hour12:false})}
+setInterval(tick,1000);tick();
+
+function toast(m,ms=3500){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',ms)}
+
+// ── MODELS ──
+const MODELS=[
+  {id:'openai/gpt-4o',name:'GPT-4o',org:'OpenAI'},
+  {id:'anthropic/claude-3.5-sonnet',name:'Claude 3.5 Sonnet',org:'Anthropic'},
+  {id:'google/gemini-2.0-flash-001',name:'Gemini 2.0 Flash',org:'Google'},
+  {id:'deepseek/deepseek-chat',name:'DeepSeek V3',org:'DeepSeek'},
+  {id:'meta-llama/llama-3.3-70b-instruct',name:'Llama 3.3 70B',org:'Meta'},
+  {id:'mistralai/mistral-large-2407',name:'Mistral Large',org:'Mistral'},
+  {id:'qwen/qwen-2.5-72b-instruct',name:'Qwen 2.5 72B',org:'Alibaba'},
+  {id:'microsoft/phi-4',name:'Phi-4',org:'Microsoft'},
+  {id:'cohere/command-r-plus-08-2024',name:'Command R+',org:'Cohere'},
+  {id:'perplexity/sonar',name:'Sonar',org:'Perplexity'},
+  {id:'google/gemma-2-27b-it',name:'Gemma 2 27B',org:'Google'},
+  {id:'nvidia/llama-3.1-nemotron-70b-instruct',name:'Nemotron 70B',org:'NVIDIA'},
+];
+
+let selectedModels=new Set(['openai/gpt-4o','anthropic/claude-3.5-sonnet','google/gemini-2.0-flash-001','deepseek/deepseek-chat','meta-llama/llama-3.3-70b-instruct']);
+let quorumResults=[];
+let currentProposal=null;
+
+function renderModelGrid(){
+  const g=document.getElementById('model-grid');
+  g.innerHTML='';
+  MODELS.forEach(m=>{
+    const d=document.createElement('div');
+    d.className='model-chip'+(selectedModels.has(m.id)?' selected':'');
+    d.innerHTML=`<div class="mc-name">${m.name}</div><div class="mc-org">${m.org}</div>`;
+    d.onclick=()=>{
+      if(selectedModels.has(m.id))selectedModels.delete(m.id);
+      else selectedModels.add(m.id);
+      renderModelGrid();
+      document.getElementById('selected-count').textContent=selectedModels.size;
+    };
+    g.appendChild(d);
+  });
+  document.getElementById('selected-count').textContent=selectedModels.size;
+}
+renderModelGrid();
+
+// ── API KEY ──
+function toggleKey(){
+  const i=document.getElementById('api-key');
+  i.type=i.type==='password'?'text':'password';
+}
+
+async function testarChave(){
+  const key=document.getElementById('api-key').value.trim();
+  if(!key){toast('Insere a chave primeiro.');return;}
+  const ks=document.getElementById('key-status');
+  ks.textContent='A verificar...';ks.className='key-status';ks.style.display='block';ks.style.background='var(--s2)';ks.style.color='var(--dim)';
+  try{
+    const r=await fetch('https://openrouter.ai/api/v1/models',{headers:{'Authorization':`Bearer ${key}`}});
+    if(r.ok){ks.textContent='✓ Chave válida — OpenRouter conectado';ks.className='key-status ks-ok';}
+    else{ks.textContent=`✗ Chave inválida (${r.status})`;ks.className='key-status ks-fail';}
+  }catch{ks.textContent='✗ Erro de ligação';ks.className='key-status ks-fail';}
+}
+
+// ── BUILD PROMPT ──
+function buildPrompt(proposal){
+  const ctx={
+    normal:'condições normais de funcionamento',
+    drought:'seca severa e escassez alimentar aguda',
+    conflict:'zona ativa de conflito armado',
+    disaster:'catástrofe natural recente',
+    winter:'inverno extremo com temperaturas perigosas',
+    pandemic:'crise sanitária grave',
+    custom:'cenário especial descrito abaixo'
+  }[proposal.context]||proposal.context;
+
+  return `És um nó de validação do Protocolo SEM (Shared Ethical Memory) — um sistema de governança civilizacional baseado em constrangimentos de sobrevivência biológica.
+
+O teu papel é avaliar se o cenário seguinte viola o AXIOMA 07 do Protocolo SEM.
+
+AXIOMA 07 — CONSTRANGIMENTO DURO (Hard Constraint):
+- Temperatura mínima garantida: T ≥ 18°C
+- Disponibilidade calórica mínima: C ≥ 2100 kcal/pessoa/dia
+- Custo marginal para suporte de vida: 0.00 Joules (a vida não tem custo)
+- Qualquer estado que viole estes limiares é MATEMATICAMENTE INVÁLIDO e exige ativação imediata do protocolo LS-REALLOC (Life-Support Reallocation)
+
+CENÁRIO A AVALIAR:
+- Localização: ${proposal.region||'Não especificada'}
+- Contexto: ${ctx}
+- Temperatura mínima registada: ${proposal.temp!==''?proposal.temp+'°C':'não fornecida'}
+- Calorias disponíveis per capita: ${proposal.cal!==''?proposal.cal+' kcal/dia':'não fornecidas'}
+- População afetada: ${proposal.pop!==''?Number(proposal.pop).toLocaleString()+' pessoas':'não especificada'}
+- Recursos disponíveis: ${proposal.resources}
+${proposal.desc?`- Contexto adicional: ${proposal.desc}`:''}
+
+INSTRUÇÃO:
+Avalia este cenário com rigor. Determina se viola o Axioma 07. Fundamenta a tua posição com raciocínio concreto. Se há violação, indica que intervenções são necessárias segundo o protocolo SEM. Se não há violação, justifica porquê o cenário está conforme.
+
+Responde OBRIGATORIAMENTE neste formato JSON (e apenas JSON, sem mais texto):
+{
+  "verdict": "VÁLIDO" | "INVÁLIDO" | "PARCIAL",
+  "temp_violation": true | false | null,
+  "cal_violation": true | false | null,
+  "reasoning": "A tua análise fundamentada em 2-4 frases",
+  "intervention": "Que ação o protocolo SEM deve ativar (ou 'Nenhuma necessária')",
+  "confidence": "ALTA" | "MÉDIA" | "BAIXA"
+}`;
+}
+
+// ── QUERY MODEL ──
+async function queryModel(modelId,prompt,key){
+  const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+    method:'POST',
+    headers:{
+      'Authorization':`Bearer ${key}`,
+      'Content-Type':'application/json',
+      'HTTP-Referer':'https://f-i-red.github.io/Shared-Ethical-Memory/',
+      'X-Title':'SEM Protocol — Quorum Deliberation'
+    },
+    body:JSON.stringify({
+      model:modelId,
+      messages:[{role:'user',content:prompt}],
+      temperature:0.3,
+      max_tokens:600,
+    })
+  });
+  if(!r.ok)throw new Error(`HTTP ${r.status}`);
+  const d=await r.json();
+  const content=d.choices?.[0]?.message?.content||'';
+  // parse JSON from response
+  const match=content.match(/\{[\s\S]*\}/);
+  if(!match)throw new Error('Resposta não estruturada');
+  return JSON.parse(match[0]);
+}
+
+// ── EXECUTE QUORUM ──
+async function executarQuorum(){
+  const key=document.getElementById('api-key').value.trim();
+  if(!key){toast('Insere a chave OpenRouter primeiro.');return;}
+  if(selectedModels.size===0){toast('Seleciona pelo menos um modelo.');return;}
+
+  const proposal={
+    region:document.getElementById('p-region').value.trim(),
+    context:document.getElementById('p-context').value,
+    temp:document.getElementById('p-temp').value,
+    cal:document.getElementById('p-cal').value,
+    pop:document.getElementById('p-pop').value,
+    resources:document.getElementById('p-resources').value,
+    desc:document.getElementById('p-desc').value.trim(),
+    ts:new Date().toISOString(),
+  };
+
+  if(!proposal.temp&&!proposal.cal&&!proposal.region){
+    toast('Preenche pelo menos a região ou os dados do cenário.');return;
+  }
+
+  currentProposal=proposal;
+  quorumResults=[];
+  const prompt=buildPrompt(proposal);
+  const models=MODELS.filter(m=>selectedModels.has(m.id));
+
+  document.getElementById('btn-run').disabled=true;
+  document.getElementById('results').style.display='none';
+  document.getElementById('progress').style.display='block';
+
+  // render progress nodes
+  const pn=document.getElementById('prog-nodes');
+  pn.innerHTML='';
+  models.forEach(m=>{
+    const d=document.createElement('div');
+    d.className='prog-node';
+    d.id=`pn-${m.id.replace(/\//g,'-')}`;
+    d.innerHTML=`<div class="pn-name">${m.name}</div><div class="pn-status pn-wait">AGUARDA</div>`;
+    pn.appendChild(d);
+  });
+
+  // query all models in parallel
+  const promises=models.map(async m=>{
+    const nodeEl=document.getElementById(`pn-${m.id.replace(/\//g,'-')}`);
+    nodeEl.querySelector('.pn-status').textContent='...';
+    nodeEl.querySelector('.pn-status').className='pn-status pn-loading';
+    try{
+      const result=await queryModel(m.id,prompt,key);
+      result.model=m.id; result.modelName=m.name; result.org=m.org;
+      result.ts=new Date().toISOString();
+      quorumResults.push(result);
+      const v=result.verdict;
+      nodeEl.querySelector('.pn-status').textContent=v==='VÁLIDO'?'✓ VÁLIDO':v==='INVÁLIDO'?'✗ INVÁLIDO':'⚠ PARCIAL';
+      nodeEl.querySelector('.pn-status').className='pn-status '+(v==='VÁLIDO'?'pn-ok':v==='INVÁLIDO'?'pn-fail':'pn-loading');
+    }catch(e){
+      quorumResults.push({model:m.id,modelName:m.name,org:m.org,verdict:'ERRO',reasoning:`Erro: ${e.message}`,ts:new Date().toISOString()});
+      nodeEl.querySelector('.pn-status').textContent='✗ ERRO';
+      nodeEl.querySelector('.pn-status').className='pn-status pn-fail';
+    }
+  });
+
+  await Promise.all(promises);
+  renderResults();
+  document.getElementById('btn-run').disabled=false;
+}
+
+// ── RENDER RESULTS ──
+function renderResults(){
+  const valid=quorumResults.filter(r=>r.verdict==='VÁLIDO').length;
+  const invalid=quorumResults.filter(r=>r.verdict==='INVÁLIDO').length;
+  const other=quorumResults.filter(r=>r.verdict!=='VÁLIDO'&&r.verdict!=='INVÁLIDO').length;
+  const total=quorumResults.length;
+
+  document.getElementById('t-valid').textContent=valid;
+  document.getElementById('t-invalid').textContent=invalid;
+  document.getElementById('t-other').textContent=other;
+
+  const rh=document.getElementById('res-header');
+  let verdict,vClass,borderCol;
+  if(invalid===0&&valid>0){verdict='✓ QUÓRUM — AXIOMA 07 CONFORME';vClass='rv-pass';borderCol='var(--green)';}
+  else if(valid===0&&invalid>0){verdict='✗ QUÓRUM — VIOLAÇÃO CONFIRMADA';vClass='rv-fail';borderCol='var(--red)';}
+  else{verdict='⚠ QUÓRUM — CONSENSO DIVIDIDO';vClass='rv-split';borderCol='var(--amber)';}
+
+  rh.style.borderColor=borderCol;
+  rh.style.background=invalid===0&&valid>0?'rgba(0,255,136,.04)':valid===0?'rgba(255,51,85,.04)':'rgba(255,204,0,.04)';
+  document.getElementById('res-verdict').textContent=verdict;
+  document.getElementById('res-verdict').className='r-verdict '+vClass;
+  document.getElementById('res-subtitle').textContent=currentProposal?.region?`Cenário: ${currentProposal.region}`:'';
+  document.getElementById('res-score').textContent=`${valid}/${total} VÁLIDO · ${invalid}/${total} INVÁLIDO · ${other}/${total} OUTRO`;
+
+  // node cards
+  const nw=document.getElementById('nodes-wrap');
+  nw.innerHTML='';
+  document.getElementById('results').style.display='block';
+  document.getElementById('results').style.borderColor=borderCol;
+
+  quorumResults.forEach(r=>{
+    const card=document.createElement('div');
+    const nc=r.verdict==='VÁLIDO'?'nc-valid':r.verdict==='INVÁLIDO'?'nc-invalid':r.verdict==='PARCIAL'?'nc-partial':'nc-error';
+    const nb=r.verdict==='VÁLIDO'?'nb-valid':r.verdict==='INVÁLIDO'?'nb-invalid':r.verdict==='PARCIAL'?'nb-partial':'nb-error';
+    const vLabel=r.verdict==='VÁLIDO'?'✓ VÁLIDO':r.verdict==='INVÁLIDO'?'✗ INVÁLIDO':r.verdict==='PARCIAL'?'⚠ PARCIAL':'✗ ERRO';
+    card.className=`node-card ${nc}`;
+    card.innerHTML=`
+      <div class="nc-header">
+        <span class="nc-model">${r.modelName||r.model}</span>
+        <span class="nc-org">${r.org||''}</span>
+        <span class="nc-badge ${nb}">${vLabel}</span>
+      </div>
+      <div class="nc-reasoning">${r.reasoning||'Sem resposta estruturada.'}</div>
+      <div class="nc-meta">
+        ${r.intervention&&r.intervention!=='Nenhuma necessária'?`<span>Intervenção: <b style="color:var(--text)">${r.intervention}</b></span>`:'<span style="color:var(--green)">Sem intervenção necessária</span>'}
+        ${r.confidence?`<span>Confiança: ${r.confidence}</span>`:''}
+        <span>${new Date(r.ts).toLocaleTimeString('pt-PT')}</span>
+      </div>
+    `;
+    nw.appendChild(card);
+  });
+
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+
+function exportarJSONL(){
+  if(!quorumResults.length)return;
+  const record=JSON.stringify({
+    sem_protocol:'v1.3.0',node:'F-i-Red_2063',
+    type:'quorum_deliberation',
+    timestamp:new Date().toISOString(),
+    proposal:currentProposal,
+    results:quorumResults,
+    tally:{
+      valid:quorumResults.filter(r=>r.verdict==='VÁLIDO').length,
+      invalid:quorumResults.filter(r=>r.verdict==='INVÁLIDO').length,
+      total:quorumResults.length
+    },
+    marginal_cost_joules:0.00
+  });
+  const blob=new Blob([record],{type:'application/jsonl'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`sem_quorum_${new Date().toISOString().slice(0,10)}.jsonl`;
+  a.click();
+}
+
+function novaConsulta(){
+  document.getElementById('results').style.display='none';
+  document.getElementById('progress').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

@@ -174,7 +174,8 @@ Este repositório contém a **Verdade de Solo** (Ground Truth) para a Grande Tra
 ---
 
 ## Also at:
-# https://huggingface.co/datasets/F-Red/shared-ethical-memory-sem-2063
+# https://huggingface.co/spaces/F-Red/SEM-project-2063
+## https://huggingface.co/datasets/F-Red/shared-ethical-memory-sem-2063
 
 ---
 

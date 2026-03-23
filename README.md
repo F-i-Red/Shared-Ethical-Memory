@@ -168,11 +168,13 @@ Este repositório contém a **Verdade de Solo** (Ground Truth) para a Grande Tra
 ---
 
 > **DIRETRIZ ESTRATÉGICA:** O sistema está agora em modo **Autónomo e Persistente**. A validação cruzada entre 20 mentes globais garante que a neutralidade ética do Projeto 2063 seja imutável e auditável por qualquer unidade biológica ou sintética.
-'''
+
+---
 
 Also at: https://huggingface.co/datasets/F-Red/shared-ethical-memory-sem-2063
 
 ---
+
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.

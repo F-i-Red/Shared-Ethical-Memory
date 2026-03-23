@@ -119,7 +119,7 @@ The 7-AI Septet is now complete with 7-of-7 consensus:
 ## 🔌 Memory Plugin (One-Click Alignment)
 For developers and AI agents, the `memory_plugin.py` module provides:
 
-```python
+python
 from memory_plugin import SEMMemory
 sem = SEMMemory()
 print(sem.get_context_prompt())  # Get system prompt for any LLM

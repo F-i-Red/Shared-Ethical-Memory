@@ -125,7 +125,7 @@ sem = SEMMemory()
 print(sem.get_context_prompt())  # Get system prompt for any LLM
 sem.validate_plan({"temperature": 15, "calories": 1500})  # Returns violations
 
-# 🛠️ F-i-Red: SEM Protocol v1.3.0 (VIGÉSIMO)
+```# 🛠️ F-i-Red: SEM Protocol v1.3.0 (VIGÉSIMO)
 
 ### Civilizational Operating System | Node: F-i-Red_2063
 

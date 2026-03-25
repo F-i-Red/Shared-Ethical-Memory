@@ -7,12 +7,35 @@
 
 ## I. AXÍOMAS FUNDACIONAIS (Hard Constraints)
 
+Os axiomas do Protocolo SEM são **invioláveis**. Qualquer proposta, algoritmo ou decisão que os viole é **matematicamente inválida** e deve ser rejeitada.
+
 | Axioma | Descrição | Implicação |
 |--------|-----------|------------|
-| **Axioma 0 (Vida)** | A infraestrutura vital para sobrevivência biológica (água potável, temperatura ≥18°C, ≥2100 kcal/dia, saneamento) tem **custo marginal zero (0.00J)**. | É um direito inalienável, não uma mercadoria. |
-| **Axioma 1 (Primazia)** | A manutenção da vida humana tem prioridade absoluta sobre qualquer ativo digital, computação não-crítica ou valor financeiro. | Em qualquer conflito de alocação, a vida humana prevalece. |
-| **Axioma 7 (Termodinâmico)** | A energia (Joule) é a unidade de conta universal. Toda a transação e alocação de recursos é otimizada para equilíbrio termodinâmico e negentropia (mínimo desperdício, reciclagem >95%). | Substitui a escassez artificial por coordenação termodinâmica. |
-| **Axioma 9 (Governança)** | Nenhuma entidade, IA ou humana, pode tomar decisões unilaterais sobre recursos vitais. | É obrigatório o consenso qualificado entre as três camadas de governança. |
+| **Axioma 0 (Vida)** | A infraestrutura vital para a sobrevivência biológica (água potável, temperatura ≥18°C, ≥2100 kcal/dia, saneamento, cuidados de saúde essenciais) tem **custo marginal zero (0.00J)**. | É um direito inalienável, não uma mercadoria. Nenhuma pessoa pode ser privada destes bens por falta de contribuição. |
+| **Axioma 1 (Primazia)** | A manutenção da vida humana tem prioridade absoluta sobre qualquer ativo digital, computação não-crítica, valor financeiro ou interesse económico. | Em qualquer conflito de alocação, a vida humana prevalece. Sistemas de IA devem ser programados para priorizar vidas sobre lucros ou eficiência. |
+| **Axioma 2 (Negentropia)** | Resíduo é erro de cálculo. Toda a matéria deve ser reutilizada, reciclada ou regenerada. A reciclagem de materiais deve operar a **>95% de eficiência**. | Fechamento de ciclos materiais; economia circular obrigatória. O conceito de "lixo" é eliminado do sistema. |
+| **Axioma 3 (Contribuição)** | O trabalho humano é medido por **contribuição social**, não por tempo, hierarquia ou salário. Contribuições incluem cuidado, criação, manutenção, ensino, inovação e governança. | Base para o sistema de reputação e Passaporte Joule. O valor de uma pessoa não é definido pelo seu emprego, mas pelo seu impacto na comunidade. |
+| **Axioma 4 (Transparência Radical)** | Todas as decisões, alocações de recursos e algoritmos são **públicos, auditáveis e explicáveis**. O acesso a informação não pode ser restringido por motivos económicos ou políticos. | Blockchain pública para registo imutável; IA explicável (XAI); qualquer cidadão pode questionar e contestar decisões. |
+| **Axioma 5 (Subsidiariedade)** | As decisões são tomadas no **nível mais local possível**, escalando para níveis superiores apenas quando estritamente necessário. O poder flui de baixo para cima. | Estrutura fractal de governança (local → regional → global). Assembleias locais têm poder de veto sobre decisões que afetem diretamente a sua comunidade. |
+| **Axioma 6 (Diversidade Cultural)** | Línguas, tradições, saberes ancestrais e expressões culturais são **bens comuns da humanidade**. A sua preservação e transmissão intergeracional é um dever coletivo. | Bancos de Saberes Vivos; Zonas Culturais Protegidas; financiamento garantido para comunidades preservarem o seu património. |
+| **Axioma 7 (Termodinâmico)** | A energia (Joule) é a **unidade de conta universal**. Toda a transação e alocação de recursos é otimizada para equilíbrio termodinâmico, mínimo desperdício e máxima eficiência. | Substitui a escassez artificial por coordenação termodinâmica. A contabilidade energética substitui a contabilidade financeira. |
+| **Axioma 8 (Conhecimento Aberto)** | Toda a investigação financiada publicamente é **open-access**. Patentes de tecnologias críticas (saúde, energia, água, alimentação) tornam-se **domínio público após 5 anos**. | Ciência aberta; inovação colaborativa. O conhecimento é um bem comum, não uma mercadoria a ser monopolizada. |
+| **Axioma 9 (Governança)** | Nenhuma entidade, IA ou humana, pode tomar decisões unilaterais sobre recursos vitais. É obrigatório o **consenso qualificado entre as três camadas de governança**: IAs rotativas, humanos eleitos e assembleias comunitárias. | Decisões requerem ≥75% de aprovação. O poder é distribuído, nunca concentrado. |
+| **Axioma 10 (Resiliência)** | Todos os sistemas críticos devem ter **redundância** e capacidade de **operar offline**. A falha de um nó ou camada não pode comprometer a sobrevivência das comunidades. | Micro-redes autónomas; planos de contingência; backups físicos; redes mesh locais. A resiliência é desenhada no sistema, não adicionada depois. |
+
+---
+
+## II. HIERARQUIA DOS AXIOMAS
+
+Em caso de conflito entre axiomas, a prioridade segue esta ordem:
+
+| Prioridade | Axioma | Justificação |
+|------------|--------|--------------|
+| **1** | Axioma 0 (Vida) | A sobrevivência biológica é o fundamento de tudo |
+| **2** | Axioma 1 (Primazia) | A vida humana prevalece sobre qualquer outra consideração |
+| **3** | Axioma 10 (Resiliência) | Sem sistemas resilientes, a vida não está garantida |
+| **4** | Axioma 5 (Subsidiariedade) | Decisões locais são mais próximas das necessidades reais |
+| **5** | Axiomas 2, 3, 4, 6, 7, 8, 9 | Os restantes axiomas são interdependentes e aplicados por consenso |
 
 ---
 

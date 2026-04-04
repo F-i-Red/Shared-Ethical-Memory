@@ -66,7 +66,7 @@ from collections import defaultdict
 
 API_KEY       = "YOUR OPENROUTER API KEY"   # <-- substitui pela tua chave
 URL           = "https://openrouter.ai/api/v1/chat/completions"
-PASTA_PROJETO = r"C:/YOUR FOLDER WITH THE FOLLOWING DOWNLOADED DOCs"  # <-- a tua pasta com os documentos
+PASTA_PROJETO = r"C:\YOUR FOLDER WITH THE FOLLOWING DOWNLOADED DOCs"  # <-- a tua pasta com os documentos
 
 # ══════════════════════════════════════════════════════════════════════════════
 # DOCUMENTOS SELECIONADOS (Tier 1 + Tier 2, sem redundâncias)

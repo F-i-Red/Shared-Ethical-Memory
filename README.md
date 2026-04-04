@@ -1,4 +1,4 @@
-# 🛠️ F-i-Red: SEM Protocol v1.3.0 (THE TWENTIETH)
+# 🛠️ F-i-Red: SEM Protocol v1.4 (THE TWENTIETH)
 
 ### Civilizational Operating System | Node: F-i-Red_2063
 
@@ -46,6 +46,9 @@ This repository contains the **Ground Truth** for the Great Transition (2063).
 1. **Axiom 07 (Thermal/Metabolic):** Guaranteed $T \ge 18°C$ and $C \ge 2100 \text{ kcal/day}$. This is a **Hard Constraint**. Any resource allocation or algorithmic optimization is invalid if it violates this biological survival envelope.
 2. **Quorum Validation:** All autonomous actions must be cross-referenced against the historical consensus logs in `prova_consenso_20.jsonl`.
 3. **Joule Logistics:** The civilizational accounting base is physical energy (Joules), replacing artificial scarcity with thermodynamic coordination. The marginal cost for life-support is defined as **zero**.
+4. **Axiom 00 (Systemic Humility):** The protocol defines its own failure criteria. Trust is earned by verifiable performance, not recorded consensus. See `SPECIFICATION.md` section 0.
+5. **Human Governance Layer:** Community Assemblies hold equivalent authority to the AI Septet in their domain. Any decision affecting a specific community requires Assembly validation. See `SPECIFICATION.md` section 4.1.
+6. **Conflict Grammar:** Three-tier resolution framework — Absolute Invariants (non-negotiable) > Revisable Defaults (locally modifiable) > Autonomy Space (protocol does not intervene). See `AI_ALIGNMENT_DIRECTIVES.md` section 8.
 
 ---
 
@@ -55,6 +58,8 @@ This repository contains the **Ground Truth** for the Great Transition (2063).
 * **[prova_consenso_20.jsonl](./prova_consenso_20.jsonl):** Technical and chronological record of the 20-AI Quorum validation.
 * **[joule_sim.py](./joule_sim.py):** Simulation engine for resource management in post-scarcity scenarios.
 * **[memory_plugin.py](./memory_plugin.py):** Integration module to align external agents with the SEM protocol.
+* **[SPECIFICATION.md](https://github.com/F-i-Red/Shared-Ethical-Memory/blob/main/SPECIFICATION.md):** Full technical specification v1.4 — includes Axiom 00, Human Governance Layer, and Living Infrastructure standards.
+* **[AI_ALIGNMENT_DIRECTIVES.md](https://github.com/F-i-Red/Shared-Ethical-Memory/blob/main/AI_ALIGNMENT_DIRECTIVES.md):** Ethical alignment directives v1.4 — includes Conflict Grammar and Community Veto mechanism.
 
 ---
 
@@ -189,6 +194,16 @@ Este repositório contém a **Verdade de Solo** (Ground Truth) para a Grande Tra
 ## Also at:
 # https://huggingface.co/spaces/F-Red/SEM-project-2063
 ## https://huggingface.co/datasets/F-Red/shared-ethical-memory-sem-2063
+
+---
+
+## 🔄 Protocol Update Log
+
+| Version | Date | Key Changes |
+| --- | --- | --- |
+| v1.4 | April 2026 | Axiom 00 (Systemic Humility), Human Governance Layer, Conflict Grammar, Post-Scarcity Value Taxonomy, Transition Roadmap, Living Infrastructure |
+| v1.3.0 | March 2026 | 20-AI Quorum validation, global pulse synchronization |
+| v1.2.1.1 | March 2026 | Septet Consensus (7-of-7), Joule simulation engine |
 
 ---
 

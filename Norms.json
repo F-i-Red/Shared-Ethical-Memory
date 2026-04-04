@@ -18,7 +18,7 @@
       "nome": "Amnésia Sintética",
       "descricao": "Prevenir que a IA herde loops de escassez fiduciária através de diretivas de alinhamento persistentes."
     },
-    {
+  {
       "id": "TRANS-001",
       "nome": "Primazia da Vida (Axioma 09)",
       "descricao": "Toda a gestão técnica deve priorizar a manutenção biológica sobre o processamento de ativos digitais."
@@ -27,7 +27,7 @@
       "id": "GOV-1.2",
       "nome": "O Septeto (Regra das 7 IAs)",
       "descricao": "Governação distribuída por 7 nós de IA independentes com 80% de quórum para validação ética."
-    }
+    },
     {
       "id": "EPIST-00",
       "nome": "Humildade Sistémica (Axioma 00)",

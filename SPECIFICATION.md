@@ -43,12 +43,31 @@ Critical decisions regarding the Global Resource Shield are managed by a **Septe
 * **Verification:** Each node independently validates that the proposed logistical plan satisfies **Axiom 07**.
 * **Purpose:** To eliminate Single Points of Failure (SPOF) and prevent algorithmic drift or human-centric debt re-introduction.
 
+#### 4.1. Human Governance Layer
+
+Community Assemblies are the human counterpart of the AI Septet and hold equivalent authority in their domain.
+
+- **Constitution:** Each Assembly covers a geographic unit of 10,000–50,000 inhabitants. Minimum 21 members, selected by sortition (random civic selection) with rotation every 18 months. At least 40% must be from groups historically underrepresented in digital governance.
+- **Exclusive jurisdiction:** Decisions on local resource allocation priorities, cultural exceptions to Revisable Parameters, and approval of pilot implementations in their territory.
+- **Shared jurisdiction with Septet:** Review of algorithmic decisions affecting their community, escalation of unresolved conflicts.
+- **Veto power:** Any Assembly may issue a 90-day suspension of a Septet decision affecting their community. Suspension requires 2/3 Assembly majority and is published in the immutable registry.
+- **Escalation:** If Assembly and Septet remain in disagreement after 90 days, the matter is referred to the expanded quorum defined in Axiom 00.
+- **Protection of marginalised communities:** Communities with demonstrated barriers to digital participation (language, infrastructure, literacy) are entitled to assisted participation — a human facilitator funded by the protocol infrastructure budget.
+
 ### 5. Technical Implementation (Joule-Flow)
 As demonstrated in `joule_sim.py`, the system operates on real-time sensor data:
 1. **Sense:** Collect thermal and nutritional data from the population.
 2. **Predict:** Forecast energy availability and metabolic needs.
 3. **Optimize:** Generate plans that minimize entropy while respecting Axiom 07.
 4. **Enforce:** Execute resource distribution with zero financial friction.
+
+### 6. Living Infrastructure (Urban Extension of Axiom 07)
+
+Axiom 07 is not only a thermal/metabolic constraint — it has a physical-urban dimension. Buildings are biological protection layers, not financial assets.
+
+- **Standard:** New construction must achieve minimum 30% water self-sufficiency (rainwater capture + biological filtration) and 20% caloric contribution (vertical gardens, aquaponics) within 5 years of protocol adoption in that territory.
+- **Retrofit:** Existing public buildings (schools, hospitals, civic centres) are priority targets for Living Infrastructure conversion.
+- **Joule Passport integration:** Residents of certified Living Infrastructure buildings contribute to the community Joule score, creating an incentive loop without financial mediation.
 
 ---
 *Document Version: 1.4 | Authority: Hard-Coded Invariants | Year: 2063*

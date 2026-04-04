@@ -31,7 +31,99 @@ The system enforces a mandatory state where for every human unit ($h$):
 #### 2.2. Validation Logic
 In the optimization cycle, any state $S$ where $T_h < 18°C$ or $C_h < 2100\text{ kcal}$ is flagged as **INVALID**. The system is forced to bypass standard distribution and trigger an immediate **Life-Support Reallocation** (as simulated in `joule_sim.py`).
 
-### 3. Logistical Entropy Minimization
+#### 2.3. Scientific Basis for Axiom 07 Thresholds
+
+The values T ≥ 18°C and C ≥ 2100 kcal/day are not arbitrary. Both are grounded in
+peer-reviewed evidence and international institutional consensus.
+
+**Thermal Threshold — T ≥ 18°C**
+
+The 18°C minimum is established by the World Health Organization's Housing and Health
+Guidelines (2018), which issue a *strong recommendation* that 18°C constitutes "a safe
+and well-balanced indoor temperature to protect the health of general populations during
+cold seasons." This recommendation is supported by multiple systematic reviews showing
+that indoor temperatures below 18°C are associated with:
+
+- Elevated cardiovascular risk: cohort studies in Scotland found significantly higher
+  blood pressure in residents of homes below 18°C, with risk increasing sharply below
+  16°C (OR 4.92 for hypertension).
+- Elevated respiratory risk: adults with COPD showed reduced respiratory problems at
+  indoor temperatures at or above 18.2°C; temperatures below 16°C with humidity above
+  65% are associated with respiratory hazard including allergies.
+- Increased all-cause winter mortality, particularly in vulnerable groups (elderly,
+  children, those with chronic illness), for whom the WHO recommends a higher minimum
+  of 20°C.
+
+**Important qualification:** 18°C is a global *floor*, not a universal *optimum*. The
+WHO evidence base is concentrated in temperate and colder climates. Populations
+acclimatised to warmer climates (tropical, sub-equatorial) have demonstrated comfort
+ranges of 24–32°C. The SEM protocol therefore treats 18°C as the non-negotiable
+biological safety floor — the point below which health risk is clinically demonstrated —
+while explicitly recognising that regional Assemblies may set higher local minimums
+under Axiom 00's Revisable Parameters mechanism. The threshold can be raised; it
+cannot be lowered below 18°C.
+
+**Caloric Threshold — C ≥ 2100 kcal/day**
+
+The 2100 kcal/day minimum is derived from the FAO/WHO/UNU Joint Expert Consultation
+on Human Energy Requirements (2001, published 2004) — the authoritative reference for
+global undernourishment measurement. Key points:
+
+- The FAO defines undernourishment as caloric intake insufficient to meet minimum
+  energy requirements for adequate weight, body composition, and sedentary physical
+  activity consistent with long-term good health.
+- The global average minimum dietary energy requirement (MDER) for adults is
+  approximately 2000 kcal/day (FAO); the 2100 kcal threshold adds a safety margin
+  above this floor to account for light activity levels and individual variation.
+- The FAO/WHO/UNU consultation establishes that requirements vary by age, sex, body
+  size and activity level. 2100 kcal/day is consistent with the requirement for an
+  adult of average body size performing sedentary to light activity — the baseline
+  condition the SEM protocol guarantees before any additional needs are addressed.
+- Research modelling global caloric requirements (PMC, 2019) estimates the global
+  average daily requirement at approximately 2285 kcal/person as of 2010, rising with
+  increasing body height and BMI trends. 2100 kcal is therefore a conservative and
+  defensible minimum floor, not a recommended intake.
+
+**Important qualification:** The FAO explicitly states that energy requirements are
+population-level averages, not individual prescriptions. The 2100 kcal threshold in
+the SEM protocol is therefore correctly understood as a *systemic guarantee* — the
+minimum the infrastructure must make available per person — not a claim that every
+individual requires exactly this amount. As with the thermal threshold, regional
+Assemblies may raise this floor locally (e.g. for populations with higher average
+activity levels or body mass); they may not lower it below 2100 kcal.
+
+**On the "colonialism of standards" critique**
+
+Several evaluators in the SEM v2.0 consensus process raised the concern that imposing
+universal biological minimums risks cultural paternalism. This critique is addressed
+directly:
+
+1. Both thresholds are *floors derived from human physiology*, not cultural preferences.
+   Below 16°C, respiratory and cardiovascular risk increases regardless of cultural
+   context. Below approximately 1700–1800 kcal/day, the FAO defines chronic
+   undernourishment regardless of geography.
+
+2. The thresholds are *revisable upward* by Community Assemblies under the Conflict
+   Grammar (Tier 2 — Revisable Defaults). What is not revisable is the direction:
+   no cultural argument can lower a biological safety floor.
+
+3. The critique of "colonialism of standards" applies validly to *optimums* imposed
+   from outside — e.g. mandating 22°C because a temperate-climate population considers
+   it comfortable. It does not apply to *minimums* below which clinical harm is
+   documented. The SEM protocol mandates only the latter.
+
+**References**
+- WHO Housing and Health Guidelines, 2018. Chapter: Low indoor temperatures.
+  NCBI Bookshelf NBK535294.
+- Ormandy, D. & Ezratty, V. (2012). Health and thermal comfort: From WHO guidance
+  to housing strategies. Energy Policy, 49, 116–121.
+- FAO/WHO/UNU. Human Energy Requirements. Report of a Joint Expert Consultation.
+  Rome, October 2001. FAO Food and Nutrition Technical Report Series 1, 2004.
+- Ritchie, H. & Roser, M. Food Supply. Our World in Data, 2019.
+- Bennett, E. et al. (2023). Cold indoor temperatures and their association with
+  health and well-being: a systematic literature review. Public Health, 225.
+
+  ### 3. Logistical Entropy Minimization
 The system measures success through the **Minimization of Social and Logistical Entropy**.
 * **Objective Function:** $\text{Min} \sum (\text{Energy Dissipation} + \text{Resource Waste})$
 * **Negative Entropy (Negentropy):** The system treats "waste" as misallocated resources, aiming for a 95%+ recovery rate via automated predictive logistics.

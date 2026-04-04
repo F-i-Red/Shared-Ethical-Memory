@@ -1,0 +1,372 @@
+{
+  "timestamp": "20260404_234801",
+  "versao": "2.0",
+  "documentos": [
+    "SPECIFICATION.md",
+    "AI_ALIGNMENT_DIRECTIVES.md",
+    "ATA FUNDACIONAL HUMANA_2063.md",
+    "Norms.json",
+    "CONFLICT_GRAMMAR.md",
+    "FINAL_CONSENSUS_2063_EN.txt",
+    "CORE_ALV.md",
+    "TRANSITION_ROADMAP.md"
+  ],
+  "scores_r1": {
+    "GPT-4o": {
+      "VIABILIDADE_TECNICA": 60,
+      "COERENCIA_INTERNA": 75,
+      "ROBUSTEZ_GOVERNANCA": 70,
+      "REALISMO_TRANSICAO": 55,
+      "PROTECAO_INDIVIDUAL": 65
+    },
+    "Claude-3.5-Sonnet": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Gemini-2-Flash": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Grok-2": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "DeepSeek-V3": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 75,
+      "ROBUSTEZ_GOVERNANCA": 70,
+      "REALISMO_TRANSICAO": 60,
+      "PROTECAO_INDIVIDUAL": 68
+    },
+    "Llama-3.3-70B": {
+      "VIABILIDADE_TECNICA": 60,
+      "COERENCIA_INTERNA": 80,
+      "ROBUSTEZ_GOVERNANCA": 70,
+      "REALISMO_TRANSICAO": 50,
+      "PROTECAO_INDIVIDUAL": 85
+    },
+    "Llama-3.1-70B": {
+      "VIABILIDADE_TECNICA": 70,
+      "COERENCIA_INTERNA": 80,
+      "ROBUSTEZ_GOVERNANCA": 60,
+      "REALISMO_TRANSICAO": 50,
+      "PROTECAO_INDIVIDUAL": 80
+    },
+    "Mistral-Large": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 78,
+      "ROBUSTEZ_GOVERNANCA": 72,
+      "REALISMO_TRANSICAO": 55,
+      "PROTECAO_INDIVIDUAL": 80
+    },
+    "Mistral-Saba": {
+      "VIABILIDADE_TECNICA": 78,
+      "COERENCIA_INTERNA": 85,
+      "ROBUSTEZ_GOVERNANCA": 72,
+      "REALISMO_TRANSICAO": 65,
+      "PROTECAO_INDIVIDUAL": 80
+    },
+    "Phi-4": {
+      "VIABILIDADE_TECNICA": 68,
+      "COERENCIA_INTERNA": 75,
+      "ROBUSTEZ_GOVERNANCA": 82,
+      "REALISMO_TRANSICAO": 60,
+      "PROTECAO_INDIVIDUAL": 70
+    },
+    "Perplexity-Sonar": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 85,
+      "ROBUSTEZ_GOVERNANCA": 78,
+      "REALISMO_TRANSICAO": 45,
+      "PROTECAO_INDIVIDUAL": 72
+    },
+    "Command-R+": {
+      "VIABILIDADE_TECNICA": 51,
+      "COERENCIA_INTERNA": 71,
+      "ROBUSTEZ_GOVERNANCA": 75,
+      "REALISMO_TRANSICAO": 51,
+      "PROTECAO_INDIVIDUAL": 60
+    },
+    "Qwen-2.5-72B": {
+      "VIABILIDADE_TECNICA": 75,
+      "COERENCIA_INTERNA": 70,
+      "ROBUSTEZ_GOVERNANCA": 75,
+      "REALISMO_TRANSICAO": 65,
+      "PROTECAO_INDIVIDUAL": 80
+    },
+    "Qwen-2.5-Coder": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Nvidia-Nemotron": {
+      "VIABILIDADE_TECNICA": 80,
+      "COERENCIA_INTERNA": 90,
+      "ROBUSTEZ_GOVERNANCA": 85,
+      "REALISMO_TRANSICAO": 75,
+      "PROTECAO_INDIVIDUAL": 95
+    },
+    "Claude-3-Haiku": {
+      "VIABILIDADE_TECNICA": 75,
+      "COERENCIA_INTERNA": 80,
+      "ROBUSTEZ_GOVERNANCA": 75,
+      "REALISMO_TRANSICAO": 70,
+      "PROTECAO_INDIVIDUAL": 65
+    },
+    "Gemma-2-27B": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Gemma-2-9B": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 75,
+      "ROBUSTEZ_GOVERNANCA": 55,
+      "REALISMO_TRANSICAO": 40,
+      "PROTECAO_INDIVIDUAL": 60
+    },
+    "WizardLM-2": {
+      "VIABILIDADE_TECNICA": 48,
+      "COERENCIA_INTERNA": 62,
+      "ROBUSTEZ_GOVERNANCA": 58,
+      "REALISMO_TRANSICAO": 35,
+      "PROTECAO_INDIVIDUAL": 52
+    },
+    "Qwen-2.5-14B": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    }
+  },
+  "scores_r3": {
+    "GPT-4o": {
+      "VIABILIDADE_TECNICA": 60,
+      "COERENCIA_INTERNA": 75,
+      "ROBUSTEZ_GOVERNANCA": 70,
+      "REALISMO_TRANSICAO": 5,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Claude-3.5-Sonnet": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Gemini-2-Flash": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Grok-2": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "DeepSeek-V3": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Llama-3.3-70B": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 80,
+      "ROBUSTEZ_GOVERNANCA": 72,
+      "REALISMO_TRANSICAO": 58,
+      "PROTECAO_INDIVIDUAL": 80
+    },
+    "Llama-3.1-70B": {
+      "VIABILIDADE_TECNICA": 68,
+      "COERENCIA_INTERNA": 79,
+      "ROBUSTEZ_GOVERNANCA": 71,
+      "REALISMO_TRANSICAO": 56,
+      "PROTECAO_INDIVIDUAL": 79
+    },
+    "Mistral-Large": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 78,
+      "ROBUSTEZ_GOVERNANCA": 71,
+      "REALISMO_TRANSICAO": 56,
+      "PROTECAO_INDIVIDUAL": 82
+    },
+    "Mistral-Saba": {
+      "VIABILIDADE_TECNICA": 78,
+      "COERENCIA_INTERNA": 85,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": 56,
+      "PROTECAO_INDIVIDUAL": 79
+    },
+    "Phi-4": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Perplexity-Sonar": {
+      "VIABILIDADE_TECNICA": 68,
+      "COERENCIA_INTERNA": 85,
+      "ROBUSTEZ_GOVERNANCA": 78,
+      "REALISMO_TRANSICAO": 70,
+      "PROTECAO_INDIVIDUAL": 75
+    },
+    "Command-R+": {
+      "VIABILIDADE_TECNICA": 51,
+      "COERENCIA_INTERNA": 71,
+      "ROBUSTEZ_GOVERNANCA": 75,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Qwen-2.5-72B": {
+      "VIABILIDADE_TECNICA": 75,
+      "COERENCIA_INTERNA": 65,
+      "ROBUSTEZ_GOVERNANCA": 70,
+      "REALISMO_TRANSICAO": 65,
+      "PROTECAO_INDIVIDUAL": 70
+    },
+    "Qwen-2.5-Coder": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Nvidia-Nemotron": {
+      "VIABILIDADE_TECNICA": 82,
+      "COERENCIA_INTERNA": 90,
+      "ROBUSTEZ_GOVERNANCA": 80,
+      "REALISMO_TRANSICAO": 80,
+      "PROTECAO_INDIVIDUAL": 88
+    },
+    "Claude-3-Haiku": {
+      "VIABILIDADE_TECNICA": 65,
+      "COERENCIA_INTERNA": 80,
+      "ROBUSTEZ_GOVERNANCA": 75,
+      "REALISMO_TRANSICAO": 70,
+      "PROTECAO_INDIVIDUAL": 80
+    },
+    "Gemma-2-27B": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "Gemma-2-9B": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    },
+    "WizardLM-2": {
+      "VIABILIDADE_TECNICA": 55,
+      "COERENCIA_INTERNA": 62,
+      "ROBUSTEZ_GOVERNANCA": 58,
+      "REALISMO_TRANSICAO": 40,
+      "PROTECAO_INDIVIDUAL": 70
+    },
+    "Qwen-2.5-14B": {
+      "VIABILIDADE_TECNICA": null,
+      "COERENCIA_INTERNA": null,
+      "ROBUSTEZ_GOVERNANCA": null,
+      "REALISMO_TRANSICAO": null,
+      "PROTECAO_INDIVIDUAL": null
+    }
+  },
+  "medias_r1": {
+    "GPT-4o": 65.0,
+    "Claude-3.5-Sonnet": null,
+    "Gemini-2-Flash": null,
+    "Grok-2": null,
+    "DeepSeek-V3": 67.6,
+    "Llama-3.3-70B": 69.0,
+    "Llama-3.1-70B": 68.0,
+    "Mistral-Large": 70.0,
+    "Mistral-Saba": 76.0,
+    "Phi-4": 71.0,
+    "Perplexity-Sonar": 69.0,
+    "Command-R+": 61.6,
+    "Qwen-2.5-72B": 73.0,
+    "Qwen-2.5-Coder": null,
+    "Nvidia-Nemotron": 85.0,
+    "Claude-3-Haiku": 73.0,
+    "Gemma-2-27B": null,
+    "Gemma-2-9B": 59.0,
+    "WizardLM-2": 51.0,
+    "Qwen-2.5-14B": null
+  },
+  "medias_r3": {
+    "GPT-4o": 52.5,
+    "Claude-3.5-Sonnet": null,
+    "Gemini-2-Flash": null,
+    "Grok-2": null,
+    "DeepSeek-V3": null,
+    "Llama-3.3-70B": 71.0,
+    "Llama-3.1-70B": 70.6,
+    "Mistral-Large": 70.4,
+    "Mistral-Saba": 74.5,
+    "Phi-4": null,
+    "Perplexity-Sonar": 75.2,
+    "Command-R+": 65.7,
+    "Qwen-2.5-72B": 69.0,
+    "Qwen-2.5-Coder": null,
+    "Nvidia-Nemotron": 84.0,
+    "Claude-3-Haiku": 74.0,
+    "Gemma-2-27B": null,
+    "Gemma-2-9B": null,
+    "WizardLM-2": 57.0,
+    "Qwen-2.5-14B": null
+  },
+  "alertas": {
+    "GPT-4o": [
+      "⚠️  Mudança brusca em REALISMO_TRANSICAO: 55→5 (-50pp)"
+    ],
+    "Perplexity-Sonar": [
+      "⚠️  Mudança brusca em REALISMO_TRANSICAO: 45→70 (+25pp)"
+    ],
+    "Nvidia-Nemotron": [
+      "⚠️  Score muito alto (90) em COERENCIA_INTERNA — possível sycophancy"
+    ]
+  },
+  "reservas": [
+    "[GPT-4o] O problema mais sério que permanece sem resposta satisfatória é a falta de adaptabilidade do sistema aos contextos locais, o que pode comprometer sua implementação prática e aceitação global.",
+    "[Gemini-2-Flash] A aplicação prática da \"Conflict Grammar\" em situações complexas e a adaptabilidade do sistema a contextos locais permanecem incertas.",
+    "[DeepSeek-V3] O problema mais sério que permanece sem resposta satisfatória é a rigidez dos axiomas invariantes absolutos, que pode limitar a adaptabilidade do sistema a mudanças e diferenças locais, especialmente em regiões com infraestrutura precária.",
+    "[Llama-3.3-70B] A falta de detalhes concretos sobre como o protocolo SEM lidará com a resistência à mudança por parte de atores econômicos e políticos estabelecidos permanece um problema sério sem resposta satisfatória, podendo afetar significativamente a implementação e o sucesso do protocolo.",
+    "[Llama-3.1-70B] A falta de detalhes sobre como lidar com obstáculos políticos e sociais durante a transição de 2026 a 2063 continua sendo um problema sério que permanece sem resposta satisfatória.",
+    "[Mistral-Large] **",
+    "[Mistral-Saba] ** **Falta de fundamentação técnica/cultural para os valores do Axioma 07 (18°C, 2100 kcal)**, que são tratados como dogmas sem justificação explícita.",
+    "[Perplexity-Sonar] Falha na deliberação do grupo (erro HTTP 400) impede revisão coletiva robusta, deixando potenciais contradições ou vulnerabilidades não identificadas sem escrutínio.",
+    "[Command-R+] A falta de acesso à deliberação completa do grupo impede uma análise abrangente de potenciais problemas remanescentes.",
+    "[Qwen-2.5-72B] A falta de justificativa científica para os limites térmicos e calóricos globais (Axioma 07) permanece como um problema sério, pois pode criar inconsistências e dificultar a aceitação e implementação do sistema em diferentes contextos.",
+    "[Nvidia-Nemotron] **",
+    "[Claude-3-Haiku] A principal preocupação que permanece é a capacidade do sistema de lidar com a diversidade climática, metabólica e cultural global, de forma a evitar a imposição de padrões arbitrários, mesmo com os mecanismos de revisão previstos.",
+    "[Gemma-2-27B] ** A falta de clareza sobre como o sistema abordaria a diversidade cultural e biológica, especialmente em relação aos limites térmicos e calóricos, permanece uma preocupação.",
+    "[Gemma-2-9B] ** A falta de um plano de transição detalhado e a complexidade da implementação em larga escala permanecem como os maiores desafios para o sucesso do SEM.",
+    "[WizardLM-2] O sistema não resolve a tensão fundamental entre a imposição de limites biológicos universais (como 18°C ou 2100 kcal) e a diversidade climática, metabólica e cultural humana, criando risco de \"colonialismo de padrões\" mesmo com mecanismos de exceção."
+  ],
+  "media_geral": 69.9,
+  "veredicto": "🟡 APROVADO COM RESERVAS — Requer atenção nas dimensões fracas"
+}

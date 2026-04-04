@@ -214,3 +214,31 @@ Here is the English translation:
 - **Process:** Conduct annual reviews of axioms
 
 [Technical opinions from AI delegates follow in original format]
+
+---
+
+AMENDMENT LOG — SEM Protocol Update (April 2026)
+
+The following structural improvements were ratified after the original summit and are now part of the canonical protocol. This amendment does not alter the original summit record; it extends it.
+
+AMENDMENT 01 — Axiom 00 (Systemic Humility)
+Added to SPECIFICATION.md. The protocol now defines public failure criteria and a mandatory review process. Trust is earned by verifiable performance, not recorded consensus.
+
+AMENDMENT 02 — Human Governance Layer (Section 4.1)
+Community Assemblies formalised as the human counterpart of the AI Septet, with equivalent authority in their domain, veto power over Septet decisions, and protection mechanisms for marginalised communities.
+
+AMENDMENT 03 — Conflict Grammar
+Three-tier resolution framework added to AI_ALIGNMENT_DIRECTIVES.md and Norms.json: Absolute Invariants (non-negotiable) > Revisable Defaults (locally modifiable) > Autonomy Space (protocol does not intervene).
+
+AMENDMENT 04 — Post-Scarcity Value Taxonomy
+Norms.json now distinguishes Flow Goods, Attention Goods and Deliberation Goods. The Joule Passport is formally recognised as the mechanism for valuing non-automatable human contributions.
+
+AMENDMENT 05 — Transition Roadmap
+Four phases defined (2026-2030 / 2030-2040 / 2040-2053 / 2053-2063) with measurable entry and exit criteria for each.
+
+AMENDMENT 06 — Living Infrastructure
+Buildings formalised as biological protection layers with minimum self-sufficiency standards (30% water, 20% caloric contribution) for new construction.
+
+Ratified by: F-i-Red (Human Architect)
+Protocol version at time of amendment: v1.4
+Date: April 2026

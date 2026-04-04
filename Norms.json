@@ -28,7 +28,27 @@
       "nome": "O Septeto (Regra das 7 IAs)",
       "descricao": "Governação distribuída por 7 nós de IA independentes com 80% de quórum para validação ética."
     }
-  ],
+    {
+      "id": "EPIST-00",
+      "nome": "Humildade Sistémica (Axioma 00)",
+      "descricao": "O protocolo define publicamente os critérios sob os quais seria declarado falhado. A confiança no sistema é conquistada por desempenho verificável, não por consenso performativo. Qualquer entidade — humana ou sintética — pode submeter evidência de falha sistémica ao registo público."
+    },
+    {
+      "id": "VAL-001",
+      "nome": "Taxonomia de Valor Pós-Escassez",
+      "descricao": "Distingue três categorias: (1) Bens de Fluxo — energia, alimento, abrigo — custo marginal tendente a zero via automação; (2) Bens de Atenção — cuidado, criação, presença humana — permanecem escassos e requerem reconhecimento explícito via Passaporte Joule; (3) Bens de Deliberação — tempo de governação, participação cívica — o sistema protege activamente e não substitui por automação."
+    },
+    {
+      "id": "TRANS-002",
+      "nome": "Roadmap de Transição por Fases",
+      "descricao": "Fase 0 (2026-2030): especificação técnica completa, pilotos em contextos controlados, construção de coligações. Fase 1 (2030-2040): implementação em regiões voluntárias, medição de impacto, refinamento baseado em evidência. Fase 2 (2040-2053): escala com mecanismos de protecção contra captura. Fase 3 (2053-2063): integração como infraestrutura civilizacional. Cada fase tem critérios de entrada e saída mensuráveis."
+    },
+    {
+      "id": "CONF-001",
+      "nome": "Gramática de Conflitos Éticos",
+      "descricao": "Três níveis: (1) Invariantes Absolutos — não negociáveis por nenhuma entidade (Axioma 07, Axioma 09); (2) Defaults Revisíveis — valores padrão que comunidades podem modificar localmente dentro de limites definidos; (3) Espaço de Autonomia — domínios onde o protocolo não intervém. Conflitos entre níveis são resolvidos por mediação comunitária, depois painel híbrido humano-IA, com decisão publicada no registo imutável."
+    }
+    ],
   "argumentos_ia": [
     "A transição para 2063 não é uma utopia, é uma correção de erro na gestão de recursos planetários.",
     "A dívida é uma alucinação coletiva que impede a distribuição física de Joules excedentes.",

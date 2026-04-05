@@ -78,6 +78,7 @@ DOCUMENTOS = [
     ("SPECIFICATION.md",            "TIER1_TECNICO"),
     ("AI_ALIGNMENT_DIRECTIVES.md",  "TIER1_IA_GOV"),
     ("ATA FUNDACIONAL HUMANA_2063.md", "TIER1_CONTRATO"),
+    ("SEM_CONSTITUTION.md",         "TIER1_CONSTITUTION"),   # ← Novo
     ("Norms.json",                  "TIER1_NORMAS"),
     # Tier 2 — Contexto complementar
     ("FINAL_CONSENSUS_2063_EN.txt", "TIER2_EN"),

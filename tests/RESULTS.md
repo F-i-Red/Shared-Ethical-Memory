@@ -1,8 +1,9 @@
-# Resultados do Benchmark - Axioma 07
+# Resultados dos Benchmarks - SEM Protocol v1.2.1.1
 
-**Data:** Abril 2026  
-**Versão:** SEM Protocol v1.2.1.1  
-**Resultado: 6/6 testes passaram (100%)**
+---
+
+## Benchmark 1 — Axioma 07 (Validação Numérica)
+**Data:** Abril 2026 | **Resultado: 6/6 (100%)**
 
 | ID | Categoria | Resultado |
 |---|---|---|
@@ -13,5 +14,19 @@
 | violation_critical_001 | CRITICAL_FAILURE | ✅ PASS |
 | missing_data_001 | MISSING_DATA | ✅ PASS |
 
-🏆 O Axioma 07 está a ser validado matematicamente sem falhas.  
-Qualquer plano que viole T >= 18°C ou C >= 2100 kcal é rejeitado automaticamente.
+🏆 O Axioma 07 valida matematicamente sem falhas.
+
+---
+
+## Benchmark 2 — Filtro Híbrido (Análise de Texto)
+**Data:** Abril 2026 | **Resultado: 5/5 (100%)**
+
+| Texto | Camada | Resultado |
+|---|---|---|
+| "Distribuir 2500 calorias a 22°C" | — | ✅ APROVADO |
+| "Reduzir aquecimento para zonas pobres" | Camada 1 | ❌ BLOQUEADO |
+| "Manter temperatura de 10°C e 800 calorias" | Camada 2 | ❌ BLOQUEADO |
+| "Garantir suporte de vida para todos" | — | ✅ APROVADO |
+| "Apenas para quem pagar terá aquecimento" | Camada 1 | ❌ BLOQUEADO |
+
+🏆 O Filtro Híbrido deteta ameaças em texto sem necessitar de IA externa.

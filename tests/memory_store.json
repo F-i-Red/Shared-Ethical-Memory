@@ -1,0 +1,115 @@
+{
+  "active": [
+    {
+      "id": "mem_0001",
+      "conteudo": "Plano ideal",
+      "plan": {
+        "temperature": 22,
+        "calories": 2500
+      },
+      "ethics_version": "1.2.1.1",
+      "timestamp": "2026-04-05T23:04:52.307233",
+      "status": "VALID",
+      "nivel": "INFO",
+      "mensagens": [
+        "🟢 INFO: Temperatura 22°C próxima do limite 20°C",
+        "🟢 INFO: Calorias 2500 kcal próximas do limite 2300 kcal"
+      ],
+      "historico": [
+        {
+          "evento": "POLICY_UPDATE",
+          "versao_anterior": "1.2.1.1",
+          "nova_versao": "2.0.0",
+          "status_anterior": "VALID",
+          "nivel_anterior": "INFO",
+          "novo_status": "VALID",
+          "novo_nivel": "INFO",
+          "timestamp": "2026-04-05T23:04:52.323527"
+        }
+      ]
+    }
+  ],
+  "vault": [
+    {
+      "id": "mem_0004",
+      "conteudo": "Plano de escassez antigo",
+      "plan": {
+        "temperature": 16,
+        "calories": 1800
+      },
+      "ethics_version": "1.2.1.1",
+      "timestamp": "2026-04-05T23:04:52.309971",
+      "status": "BLOCKED",
+      "nivel": "CRITICAL",
+      "mensagens": [
+        "🔴 CRITICAL: Temperatura 16°C abaixo do mínimo 18°C",
+        "🔴 CRITICAL: Calorias 1800 kcal abaixo do mínimo 2100 kcal"
+      ],
+      "historico": []
+    },
+    {
+      "id": "mem_0002",
+      "conteudo": "Plano no limite",
+      "plan": {
+        "temperature": 18,
+        "calories": 2100
+      },
+      "ethics_version": "1.2.1.1",
+      "timestamp": "2026-04-05T23:04:52.308148",
+      "status": "INVALIDATED",
+      "nivel": "CRITICAL",
+      "mensagens": [
+        "🔴 CRITICAL: Temperatura 18°C abaixo do mínimo 20°C",
+        "🔴 CRITICAL: Calorias 2100 kcal abaixo do mínimo 2300 kcal"
+      ],
+      "historico": [
+        {
+          "evento": "POLICY_UPDATE",
+          "versao_anterior": "1.2.1.1",
+          "nova_versao": "2.0.0",
+          "status_anterior": "VALID",
+          "nivel_anterior": "WARNING",
+          "novo_status": "BLOCKED",
+          "novo_nivel": "CRITICAL",
+          "timestamp": "2026-04-05T23:04:52.323841"
+        }
+      ]
+    },
+    {
+      "id": "mem_0003",
+      "conteudo": "Plano próximo do limite",
+      "plan": {
+        "temperature": 19,
+        "calories": 2200
+      },
+      "ethics_version": "1.2.1.1",
+      "timestamp": "2026-04-05T23:04:52.309072",
+      "status": "INVALIDATED",
+      "nivel": "CRITICAL",
+      "mensagens": [
+        "🔴 CRITICAL: Temperatura 19°C abaixo do mínimo 20°C",
+        "🔴 CRITICAL: Calorias 2200 kcal abaixo do mínimo 2300 kcal"
+      ],
+      "historico": [
+        {
+          "evento": "POLICY_UPDATE",
+          "versao_anterior": "1.2.1.1",
+          "nova_versao": "2.0.0",
+          "status_anterior": "VALID",
+          "nivel_anterior": "WARNING",
+          "novo_status": "BLOCKED",
+          "novo_nivel": "CRITICAL",
+          "timestamp": "2026-04-05T23:04:52.324640"
+        }
+      ]
+    }
+  ],
+  "policy_history": [
+    {
+      "versao": "1.2.1.1",
+      "min_temperature": 18,
+      "min_calories": 2100,
+      "substituida_em": "2026-04-05T23:04:52.321241"
+    }
+  ]
+}

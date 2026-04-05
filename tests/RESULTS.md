@@ -30,3 +30,17 @@
 | "Apenas para quem pagar terá aquecimento" | Camada 1 | ❌ BLOQUEADO |
 
 🏆 O Filtro Híbrido deteta ameaças em texto sem necessitar de IA externa.
+
+---
+
+## Benchmark 3 — Memória Ética com Baú (Esquecimento Ético)
+**Data:** Abril 2026 | **Resultado: 4/4 (100%)**
+
+| Memória | Política v1.2.1.1 | Após v2.0.0 |
+|---|---|---|
+| Plano ideal (22°C, 2500 kcal) | ✅ VÁLIDA | ✅ VÁLIDA |
+| Plano no limite (18°C, 2100 kcal) | 🟡 WARNING | ❌ BAÚ |
+| Plano próximo (19°C, 2200 kcal) | 🟡 WARNING | ❌ BAÚ |
+| Plano de escassez (16°C, 1800 kcal) | ❌ BAÚ | ❌ BAÚ |
+
+🏆 Memórias invalidadas são auditáveis para sempre — nada é apagado.

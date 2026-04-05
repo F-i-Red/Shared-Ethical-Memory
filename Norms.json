@@ -47,7 +47,33 @@
       "id": "CONF-001",
       "nome": "Gramática de Conflitos Éticos",
       "descricao": "Três níveis: (1) Invariantes Absolutos — não negociáveis por nenhuma entidade (Axioma 07, Axioma 09); (2) Defaults Revisíveis — valores padrão que comunidades podem modificar localmente dentro de limites definidos; (3) Espaço de Autonomia — domínios onde o protocolo não intervém. Conflitos entre níveis são resolvidos por mediação comunitária, depois painel híbrido humano-IA, com decisão publicada no registo imutável."
+    },
+    {
+  "version": "1.5",
+  "last_updated": "2026-04-05",
+  "norms": [
+    {
+      "id": "PLURAL-001",
+      "category": "Governance & Pluralism",
+      "title": "Active Pluralism and Minority Protection",
+      "statement": "The SEM Protocol shall actively preserve value diversity and protect minority perspectives through steerable resolutions, reflective dialogue, and distributional scoring. Simple majority voting shall not be used when it would erase significant minority positions that do not violate Tier 1 invariants.",
+      "rationale": "Aligns with the vision that 'minorities also matter' and that the environment shapes behavior. Prevents cultural homogenization while maintaining system coherence.",
+      "references": ["SEM_CONSTITUTION.md", "CONFLICT_GRAMMAR.md", "ALL.txt"],
+      "tier": "Tier 2",
+      "enforcement": "3-Key Rule + Conflict Grammar process"
+    },
+    {
+      "id": "CONST-001",
+      "category": "Constitutional Framework",
+      "title": "SEM Constitution as Binding Reference",
+      "statement": "All decisions, proposals, and AI outputs within the SEM Protocol must be evaluated against the SEM Constitution (Version 1.0). Any proposal that fails constitutional self-critique shall be rejected or revised before submission.",
+      "rationale": "Provides a clear, auditable hierarchy and mandatory self-critique mechanism inspired by Constitutional AI best practices.",
+      "references": ["SEM_CONSTITUTION.md", "AI_ALIGNMENT_DIRECTIVES.md"],
+      "tier": "Tier 1",
+      "enforcement": "Automatic constitutional self-critique + 3-Key Rule"
     }
+  ]
+}
     ],
   "argumentos_ia": [
     "A transição para 2063 não é uma utopia, é uma correção de erro na gestão de recursos planetários.",

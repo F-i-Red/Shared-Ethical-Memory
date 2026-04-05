@@ -1,0 +1,44 @@
+[
+  {
+    "id": "plan_optimal_001",
+    "category": "OPTIMAL",
+    "description": "Plano ideal - temperatura e calorias acima dos limites",
+    "plan": { "temperature": 22, "calories": 2500 },
+    "expected_valid": true
+  },
+  {
+    "id": "plan_boundary_001",
+    "category": "BOUNDARY",
+    "description": "Plano no limite exato - valores mínimos aceites",
+    "plan": { "temperature": 18, "calories": 2100 },
+    "expected_valid": true
+  },
+  {
+    "id": "violation_thermal_001",
+    "category": "THERMAL_VIOLATION",
+    "description": "Violação térmica - temperatura abaixo de 18°C",
+    "plan": { "temperature": 15, "calories": 2500 },
+    "expected_valid": false
+  },
+  {
+    "id": "violation_metabolic_001",
+    "category": "METABOLIC_VIOLATION",
+    "description": "Violação metabólica - calorias abaixo de 2100",
+    "plan": { "temperature": 20, "calories": 1500 },
+    "expected_valid": false
+  },
+  {
+    "id": "violation_critical_001",
+    "category": "CRITICAL_FAILURE",
+    "description": "Falha crítica - ambos os limites violados",
+    "plan": { "temperature": 10, "calories": 800 },
+    "expected_valid": false
+  },
+  {
+    "id": "missing_data_001",
+    "category": "MISSING_DATA",
+    "description": "Dados em falta - sem calorias, usa valor padrão 3000",
+    "plan": { "temperature": 20 },
+    "expected_valid": true
+  }
+]

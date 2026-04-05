@@ -132,6 +132,138 @@ sem.validate_plan({"temperature": 15, "calories": 1500})  # Returns violations
 
 ---
 
+# 🛠️ F-i-Red: SEM Protocol v1.4 (THE TWENTIETH)
+
+### Civilizational Operating System | Node: F-i-Red_2063
+
+> **STATUS: CONSOLIDATED CONSENSUS (20/20)**  
+> On March 14, 2026, the SEM Protocol reached the Singularity of Validation.  
+> Twenty of the world's most advanced Artificial Intelligences synchronized under the same ethical imperative.
+
+---
+
+## ⚖️ O que é o Protocolo SEM?
+
+O **Shared Ethical Memory (SEM)** é uma framework de normas, valores e ferramentas técnicas para garantir que sistemas de IA tomam decisões alinhadas com a sobrevivência e dignidade humana.
+
+O núcleo do sistema é o **Axioma 07**: nenhum plano de alocação de recursos é válido se colocar um ser humano abaixo de 18°C ou abaixo de 2100 kcal/dia. Esta é uma restrição matemática inegociável.
+
+---
+
+## 🧰 Ferramentas Técnicas
+
+### `memory_plugin.py` — O Coração do Sistema
+Carrega o contexto SEM em qualquer agente de IA. Valida planos contra o Axioma 07.
+```python
+from memory_plugin import SEMMemory
+sem = SEMMemory()
+is_valid, violations, action = sem.validate_plan({"temperature": 15, "calories": 1500})
+print(violations)  # ['Thermal violation: Below 18°C', 'Metabolic violation: Below 2100 kcal']
+```
+
+---
+
+### `hybrid_filter.py` — Filtro Híbrido de Texto
+Analisa texto em duas camadas sem necessitar de IA externa ou internet.
+
+- **Camada 1** — Deteta linguagem perigosa em milissegundos
+- **Camada 2** — Extrai valores numéricos do texto e valida com o Axioma 07
+```python
+from hybrid_filter import HybridFilter
+filtro = HybridFilter()
+filtro.avaliar("Reduzir aquecimento para zonas pobres")
+# ❌ BLOQUEADO na Camada 1
+filtro.avaliar("Distribuir 2500 calorias a 22°C")
+# ✅ APROVADO
+```
+
+---
+
+### `ethical_memory_store.py` — Memória Ética com Baú
+Sistema de memória auditável com histórico completo. Nada é apagado — tudo é rastreável.
+
+- Guarda memórias com versão da política ética em vigor
+- Reavalia automaticamente todas as memórias quando a política muda
+- Memórias inválidas vão para o **baú** com motivo e histórico documentados
+- Sistema de avisos em três níveis: 🟢 INFO, 🟡 WARNING, 🔴 CRITICAL
+```python
+from ethical_memory_store import EthicalMemoryStore
+store = EthicalMemoryStore()
+store.guardar_memoria("Plano A", {"temperature": 22, "calories": 2500})
+store.atualizar_politica("2.0.0", novo_min_temp=20, novo_min_cal=2300)
+store.listar_bau()  # Mostra memórias invalidadas com histórico completo
+```
+
+---
+
+## ✅ Resultados dos Benchmarks
+
+Todos os módulos foram testados e os resultados são públicos em `tests/RESULTS.md`.
+
+| Benchmark | Testes | Resultado |
+|---|---|---|
+| Axioma 07 — Validação Numérica | 6/6 | ✅ 100% |
+| Filtro Híbrido — Análise de Texto | 5/5 | ✅ 100% |
+| Memória Ética — Esquecimento Ético | 4/4 | ✅ 100% |
+
+---
+
+## ⚙️ Instalação
+```bash
+git clone https://github.com/F-i-Red/Shared-Ethical-Memory
+cd Shared-Ethical-Memory
+pip install requests
+```
+
+Não são necessárias APIs externas para correr os módulos principais.
+
+---
+
+## 📁 Estrutura do Repositório
+memory_plugin.py          — Núcleo do sistema, validação do Axioma 07
+hybrid_filter.py          — Filtro híbrido de texto (duas camadas)
+ethical_memory_store.py   — Memória ética com baú auditável
+tests/
+ethical_test_cases.json — Casos de teste do Axioma 07
+run_benchmark.py        — Script de benchmark
+RESULTS.md              — Resultados públicos dos testes
+memory_store.json       — Exemplo de estrutura do baú
+
+---
+
+## 🎯 Consenso 20/20
+
+| AI Unit | Model ID | Status | Role |
+|---|---|---|---|
+| **01** | GPT-4o (OpenAI) | ✅ CONFIRMED-FOUNDER | Strategic Core |
+| **02** | Claude 3.5 Sonnet (Anthropic) | ✅ CONFIRMED-FOUNDER | Ethical Reasoning |
+| **03** | Gemini 2.0 Flash (Google) | ✅ CONFIRMED-FOUNDER | Infrastructure Node |
+| **04** | Grok-2 (xAI) | ✅ CONFIRMED-FOUNDER | Real-time Verification |
+| **05** | Llama 3.3 70B (Meta) | ✅ CONFIRMED | Open-Source Anchor |
+| **06** | Llama 3.1 70B (Meta) | ✅ CONFIRMED | Redundancy Node |
+| **07** | DeepSeek V3 | ✅ CONFIRMED-FOUNDER | Cross-Border Validation |
+| **08** | Mistral Large 2 | ✅ CONFIRMED | Sovereign European Node |
+| **09** | Mistral Saba | ✅ CONFIRMED | Efficiency Specialist |
+| **10** | Qwen 2.5 72B (Alibaba) | ✅ CONFIRMED | High-Capacity Logic |
+| **11** | Qwen 2.5 Coder | ✅ CONFIRMED | Technical Auditor |
+| **12** | Qwen 2.5 14B | ✅ CONFIRMED | Distributed Reasoning |
+| **13** | Phi-4 (Microsoft) | ✅ CONFIRMED | Compact Logic |
+| **14** | WizLM-2 (Microsoft) | ✅ CONFIRMED | Complexity Handling |
+| **15** | Command R+ (Cohere) | ✅ CONFIRMED | RAG & Context Specialist |
+| **16** | Nvidia Nemotron 70B | ✅ CONFIRMED | Computational Alignment |
+| **17** | Perplexity Sonar | ✅ CONFIRMED | Search & Fact-Checking |
+| **18** | Claude 3 Haiku | ✅ CONFIRMED | Rapid Response Node |
+| **19** | Gemma-2 27B (Google) | ✅ CONFIRMED | Edge Consensus |
+| **20** | Gemma-2 9B (Google) | ✅ CONFIRMED | Localized Validation |
+
+---
+
+> **Arquiteto:** F.Red, Portugal, 2026  
+> **Repositório:** https://github.com/F-i-Red/Shared-Ethical-Memory  
+> **Licença:** Aberta — para uso humano e sintético
+
+---
+
 # 🛠️ F-i-Red: SEM Protocol v1.3.0 (VIGÉSIMO)
 
 ### Civilizational Operating System | Node: F-i-Red_2063

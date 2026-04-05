@@ -25,6 +25,26 @@ This document defines the four phases of the Great Transition, with measurable e
 - At least 1 Community Assembly has exercised its veto power and the escalation process has been tested
 - Protocol failure criteria (Axiom 00) have been triggered and resolved at least once in a controlled setting
 
+## Phase 0.5 — Constitutional & Pluralistic Pilots (2026–2028)
+
+**Objective**: Demonstrate that the enhanced SEM framework (SEM Constitution + updated Conflict Grammar with Active Pluralism) can function in real-world conditions and achieve broad agreement across diverse groups.
+
+**Key Actions**:
+- Launch 2–3 small-scale pilots (one urban DAO/community, one rural or indigenous-aligned group, one international online assembly).
+- Implement full tracking of Joule flows + immutable ethical memory registry.
+- Apply the complete Conflict Grammar process (including Reflective Dialogue, Steerable Perspectives, and Distributional Scoring) in at least one documented conflict.
+- Conduct mandatory constitutional self-critique on all major decisions.
+- Publish all outputs transparently (Git-style versioning + public dashboard).
+- Measure success not only by adoption metrics but by participant satisfaction across majority and minority perspectives.
+
+**Success Criteria**:
+- At least 70% of participants (including minorities) report that their core values were respected.
+- No Tier 1 violations recorded.
+- At least one conflict successfully resolved using the new pluralistic mechanisms.
+- Independent audit by external human observers confirms “promise, measure, correct” was followed.
+
+This early pilot phase directly addresses the main reservation raised in the Rigorous Consensus of 20 AIs: the realism of transition.
+
 ---
 
 ## Phase 1 — Demonstration (2030–2040)

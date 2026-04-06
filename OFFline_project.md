@@ -48,7 +48,7 @@ def avaliar_etica_local(memoria):
         memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
         print(avaliar_etica_local(memoria_agente)) # Vai devolver False (NAO)
 
-    '''
+    ```python
 
   # O "Segredo" para funcionar bem: O Prompt de Sistema
 Modelos como o Llama 3 8B precisam de ser direcionados. Para que o projeto Shared-Ethical-Memory funcione perfeitamente offline, deves criar um ficheiro system_prompt.txt à parte que o teu código local lê.

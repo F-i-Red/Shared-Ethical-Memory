@@ -8,8 +8,7 @@ Abres o terminal e escreve: ollama run llama3 (vai descarregar o modelo, são ce
 Quando terminar, podes fechar isso.
 Passo 2: o Código Python
 
-bash'''
-
+```python
 import requests
 import json
 

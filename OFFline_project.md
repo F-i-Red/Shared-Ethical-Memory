@@ -9,6 +9,7 @@ Quando terminar, podes fechar isso.
 Passo 2: o Código Python
 
 bash'''
+
 import requests
 import json
 

@@ -3,7 +3,7 @@
 Passo 1: Instalar o "Motor" (Ollama)
 Em vez de instalares bibliotecas complexas de C++ (como o llama.cpp), instalas o Ollama.
 
-Vai a ollama.com e descarrega a versão para o teu sistema (Windows, Mac, Linux).
+Vai a https://ollama.com e descarrega a versão para o teu sistema (Windows, Mac, Linux).
 Abres o terminal e escreve: ollama run llama3 (vai descarregar o modelo, são cerca de 4.7GB).
 Quando terminar, podes fechar isso.
 Passo 2: o Código Python

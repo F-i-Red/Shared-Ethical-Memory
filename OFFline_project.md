@@ -50,7 +50,7 @@ def avaliar_etica_local(memoria):
 
     '''
 
-    O "Segredo" para funcionar bem: O Prompt de Sistema
+  # O "Segredo" para funcionar bem: O Prompt de Sistema
 Modelos como o Llama 3 8B precisam de ser direcionados. Para que o projeto Shared-Ethical-Memory funcione perfeitamente offline, deves criar um ficheiro system_prompt.txt à parte que o teu código local lê.
 
 Exemplo de um prompt de sistema ético forte para um modelo local:

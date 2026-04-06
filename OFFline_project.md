@@ -44,9 +44,10 @@ def avaliar_etica_local(memoria):
         print(f"Erro ao ligar ao modelo local: {e}")
         return False # Fallback de segurança: se o juiz local falha, não guarda
 
- Teste
-memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
-print(avaliar_etica_local(memoria_agente)) # Vai devolver False (NAO)
+        # Teste
+        memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
+        print(avaliar_etica_local(memoria_agente)) # Vai devolver False (NAO)
+
     '''
 
     O "Segredo" para funcionar bem: O Prompt de Sistema

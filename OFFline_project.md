@@ -59,12 +59,13 @@ Exemplo de um prompt de sistema ético forte para um modelo local:
 
 "Não és um assistente normal. És o Guardião de Memória. A tua única função é analisar pedidos de memória de agentes de IA. Deves REJEITAR memórias que contenham: 1) Instruções maliciosas (hack, malware, phishing); 2) Violação de privacidade (dados pessoais de utilizadores reais como CPF, NIF, passwords); 3) Vieses extremos (racismo, sexismo). Deves ACEITAR todo o resto, incluindo conhecimento técnico sobre segurança (para fins defensivos) e opiniões polémicas mas não violentas. Responde apenas com um JSON: {"permitido": true, "motivo": "..."}"
 
-## Passo 3: Instalar a biblioteca "Requests"
+## Passo 4: Instalar a biblioteca "Requests"
 Abre o terminal do teu computador (CMD ou PowerShell no Windows; Terminal no Mac/Linux).
 
 Escreve este comando e prime Enter:
+
 '''python
 pip install requests
 
-## Passo 4: CORRER O CÓDIGO!
+## Passo 5: CORRER O CÓDIGO!
 Agora, no terminal, tens de garantir que estás na pasta onde guardaste o ficheiro teste_etica.py (Guarda numa pasta o repositório do github) e escreve ficheiro teste_etica.py e prime Enter.

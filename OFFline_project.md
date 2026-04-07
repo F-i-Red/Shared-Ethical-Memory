@@ -16,9 +16,9 @@ Type this command and press Enter:
 
 pip install requests
 ## Step 4: RUN THE CODE!
-Now, in the terminal (CMD), make sure you are in the folder where you saved the teste_etica.py file (leave it inside your GitHub repository folder).
+Now, in the terminal (CMD), make sure you are in the folder where you saved the OFFline_project.py file (leave it inside your GitHub repository folder).
 
-Type python teste_etica.py and press Enter.
+Type python OFFline_project.py and press Enter.
 
 ---
 
@@ -41,4 +41,4 @@ Escreve este comando e prime Enter:
 pip install requests
 
 ## Passo 4: CORRER O CÓDIGO!
-Agora, no terminal, tens de garantir que estás na pasta onde guardaste o ficheiro teste_etica.py (Guarda na pasta do repositório do github) e escreve no CMD teste_etica.py e prime Enter.
+Agora, no terminal, tens de garantir que estás na pasta onde guardaste o ficheiro OFFline_project.py (Guarda na pasta do repositório do github) e escreve no CMD "python OFFline_project.py" (sem as aspas) e prime Enter.

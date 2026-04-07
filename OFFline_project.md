@@ -65,7 +65,6 @@ Abre o terminal do teu computador (CMD ou PowerShell no Windows; Terminal no Mac
 
 Escreve este comando e prime Enter:
 
-'''python
 pip install requests
 
 ## Passo 5: CORRER O CÓDIGO!

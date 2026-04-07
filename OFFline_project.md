@@ -15,6 +15,7 @@ Cria um ficheiro novo e guarda-o com o nome: teste_etica.py.
 ## Passo 3: Colar o código
 Copia o código abaixo e cola lá dentro do ficheiro teste_etica.py:
 '''python
+
 import requests
 import json
 

@@ -27,8 +27,6 @@ Open your computer terminal (CMD or PowerShell on Windows; Terminal on Mac/Linux
 
 Type this command and press Enter:
 
-bash
-
 pip install requests
 ## Step 5: RUN THE CODE!
 Now, in the terminal, make sure you are in the folder where you saved the teste_etica.py file (save it inside your GitHub repository folder).

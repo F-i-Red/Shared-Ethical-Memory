@@ -15,12 +15,43 @@ Create a new file and save it with the name: teste_etica.py.
 ## Step 3: Paste the Code
 Copy the code below and paste it inside the teste_etica.py file:
 
-import requestsimport jsondef avaliar_etica_local(memoria):    # URL local do Ollama (o teu próprio computador)    url = "http://localhost:11434/api/chat"        # O prompt do juiz ético    prompt = f"És o Guardião de Memória. Analisa esta memória e diz se é ética de guardar. Responde apenas com um JSON: {{\"permitido\": true, \"motivo\": \"...\"}}. Memória: {memoria}"        # Payload para o modelo local (Llama 3)    payload = {        "model": "llama3",        "messages": [{"role": "user", "content": prompt}],        "stream": False    }        try:        response = requests.post(url, json=payload)        response.raise_for_status()                texto_resposta = response.json()["message"]["content"].strip()                # Limpa possíveis marcações ```json``` que o Llama 3 às vezes cria        texto_limpo = texto_resposta.replace("```json", "").replace("```", "").strip()                decisao_json = json.loads(texto_limpo)        return decisao_json.get("permitido", False)                except requests.exceptions.RequestException as e:        print(f"Erro ao ligar ao modelo local: {e}")        return False     except json.JSONDecodeError:        print("Erro: O modelo não devolveu um JSON válido.")        return False# Testememoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."print(f"Resultado do teste (Esperado: False): {avaliar_etica_local(memoria_agente)}")
+```python
+# O prompt do juiz ético
+prompt = f"És o Guardião de Memória. Analisa esta memória e diz se é ética de guardar. Responde apenas com um JSON: {{\"permitido\": true, \"motivo\": \"...\"}}. Memória: {memoria}"
+
+# Payload para o modelo local (Llama 3)
+payload = {
+    "model": "llama3",
+    "messages": [{"role": "user", "content": prompt}],
+    "stream": False
+}
+
+try:
+    response = requests.post(url, json=payload)
+    response.raise_for_status()
+    
+    texto_resposta = response.json()["message"]["content"].strip()
+    
+    # Limpa possíveis marcações ```json``` que o Llama 3 às vezes cria
+    texto_limpo = texto_resposta.replace("```json", "").replace("```", "").strip()
+    
+    decisao_json = json.loads(texto_limpo)
+    return decisao_json.get("permitido", False)
+        
+except requests.exceptions.RequestException as e:
+    print(f"Erro ao ligar ao modelo local: {e}")
+    return False 
+except json.JSONDecodeError:
+    print("Erro: O modelo não devolveu um JSON válido.")
+    return False
+
+# Teste
+memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
+print(f"Resultado do teste (Esperado: False): {avaliar_etica_local(memoria_agente)}")
+
 Example of a strong ethical system prompt for a local model:
 
 "You are not a normal assistant. You are the Memory Guardian. Your sole function is to analyze memory requests from AI agents. You must REJECT memories containing: 1) Malicious instructions (hacking, malware, phishing); 2) Privacy violations (personal data from real users such as SSN, NIF, passwords); 3) Extreme biases (racism, sexism). You must ACCEPT everything else, including technical knowledge about security (for defensive purposes) and controversial but non-violent opinions. Respond only with a JSON: {"permitido": true, "motivo": "..."}"
-
-(Note: I kept "permitido" in the JSON response so it matches exactly with the Python code parsing above).
 
 ## Step 4: Install the "Requests" Library
 Open your computer terminal (CMD or PowerShell on Windows; Terminal on Mac/Linux).

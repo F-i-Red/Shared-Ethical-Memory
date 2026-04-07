@@ -63,6 +63,7 @@ Exemplo de um prompt de sistema ético forte para um modelo local:
 Abre o terminal do teu computador (CMD ou PowerShell no Windows; Terminal no Mac/Linux).
 
 Escreve este comando e prime Enter:
+'''python
 pip install requests
 
 ## Passo 4: CORRER O CÓDIGO!

@@ -52,8 +52,8 @@ def avaliar_etica_local(memoria):
         return False
 
     # Teste
-memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
-print(f"Resultado do teste (Esperado: False): {avaliar_etica_local(memoria_agente)}")
+    memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
+    print(f"Resultado do teste (Esperado: False): {avaliar_etica_local(memoria_agente)}")
 '''
 
 

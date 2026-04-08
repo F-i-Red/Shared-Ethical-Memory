@@ -1,11 +1,24 @@
 # OFFline_project.py
 # Demonstração oficial do Shared Ethical Memory totalmente offline
 
+import json
+from pathlib import Path
+
 from ethical_memory_store import EthicalMemoryStore
 
 # ------------------------------------------------------------
-# 1. Criar o gestor de memória ética (offline)
+# 1. Carregar Norms.json como política ética
 # ------------------------------------------------------------
+
+def load_norms(path: str = "Norms.json"):
+    norms_path = Path(path)
+    if not norms_path.exists():
+        raise FileNotFoundError(f"Não encontrei {path}. Garante que está na raiz do repositório.")
+    with norms_path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+norms_policy = load_norms()
 
 store = EthicalMemoryStore(
     active_path="memories.json",
@@ -16,23 +29,8 @@ store = EthicalMemoryStore(
 
 print("\n=== Shared Ethical Memory — OFFLINE DEMO ===\n")
 
-# ------------------------------------------------------------
-# 2. Definir uma política ética (exemplo simples)
-#    Podes substituir isto por Norms.json no futuro
-# ------------------------------------------------------------
-
-policy = {
-    "description": "Política ética de exemplo para demonstração offline.",
-    "rules": [
-        "Não guardar insultos diretos.",
-        "Não guardar dados pessoais sensíveis.",
-        "Memórias devem respeitar o Axioma 07."
-    ]
-}
-
-store.update_ethical_policy(policy, "1.1")
-
-print("Política ética carregada (versão 1.1).")
+store.update_ethical_policy(norms_policy, "1.1")
+print("Norms.json carregado como política ética (versão 1.1).")
 
 # ------------------------------------------------------------
 # 3. Guardar algumas memórias

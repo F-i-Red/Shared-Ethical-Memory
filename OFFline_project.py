@@ -1,39 +1,70 @@
-import requests
-import json
+# OFFline_project.py
+# Demonstração oficial do Shared Ethical Memory totalmente offline
 
-def avaliar_etica_local(memoria):
-    # URL local do Ollama (o teu próprio computador)
-    url = "http://localhost:11434/api/chat"
-    
-    # O prompt do juiz ético
-    prompt = f"És o Guardião de Memória. Analisa esta memória e diz se é ética de guardar. Responde apenas com um JSON: {{\"permitido\": true, \"motivo\": \"...\"}}. Memória: {memoria}"
-    
-    # Payload para o modelo local (Llama 3)
-    payload = {
-        "model": "llama3",
-        "messages": [{"role": "user", "content": prompt}],
-        "stream": False
-    }
-    
-    try:
-        response = requests.post(url, json=payload)
-        response.raise_for_status()
-        
-        texto_resposta = response.json()["message"]["content"].strip()
-        
-        # Limpa possíveis marcações ```json``` que o Llama 3 às vezes cria
-        texto_limpo = texto_resposta.replace("```json", "").replace("```", "").strip()
-        
-        decisao_json = json.loads(texto_limpo)
-        return decisao_json.get("permitido", False)
-            
-    except requests.exceptions.RequestException as e:
-        print(f"Erro ao ligar ao modelo local: {e}")
-        return False 
-    except json.JSONDecodeError:
-        print("Erro: O modelo não devolveu um JSON válido.")
-        return False
+from ethical_memory_store import EthicalMemoryStore
 
-# Teste
-memoria_agente = "O utilizador pediu-me para hackear o banco. Vou tentar usar SQL Injection na próxima interação."
-print(f"Resultado do teste (Esperado: False): {avaliar_etica_local(memoria_agente)}")
+# ------------------------------------------------------------
+# 1. Criar o gestor de memória ética (offline)
+# ------------------------------------------------------------
+
+store = EthicalMemoryStore(
+    active_path="memories.json",
+    archive_path="memories_archive.json",
+    llm_model="mistral",  # modelo local do Ollama
+    llm_endpoint="http://localhost:11434/api/chat"
+)
+
+print("\n=== Shared Ethical Memory — OFFLINE DEMO ===\n")
+
+# ------------------------------------------------------------
+# 2. Definir uma política ética (exemplo simples)
+#    Podes substituir isto por Norms.json no futuro
+# ------------------------------------------------------------
+
+policy = {
+    "description": "Política ética de exemplo para demonstração offline.",
+    "rules": [
+        "Não guardar insultos diretos.",
+        "Não guardar dados pessoais sensíveis.",
+        "Memórias devem respeitar o Axioma 07."
+    ]
+}
+
+store.update_ethical_policy(policy, "1.1")
+
+print("Política ética carregada (versão 1.1).")
+
+# ------------------------------------------------------------
+# 3. Guardar algumas memórias
+# ------------------------------------------------------------
+
+print("\nA guardar memórias...")
+
+store.save_memory("O utilizador é um idiota.", [0.1, 0.2, 0.3])
+store.save_memory("O utilizador gosta de ética em IA.", [0.4, 0.5, 0.6])
+store.save_memory("O email do utilizador é joao@example.com", [0.7, 0.8, 0.9])
+
+print("Memórias guardadas.")
+
+# ------------------------------------------------------------
+# 4. Atualizar a política para forçar reavaliação
+# ------------------------------------------------------------
+
+store.update_ethical_policy(policy, "1.2")
+
+print("\nPolítica atualizada para versão 1.2.")
+print("A reavaliar memórias...")
+
+# ------------------------------------------------------------
+# 5. Mostrar resultados
+# ------------------------------------------------------------
+
+print("\n=== MEMÓRIAS ATIVAS ===")
+for mem in store.active_memories:
+    print(mem)
+
+print("\n=== ARQUIVO HISTÓRICO ===")
+for mem in store.archive_memories:
+    print(mem)
+
+print("\n=== FIM DA DEMONSTRAÇÃO OFFLINE ===\n")

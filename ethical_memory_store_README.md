@@ -7,7 +7,7 @@ Instala o Ollama no teu PC.
 
 No terminal (CMD):
 
-bash
+```bash
 ollama run mistral
 
 ```

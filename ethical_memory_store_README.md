@@ -18,4 +18,4 @@ memories.json (a crescer com memórias)
 
 memories_archive.json (a receber memórias violadoras)
 
-nada é apagado
+Nada é apagado

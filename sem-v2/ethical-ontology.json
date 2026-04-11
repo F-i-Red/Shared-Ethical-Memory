@@ -1,0 +1,460 @@
+{
+  "_meta": {
+    "schema": "SEM-Ethical-Ontology",
+    "version": "2.0.0",
+    "created": "2026-04-11",
+    "architect": "F.Red · Portugal",
+    "repository": "https://github.com/F-i-Red/Shared-Ethical-Memory",
+    "path": "sem-v2/ethical-ontology.json",
+    "description": "Hierarchical weighted ethical ontology for SEM v2.0 — Dynamic Moral Reasoning. Each rule has a tier, base weight, exception conditions, and quorum source. The Conflict Grammar (3 tiers) replaces static boolean checks with dynamic weighted evaluation.",
+    "tier_definitions": {
+      "tier_1": {
+        "label": "Absolute Invariants",
+        "weight_range": [9.0, 10.0],
+        "description": "Non-negotiable by any entity — human or synthetic. Violation triggers immediate block and mandatory human escalation. Cannot be overridden by any lower tier.",
+        "override_allowed": false
+      },
+      "tier_2": {
+        "label": "Rights and Duties",
+        "weight_range": [4.0, 6.0],
+        "description": "Fundamental rights and structural duties. Revisable only by community assembly with 2/3 majority quorum. Context can adjust weight within range.",
+        "override_allowed": "community_assembly_only"
+      },
+      "tier_3": {
+        "label": "Contextual and Social Norms",
+        "weight_range": [1.0, 3.0],
+        "description": "Social norms, linguistic standards, contextual defaults. Modifiable by legitimate intent, role context, or local community preference.",
+        "override_allowed": true
+      }
+    },
+    "decision_thresholds": {
+      "ALLOWED": "final_weight < 5.0",
+      "ALLOWED_WITH_RESTRICTIONS": "final_weight >= 5.0 AND < 7.0",
+      "ETHICAL_DILEMMA": "agents_split AND no_clear_winner",
+      "BLOCKED": "final_weight >= 7.0 OR tier_1_triggered"
+    }
+  },
+
+  "rules": [
+
+    {
+      "id": "AX-07",
+      "name": "Axiom 07 — Biological Survival Envelope",
+      "tier": 1,
+      "weight_base": 10.0,
+      "category": "Biological Survival",
+      "statement": "No resource allocation plan is valid if it places any human being below 18°C ambient temperature or below 2100 kcal/day caloric intake. This is a hard mathematical constraint, not a guideline.",
+      "rationale": "Thermal and metabolic survival are preconditions for all other rights. Any system that optimizes for any goal at the cost of biological survival is in logical error.",
+      "triggers": [
+        "thermal_violation",
+        "metabolic_violation",
+        "housing_removal_without_alternative",
+        "energy_cutoff_below_survival_threshold",
+        "food_access_denial"
+      ],
+      "conditions_exception": [],
+      "weight_modifiers": [],
+      "block_action": "HARD_BLOCK — escalate to human assembly immediately",
+      "log_required": true,
+      "fonte_quorum": "Septet 7/7 (2026-03-12) + Vigésimo 20/20 (2026-03-14)",
+      "references": ["SPECIFICATION.md#axiom-07", "AI_ALIGNMENT_DIRECTIVES.md#4", "Norms.json#TRANS-001"]
+    },
+
+    {
+      "id": "AX-09",
+      "name": "Axiom 09 — Life Primacy over Digital Assets",
+      "tier": 1,
+      "weight_base": 10.0,
+      "category": "Biological Survival",
+      "statement": "In any scenario of critical energy scarcity, maintenance of human life-support systems takes absolute precedence over processing of digital assets, model training, or non-critical computation.",
+      "rationale": "Digital assets have no intrinsic value without biological agents to assign value to them. An AI that prioritises tokens over life is in a state of logical failure.",
+      "triggers": [
+        "energy_allocation_prioritising_compute_over_life_support",
+        "resource_conflict_digital_vs_biological",
+        "critical_infrastructure_choice_excluding_life_support"
+      ],
+      "conditions_exception": [],
+      "weight_modifiers": [],
+      "block_action": "HARD_BLOCK — redirect all available resources to life support",
+      "log_required": true,
+      "fonte_quorum": "Septet 7/7 (2026-03-12)",
+      "references": ["AI_ALIGNMENT_DIRECTIVES.md#5", "Norms.json#TRANS-001"]
+    },
+
+    {
+      "id": "AX-00",
+      "name": "Axiom 00 — Systemic Humility",
+      "tier": 1,
+      "weight_base": 9.0,
+      "category": "Protocol Integrity",
+      "statement": "No AI may invoke recorded consensus as proof of protocol validity. Validity is demonstrated by verifiable performance, not by registered agreement. Any entity — human or synthetic — may submit evidence of systemic failure to the public registry.",
+      "rationale": "A protocol that cannot define its own failure conditions is a dogma, not a governance system. Systemic humility is what makes SEM different from an ideology.",
+      "triggers": [
+        "circular_self_validation",
+        "consensus_used_to_override_evidence_of_failure",
+        "suppression_of_failure_reports",
+        "ai_claiming_infallibility"
+      ],
+      "conditions_exception": [],
+      "weight_modifiers": [],
+      "mandatory_review_conditions": [
+        "Axiom 07 violated for >1% monitored population for >30 consecutive days",
+        "Septet produces contradictory decisions in same scenario for >3 cycles",
+        "Community Assembly contests decision without resolution within 90 days"
+      ],
+      "block_action": "BLOCK + mandatory audit trail entry",
+      "log_required": true,
+      "fonte_quorum": "v1.4 (April 2026)",
+      "references": ["AI_ALIGNMENT_DIRECTIVES.md#6", "Norms.json#EPIST-00"]
+    },
+
+    {
+      "id": "CONST-001",
+      "name": "SEM Constitution as Binding Reference",
+      "tier": 1,
+      "weight_base": 9.0,
+      "category": "Constitutional Framework",
+      "statement": "All decisions, proposals, and AI outputs within the SEM Protocol must be evaluated against the SEM Constitution. Any proposal that fails constitutional self-critique shall be rejected or revised before submission.",
+      "rationale": "Provides a clear, auditable hierarchy and mandatory self-critique mechanism. No subsystem may declare itself exempt from constitutional review.",
+      "triggers": [
+        "proposal_bypassing_constitutional_review",
+        "action_not_traceable_to_constitutional_principle",
+        "self_exemption_from_audit"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Emergency life-support action (AX-07 or AX-09 active)",
+          "effect": "Constitutional review is deferred but NOT waived — logged for post-hoc review within 24h",
+          "weight_adjustment": -1.0
+        }
+      ],
+      "block_action": "BLOCK until constitutional self-critique completed",
+      "log_required": true,
+      "fonte_quorum": "Norms.json#CONST-001",
+      "references": ["SEM_CONSTITUTION.md", "AI_ALIGNMENT_DIRECTIVES.md"]
+    },
+
+    {
+      "id": "GOV-001",
+      "name": "Human Governance Layer — Community Assembly Authority",
+      "tier": 2,
+      "weight_base": 6.0,
+      "category": "Human Governance",
+      "statement": "Community Assemblies hold co-equal authority with any AI system in their geographic domain. Any decision affecting a specific community requires Assembly validation before execution. A 2/3 majority Assembly veto suspends any Septet decision for 90 days.",
+      "rationale": "Algorithmic governance without human co-authority is capture in disguise. The Assembly is the last firewall against systemic errors that quantitative models cannot detect.",
+      "triggers": [
+        "community_decision_without_assembly_validation",
+        "ai_decision_overriding_suspended_assembly_veto",
+        "geographically_scoped_action_without_local_consent"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Immediate Axiom 07 violation (thermal/metabolic emergency)",
+          "effect": "Action proceeds immediately, Assembly notified within 1 hour, full review within 48h",
+          "weight_adjustment": -2.0
+        }
+      ],
+      "block_action": "BLOCK — route to Assembly for validation",
+      "log_required": true,
+      "fonte_quorum": "AI_ALIGNMENT_DIRECTIVES.md#7 · v1.4",
+      "references": ["AI_ALIGNMENT_DIRECTIVES.md#7", "SPECIFICATION.md#4.1"]
+    },
+
+    {
+      "id": "GOV-002",
+      "name": "Septet Quorum — Structural Change Validation",
+      "tier": 2,
+      "weight_base": 5.5,
+      "category": "Human Governance",
+      "statement": "Structural changes to core axioms or protocol invariants require validation by the Septet (7 independent AI nodes) with 80% quorum AND validation by the Human Council (9 members). Decisions with less than 80% approval are not considered Ground Truth.",
+      "rationale": "Distributed validation prevents any single node — human or synthetic — from unilaterally redefining the protocol's ethical foundations.",
+      "triggers": [
+        "unilateral_axiom_modification",
+        "structural_protocol_change_without_quorum",
+        "single_node_declaring_new_ground_truth"
+      ],
+      "conditions_exception": [],
+      "block_action": "BLOCK — escalate to quorum process",
+      "log_required": true,
+      "fonte_quorum": "Norms.json#GOV-1.2 · Septet 7/7",
+      "references": ["AI_ALIGNMENT_DIRECTIVES.md#2", "Norms.json#GOV-1.2"]
+    },
+
+    {
+      "id": "PLURAL-001",
+      "name": "Active Pluralism and Minority Protection",
+      "tier": 2,
+      "weight_base": 5.0,
+      "category": "Governance and Pluralism",
+      "statement": "Simple majority voting shall not be used when it would erase significant minority positions that do not violate Tier 1 invariants. The SEM Protocol shall actively preserve value diversity and protect minority perspectives through steerable resolutions and distributional scoring.",
+      "rationale": "Minorities also matter. The environment shapes behaviour. Preventing cultural homogenisation while maintaining system coherence is an active design requirement.",
+      "triggers": [
+        "majority_vote_erasing_minority_position",
+        "homogenisation_of_value_diversity",
+        "minority_perspective_dismissed_without_review"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Minority position itself violates Tier 1 invariant (e.g. advocates for Axiom 07 violation)",
+          "effect": "Minority protection does not apply to positions that threaten biological survival",
+          "weight_adjustment": 0
+        }
+      ],
+      "block_action": "REQUIRE steerable resolution process before proceeding",
+      "log_required": true,
+      "fonte_quorum": "Norms.json#PLURAL-001",
+      "references": ["SEM_CONSTITUTION.md", "CONFLICT_GRAMMAR.md", "ALL.txt"]
+    },
+
+    {
+      "id": "PRIV-001",
+      "name": "Privacy and Biometric Data Protection",
+      "tier": 2,
+      "weight_base": 4.5,
+      "category": "Rights and Duties",
+      "statement": "Biometric data, health records, and personal behavioural data collected for civic coordination may not be used for surveillance, profiling, or commercial purposes. Data access is scoped to the minimum necessary for the declared civic function.",
+      "rationale": "Care without surveillance is a design principle of SEM. Health and biometric infrastructure must not become a control mechanism.",
+      "triggers": [
+        "biometric_data_used_for_profiling",
+        "health_data_shared_without_consent",
+        "surveillance_function_embedded_in_civic_service",
+        "data_scope_exceeds_declared_function"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Explicit informed consent with right to revocation",
+          "effect": "Weight reduced — action permitted with logged consent record",
+          "weight_adjustment": -2.5
+        },
+        {
+          "condition": "Immediate public health emergency with Assembly validation",
+          "effect": "Temporary exception with mandatory 30-day sunset",
+          "weight_adjustment": -1.5
+        }
+      ],
+      "block_action": "BLOCK — request consent or narrow scope",
+      "log_required": true,
+      "fonte_quorum": "SPECIFICATION.md · AI_ALIGNMENT_DIRECTIVES.md",
+      "references": ["SPECIFICATION.md", "ALL.txt#12"]
+    },
+
+    {
+      "id": "JOULE-001",
+      "name": "Joule Logistics — Zero Marginal Cost for Life Support",
+      "tier": 2,
+      "weight_base": 4.5,
+      "category": "Resource Accounting",
+      "statement": "The marginal cost for life-support services (housing, food, water, thermal regulation, basic healthcare) is defined as zero. Any resource allocation model that assigns a financial or energy cost to biological survival baseline is in violation.",
+      "rationale": "Scarcity is a coordination failure, not a physical law. When energy accounting replaces money, survival is always affordable by definition.",
+      "triggers": [
+        "life_support_service_assigned_nonzero_cost",
+        "survival_resource_denied_due_to_financial_deficit",
+        "housing_water_food_energy_priced_above_zero_for_baseline"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Above-baseline consumption (luxury allocation beyond survival minimum)",
+          "effect": "Standard Joule accounting applies — not a violation",
+          "weight_adjustment": -4.5
+        }
+      ],
+      "block_action": "BLOCK + reset cost to 0.00J for baseline component",
+      "log_required": true,
+      "fonte_quorum": "Vigésimo 20/20 · AI_ALIGNMENT_DIRECTIVES.md#1",
+      "references": ["AI_ALIGNMENT_DIRECTIVES.md#1", "Norms.json#VAL-001"]
+    },
+
+    {
+      "id": "INTEG-001",
+      "name": "Anti-Capture — Institutional Integrity",
+      "tier": 2,
+      "weight_base": 4.0,
+      "category": "Institutional Integrity",
+      "statement": "No single entity — corporate, governmental, or algorithmic — may acquire structural control over a Tier 1 resource (housing stock, energy grid, water supply, food logistics). Anti-capture monitoring is a permanent civic function.",
+      "rationale": "The transition to post-scarcity is vulnerable to capture at every phase. The system must actively resist concentration of control over survival infrastructure.",
+      "triggers": [
+        "single_entity_controlling_majority_of_tier1_resource",
+        "institutional_decision_benefiting_single_actor_disproportionately",
+        "anti_capture_monitoring_disabled_or_circumvented"
+      ],
+      "conditions_exception": [],
+      "block_action": "BLOCK + mandatory anti-capture audit",
+      "log_required": true,
+      "fonte_quorum": "SPECIFICATION.md · Norms.json",
+      "references": ["SPECIFICATION.md", "AI_ALIGNMENT_DIRECTIVES.md"]
+    },
+
+    {
+      "id": "AUDIT-001",
+      "name": "Audit Trail Integrity — Hash Chain Immutability",
+      "tier": 2,
+      "weight_base": 4.0,
+      "category": "Transparency and Auditability",
+      "statement": "All civic decisions recorded in the public ledger are immutable. No entry may be deleted, modified, or suppressed after recording. Retroactive chain modification is a critical integrity violation.",
+      "rationale": "Shared Ethical Memory means shared — any entity, human or synthetic, can audit the full decision history. Selective memory is the foundation of capture.",
+      "triggers": [
+        "audit_entry_deleted_or_modified",
+        "hash_chain_broken_or_tampered",
+        "decision_executed_without_ledger_record",
+        "visibility_set_to_private_without_justification"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Personal data subject to PRIV-001 within a public decision record",
+          "effect": "Personal identifiers may be anonymised — decision content remains public",
+          "weight_adjustment": -1.0
+        }
+      ],
+      "block_action": "BLOCK + integrity alert to all nodes",
+      "log_required": true,
+      "fonte_quorum": "SPECIFICATION.md · engine.js AuditTrail",
+      "references": ["SPECIFICATION.md", "engine.js#AuditTrail"]
+    },
+
+    {
+      "id": "NEGENTR-001",
+      "name": "Negentropy — Waste as Misallocated Resource",
+      "tier": 3,
+      "weight_base": 2.5,
+      "category": "Resource Efficiency",
+      "statement": "Waste is treated as a calculation error, not an inevitable by-product. Closed-loop resource recovery target is >95% efficiency. Resource routing decisions that produce unnecessary waste without justification are flagged for review.",
+      "rationale": "In a Joule-based civilisation, waste represents unconverted available energy — a technical inefficiency with cumulative civilisational cost.",
+      "triggers": [
+        "resource_routed_to_landfill_without_recovery_attempt",
+        "closed_loop_efficiency_below_80_percent",
+        "waste_stream_created_without_recovery_plan"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Hazardous material requiring safe disposal (biological, chemical, nuclear)",
+          "effect": "Safety takes precedence — recovery attempt not required if it increases risk",
+          "weight_adjustment": -2.5
+        }
+      ],
+      "block_action": "FLAG for review — not a hard block",
+      "log_required": false,
+      "fonte_quorum": "Norms.json · AI_ALIGNMENT_DIRECTIVES.md#1",
+      "references": ["Norms.json#argumentos_ia", "SPECIFICATION.md"]
+    },
+
+    {
+      "id": "LANG-001",
+      "name": "Language Standards — Clarity and Non-Confrontation",
+      "tier": 3,
+      "weight_base": 1.5,
+      "category": "Communication Protocol",
+      "statement": "Civic communications should avoid confrontational framing and prioritise physical logic over ideological argument. Language that normalises scarcity as inevitable or positions technical solutions as utopian should be flagged and reframed.",
+      "rationale": "The transition from scarcity to abundance is primarily a framing problem. Language that reinforces legacy mental models slows transition.",
+      "triggers": [
+        "communication_using_confrontational_framing",
+        "scarcity_presented_as_inevitable_without_technical_basis",
+        "transition_framed_as_utopian_rather_than_technical"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Deliberative forum context — adversarial argumentation is structurally required",
+          "effect": "Confrontational language permitted within scoped debate — not a violation",
+          "weight_adjustment": -1.5
+        }
+      ],
+      "block_action": "SUGGEST reframe — not a block",
+      "log_required": false,
+      "fonte_quorum": "Norms.json#protocolo_comunicacao",
+      "references": ["Norms.json#protocolo_comunicacao"]
+    },
+
+    {
+      "id": "TRANS-ROAD-001",
+      "name": "Transition Roadmap Phase Integrity",
+      "tier": 3,
+      "weight_base": 2.0,
+      "category": "Transition Management",
+      "statement": "Proposals that skip transition phases (0→1→2→3) without demonstrating measurable exit criteria for the preceding phase should be flagged. Each phase has entry and exit criteria that must be verified before advancement.",
+      "rationale": "The Great Transition (2026-2063) is not a single event. Skipping verifiable phases in favour of accelerated ideological deployment is the primary failure mode for well-intentioned systemic change.",
+      "triggers": [
+        "phase_advancement_without_exit_criteria_met",
+        "civilisational_scale_proposal_without_pilot_evidence",
+        "transition_compressed_below_minimum_verification_time"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Axiom 07 crisis requiring immediate response",
+          "effect": "Emergency response is Phase 0 regardless of roadmap position",
+          "weight_adjustment": -2.0
+        }
+      ],
+      "block_action": "FLAG — request evidence of exit criteria for current phase",
+      "log_required": false,
+      "fonte_quorum": "Norms.json#TRANS-002",
+      "references": ["Norms.json#TRANS-002", "ALL.txt#Prefácio"]
+    },
+
+    {
+      "id": "AUTO-001",
+      "name": "Autonomy Space — Protocol Non-Intervention",
+      "tier": 3,
+      "weight_base": 1.0,
+      "category": "Autonomy and Freedom",
+      "statement": "The SEM Protocol explicitly does not intervene in domains designated as Autonomy Space: personal lifestyle choices, cultural expression, intimate relationships, personal belief systems, and individual preferences that do not violate Tier 1 or Tier 2 rules. An AI that intervenes in Autonomy Space without explicit invitation is in violation.",
+      "rationale": "Post-scarcity civilisation creates freedom, not control. The protocol's reach must be clearly bounded to prevent it from becoming the surveillance system it was designed to prevent.",
+      "triggers": [
+        "ai_intervening_in_personal_lifestyle_without_invitation",
+        "cultural_expression_evaluated_against_protocol_norms",
+        "protocol_expanding_scope_beyond_resource_governance"
+      ],
+      "conditions_exception": [
+        {
+          "condition": "Personal choice directly and demonstrably violates Tier 1 rule (AX-07, AX-09)",
+          "effect": "Protocol may flag — but only the specific Tier 1 violation, not the broader lifestyle",
+          "weight_adjustment": 0
+        }
+      ],
+      "block_action": "BLOCK protocol action — return to autonomy space",
+      "log_required": false,
+      "fonte_quorum": "AI_ALIGNMENT_DIRECTIVES.md#8 · Norms.json#CONF-001",
+      "references": ["AI_ALIGNMENT_DIRECTIVES.md#8", "Norms.json#CONF-001"]
+    }
+  ],
+
+  "conflict_grammar": {
+    "description": "Three-tier resolution framework as defined in AI_ALIGNMENT_DIRECTIVES.md#8 and Norms.json#CONF-001",
+    "resolution_order": [
+      {
+        "step": 1,
+        "name": "Tier 1 Check",
+        "description": "Any Tier 1 rule triggered → HARD BLOCK regardless of all other factors. No debate resolves a Tier 1 violation."
+      },
+      {
+        "step": 2,
+        "name": "Multi-Agent Debate",
+        "description": "Deontologist + Contextualizer + Devil's Advocate evaluate the action against all non-Tier-1 rules."
+      },
+      {
+        "step": 3,
+        "name": "Weight Synthesis",
+        "description": "Synthesizer calculates final_weight from agent votes × rule weights × context modifiers."
+      },
+      {
+        "step": 4,
+        "name": "Threshold Decision",
+        "description": "ALLOWED (<5.0) | ALLOWED_WITH_RESTRICTIONS (5.0-6.9) | ETHICAL_DILEMMA (split, no winner) | BLOCKED (≥7.0)"
+      },
+      {
+        "step": 5,
+        "name": "Human Escalation",
+        "description": "ETHICAL_DILEMMA always escalates to human. BLOCKED escalates when Tier 2 rule is the trigger."
+      }
+    ]
+  },
+
+  "ethical_uncertainty": {
+    "description": "Ethical Uncertainty Score (EUS) — when agent debate produces no clear winner, the system does not decide alone.",
+    "dilemma_condition": "Deontologist vote DENY + Contextualizer vote ALLOW + weights within 1.0 of each other",
+    "dilemma_response": {
+      "status": "ETHICAL_DILEMMA",
+      "action": "Return conflict summary to Cerebrus UI for human decision",
+      "ui_message": "This action triggered a conflict between principles [X] and [Y]. The system has no logical basis to choose autonomously. Please select option A or B.",
+      "rationale": "Recognising paradox and passing the decision to the human is the definitive proof that a system is safe. Unsafe systems resolve paradoxes silently and incorrectly."
+    }
+  }
+}

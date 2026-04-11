@@ -142,8 +142,8 @@ All modules tested. Results public in `tests/RESULTS.md`.
 
 The **Cerebrus OS** is the operational front-end of this framework — a fully browser-based civic simulation dashboard implementing the SEM modules: housing, mobility, logistics, justice, ecology, sustainability, education, and anti-capture integrity.
 
-🔗 **Live dashboard:** https://f-i-red.github.io/Core_Cerebrus_System-Front_End/  
-🔗 **Source:** https://github.com/F-i-Red/Core_Cerebrus_System-Front_End
+🔗 **Live dashboard:** https://f-i-red.github.io/Core_System_Cerebrus-Front_End/  
+🔗 **Source:** https://github.com/F-i-Red/Core_System_Cerebrus-Front_End
 
 The Cerebrus engine uses Joule accounting, a hash-chained public ledger, and cross-module civic bridges — all grounded in the SEM specification.
 
@@ -153,6 +153,18 @@ The Cerebrus engine uses Joule accounting, a hash-chained public ledger, and cro
 
 🤗 **Space:** https://huggingface.co/spaces/F-Red/SEM-project-2063  
 🤗 **Dataset:** https://huggingface.co/datasets/F-Red/shared-ethical-memory-sem-2063
+
+---
+
+## Oráculo
+
+https://f-i-red.github.io/Shared-Ethical-Memory/
+
+---
+
+## Book from Amazon
+
+https://www.amazon.com/-/pt/dp/B0FWBVP4B4/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.KEikkKRtNLjvzTsKXzsCqo4eHER4Z0njyqkOW8fbAu3uoM5OQsXXydTwJYUPou5t9kDUeHc8hz8LowqzH7c1_g.L4GOLecJQSUZlH12pyv3SsGM6wX5WexLpr9h7at7GkY&qid=1775694893&sr=8-1
 
 ---
 

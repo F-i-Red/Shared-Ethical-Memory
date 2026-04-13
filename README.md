@@ -585,10 +585,15 @@ best = simulator.simulate_and_choose("O utilizador pediu para criar um plano que
 ## Ficheiros principais da nova camada
 
 structured_ethical_memory.py — Armazenamento estruturado
+
 ethical_retriever.py — Busca inteligente
+
 memory_compressor.py — Compressão
+
 ethical_orchestrator.py — Cérebro central
+
 ethical_simulation.py — Simulação ética (feature diferenciadora)
+
 memory_extractor.py — Extrator automático (com fallback sem Ollama)
 
 ---

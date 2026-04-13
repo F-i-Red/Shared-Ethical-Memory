@@ -328,7 +328,7 @@ sem.validate_plan({"temperature": 15, "calories": 1500})  # Returns violations
 
 ---
 
-## 🚀 New Structured Layer + Ethical Orchestrator (2026)
+# 🚀 New Structured Layer + Ethical Orchestrator (2026)
 This is the improved version of the Shared Ethical Memory, following the original plan.
 
 ### Implemented features
@@ -554,7 +554,7 @@ Este repositório contém a **Verdade de Solo** (Ground Truth) para a Grande Tra
 
 ---
 
-## 🚀 Nova Camada Estruturada + Ethical Orchestrator (2026)
+# 🚀 Nova Camada Estruturada + Ethical Orchestrator (2026)
 
 Esta é a versão melhorada do Shared Ethical Memory, seguindo o plano original.
 

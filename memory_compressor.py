@@ -1,5 +1,4 @@
-# memory_compressor.py
-# Novo ficheiro - Compressão hierárquica (100 decisões → 10 princípios → meta-princípios)
+# memory_compressor.py - Versão corrigida e robusta
 
 import json
 from typing import List, Dict
@@ -7,7 +6,7 @@ from structured_ethical_memory import StructuredEthicalMemory
 
 class MemoryCompressor:
     """
-    Reduz memórias semelhantes em princípios e meta-princípios (como no plano original).
+    Compressão hierárquica: reduz memórias em princípios e meta-princípios.
     """
 
     def __init__(self):
@@ -15,35 +14,44 @@ class MemoryCompressor:
 
     def compress(self) -> Dict:
         """Faz compressão completa."""
+        # Força reload das memórias mais recentes
         all_mem = self.structured.get_all_ethical_memories()
         
         if not all_mem:
-            return {"status": "sem memórias para comprimir"}
+            return {
+                "status": "sem memórias para comprimir",
+                "original_count": 0,
+                "principles_count": 0,
+                "principles": [],
+                "meta_principles": []
+            }
 
-        # Passo 1: Agrupar por princípio (simples clustering por texto)
+        # Agrupar por princípio
         groups = {}
         for mem in all_mem:
-            principle = mem.get("principle", "Outros")
+            principle = mem.get("principle", "Outros").strip()
             if principle not in groups:
                 groups[principle] = []
             groups[principle].append(mem)
 
-        # Passo 2: Criar princípios resumidos
+        # Criar resumo dos princípios
         principles_summary = []
         for principle, memories in groups.items():
+            avg_conf = round(sum(m.get("confidence", 0) for m in memories) / len(memories), 2)
             summary = {
                 "principle": principle,
                 "count": len(memories),
-                "avg_confidence": round(sum(m.get("confidence", 0) for m in memories) / len(memories), 2),
-                "example_decision": memories[0].get("decision")
+                "avg_confidence": avg_conf,
+                "example_decision": memories[0].get("decision", "")
             }
             principles_summary.append(summary)
 
-        # Passo 3: Meta-princípios (padrões gerais)
+        # Meta-princípios (núcleo fixo + evolução futura)
         meta_principles = [
             "Prioridade à não-violência e minimização de dano",
             "Respeito à autonomia com responsabilidade coletiva",
-            "Transparência e verdade como base de confiança"
+            "Transparência e verdade como base de confiança",
+            "Proteger os mais vulneráveis"
         ]
 
         result = {

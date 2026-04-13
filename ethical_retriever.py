@@ -9,7 +9,12 @@ class EthicalRetriever:
     def __init__(self):
         self.structured_memory = StructuredEthicalMemory()
 
-    def retrieve_relevant_ethics(self, query: str, top_k: int = 5) -> List[Dict]:
+    def __init__(self):
+        self.structured_memory = StructuredEthicalMemory()
+        # Força reload
+        _ = self.structured_memory.get_all_ethical_memories()
+        
+        def retrieve_relevant_ethics(self, query: str, top_k: int = 5) -> List[Dict]:
         all_ethical = self.structured_memory.get_all_ethical_memories()
         
         if not all_ethical:

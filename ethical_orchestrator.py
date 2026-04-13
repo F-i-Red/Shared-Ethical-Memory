@@ -1,4 +1,4 @@
-# ethical_orchestrator.py - Versão melhorada
+# ethical_orchestrator.py - Versão robusta final
 
 from structured_ethical_memory import StructuredEthicalMemory
 from ethical_retriever import EthicalRetriever
@@ -8,28 +8,27 @@ from memory_extractor import MemoryExtractor
 class EthicalOrchestrator:
     """
     Cérebro central do Shared Ethical Memory.
-    Junta retrieval, compressão e extração.
     """
 
     def __init__(self):
         self.structured = StructuredEthicalMemory()
         self.retriever = EthicalRetriever()
         self.compressor = MemoryCompressor()
-        self.extractor = MemoryExtractor(use_llm=False)   # Modo demo
+        self.extractor = MemoryExtractor(use_llm=False)
 
     def process_query(self, user_query: str):
         print(f"\n🔍 Processando query: {user_query}")
 
-        # Forçar reload antes de tudo
+        # Força reload completo antes de qualquer operação
         _ = self.structured.get_all_ethical_memories()
 
-        # 1. Retrieval ético
+        # Retrieval
         ethical_context = self.retriever.build_context_for_llm(user_query, top_k=5)
 
-        # 2. Compressão
+        # Compressão
         compressed = self.compressor.compress()
 
-        # 3. Extrair possível nova memória (demo)
+        # Extração demo
         new_memory = self.extractor.extract_ethical_memory(user_query)
 
         result = {
@@ -44,7 +43,7 @@ class EthicalOrchestrator:
         return result
 
 
-# Teste rápido ao correr o ficheiro
+# Teste direto
 if __name__ == "__main__":
     orchestrator = EthicalOrchestrator()
     
@@ -57,7 +56,8 @@ if __name__ == "__main__":
     print(result["ethical_context"])
     
     print("\nMeta-princípios atuais:")
-    print(result["compressed_summary"].get("meta_principles", []))
+    meta = result["compressed_summary"].get("meta_principles", [])
+    print(meta if meta else "Nenhum meta-princípio encontrado ainda.")
     
     print("\nSugestão de nova memória:")
     print(result["suggested_new_memory"])

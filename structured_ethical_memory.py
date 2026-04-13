@@ -1,31 +1,24 @@
-# structured_ethical_memory.py (versão corrigida - usa os mesmos ficheiros do repo original)
+# structured_ethical_memory.py - Versão final corrigida (usa os mesmos ficheiros do repo)
 
 import json
-import os
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Dict, List
 
-from ethical_memory_store import EthicalMemoryStore, load_json, save_json
+from ethical_memory_store import EthicalMemoryStore
 
 
 class StructuredEthicalMemory:
     """
     Camada estruturada para memórias éticas.
-    Usa os mesmos ficheiros do EthicalMemoryStore original (memories.json).
-    Nada é apagado.
+    Usa exatamente os mesmos ficheiros do teu EthicalMemoryStore original (memories.json).
+    Nada é apagado. Compatível com tudo o que já tinhas.
     """
 
-    def __init__(self,
-                 active_path: str = "memories.json",        # <--- Mudado para o ficheiro original
-                 archive_path: str = "memories_archive.json",
-                 llm_model: str = "mistral",
-                 llm_endpoint: str = "http://localhost:11434/api/chat"):
-
+    def __init__(self):
+        # Usa os ficheiros originais do teu repo
         self.store = EthicalMemoryStore(
-            active_path=active_path,
-            archive_path=archive_path,
-            llm_model=llm_model,
-            llm_endpoint=llm_endpoint
+            active_path="memories.json",
+            archive_path="memories_archive.json"
         )
 
     def add_ethical_memory(self,
@@ -33,7 +26,7 @@ class StructuredEthicalMemory:
                            context: str,
                            decision: str,
                            justification: str,
-                           confidence: float = 0.8,
+                           confidence: float = 0.85,
                            extra_tags: List[str] = None) -> str:
 
         if extra_tags is None:
@@ -66,20 +59,13 @@ class StructuredEthicalMemory:
         return mem_id
 
     def get_all_ethical_memories(self) -> List[Dict]:
-        """Devolve todas as memórias éticas ativas."""
+        """Devolve todas as memórias éticas guardadas."""
         ethical_list = []
         for mem in self.store.active_memories:
             try:
-                data = json.loads(mem["text"])
+                data = json.loads(mem.get("text", "{}"))
                 if isinstance(data, dict) and data.get("type") == "ethical":
                     ethical_list.append(data)
             except:
                 pass
         return ethical_list
-
-    def search_by_principle(self, keyword: str) -> List[Dict]:
-        results = []
-        for mem in self.get_all_ethical_memories():
-            if keyword.lower() in mem.get("principle", "").lower():
-                results.append(mem)
-        return results

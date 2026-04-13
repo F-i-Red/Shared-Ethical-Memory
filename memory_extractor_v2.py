@@ -11,7 +11,7 @@ import json
 from typing import Optional, Dict
 from google import genai
 
-GEMINI_MODEL = "gemini-2.0-flash"
+GEMINI_MODEL = "gemini-1.5-flash"
 
 EXTRACTION_PROMPT = """
 Analisa o seguinte texto e extrai UMA memória ética estruturada.

@@ -1,10 +1,10 @@
-# structured_ethical_memory.py - Versão robusta final
+# structured_ethical_memory.py - Versão final estável (compatível com o teu repo original)
 
 import json
 from datetime import datetime
 from typing import Dict, List
 
-from ethical_memory_store import EthicalMemoryStore
+from ethical_memory_store import EthicalMemoryStore, load_json   # <--- importamos a função load_json
 
 
 class StructuredEthicalMemory:
@@ -54,9 +54,9 @@ class StructuredEthicalMemory:
         return mem_id
 
     def get_all_ethical_memories(self) -> List[Dict]:
-        """Força reload do ficheiro para ver as memórias mais recentes."""
-        # Recarrega sempre o ficheiro para evitar problemas de cache
-        self.store.active_memories = self.store.load_json(self.store.active_path, default=[])
+        """Recarrega sempre o ficheiro para ver as memórias mais recentes."""
+        # Recarrega o ficheiro diretamente usando a função load_json do teu repo
+        self.store.active_memories = load_json(self.store.active_path, default=[])
         
         ethical_list = []
         for mem in self.store.active_memories:

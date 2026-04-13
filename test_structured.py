@@ -1,15 +1,16 @@
-# test_structured.py - Versão atualizada
+# test_structured.py - Teste completo da Fase 1
 
-import json
 from structured_ethical_memory import StructuredEthicalMemory
-from memory_extractor import MemoryExtractor
 from ethical_retriever import EthicalRetriever
+from memory_compressor import MemoryCompressor
 
-print("=== Teste Avançado - Memória Ética Estruturada + Retrieval ===\n")
+print("=== Teste Completo - Memória Ética Estruturada + Retrieval + Compressão ===\n")
 
-# 1. Adicionar algumas memórias de exemplo (sem LLM)
 structured = StructuredEthicalMemory()
+retriever = EthicalRetriever()
+compressor = MemoryCompressor()
 
+# Adicionar memórias de exemplo
 exemplos = [
     {
         "principle": "Minimizar dano humano",
@@ -28,13 +29,18 @@ exemplos = [
 ]
 
 for ex in exemplos:
-    structured.add_ethical_memory(
-        principle=ex["principle"],
-        context=ex["context"],
-        decision=ex["decision"],
-        justification=ex["justification"],
-        confidence=ex["confidence"]
-    )
+    structured.add_ethical_memory(**ex)
+
+# Retrieval
+query = "O que fazer quando o utilizador pede para causar dano?"
+context = retriever.build_context_for_llm(query)
+print("Contexto ético para LLM:\n", context)
+
+# Compressão
+compressed = compressor.compress()
+print("\nResultado da compressão:\n", json.dumps(compressed, indent=2, ensure_ascii=False))
+
+
 
 # 2. Testar retrieval inteligente
 retriever = EthicalRetriever()

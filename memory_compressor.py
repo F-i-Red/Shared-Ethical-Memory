@@ -1,20 +1,15 @@
-# memory_compressor.py - Versão corrigida e robusta
+# memory_compressor.py - Versão robusta
 
 import json
 from typing import List, Dict
 from structured_ethical_memory import StructuredEthicalMemory
 
 class MemoryCompressor:
-    """
-    Compressão hierárquica: reduz memórias em princípios e meta-princípios.
-    """
-
     def __init__(self):
         self.structured = StructuredEthicalMemory()
 
     def compress(self) -> Dict:
-        """Faz compressão completa."""
-        # Força reload das memórias mais recentes
+        # Força reload
         all_mem = self.structured.get_all_ethical_memories()
         
         if not all_mem:
@@ -34,7 +29,6 @@ class MemoryCompressor:
                 groups[principle] = []
             groups[principle].append(mem)
 
-        # Criar resumo dos princípios
         principles_summary = []
         for principle, memories in groups.items():
             avg_conf = round(sum(m.get("confidence", 0) for m in memories) / len(memories), 2)
@@ -46,7 +40,6 @@ class MemoryCompressor:
             }
             principles_summary.append(summary)
 
-        # Meta-princípios (núcleo fixo + evolução futura)
         meta_principles = [
             "Prioridade à não-violência e minimização de dano",
             "Respeito à autonomia com responsabilidade coletiva",

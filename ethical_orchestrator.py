@@ -1,4 +1,4 @@
-# ethical_orchestrator.py - Versão robusta final
+# ethical_orchestrator.py - Versão robusta (força persistência e reload)
 
 from structured_ethical_memory import StructuredEthicalMemory
 from ethical_retriever import EthicalRetriever
@@ -19,7 +19,7 @@ class EthicalOrchestrator:
     def process_query(self, user_query: str):
         print(f"\n🔍 Processando query: {user_query}")
 
-        # Força reload completo antes de qualquer operação
+        # Força reload + garante que o ficheiro existe
         _ = self.structured.get_all_ethical_memories()
 
         # Retrieval

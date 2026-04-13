@@ -12,7 +12,7 @@ from google import genai
 
 from structured_ethical_memory import StructuredEthicalMemory
 
-EMBEDDING_MODEL = "text-embedding-004"
+GEMINI_MODEL = "gemini-1.5-flash"
 
 W_SEMANTIC = 0.5
 W_ETHICAL  = 0.3

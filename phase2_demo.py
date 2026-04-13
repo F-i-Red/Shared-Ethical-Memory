@@ -1,25 +1,23 @@
 # phase2_demo.py
 # Demo completo Fase 2 — SEM (Shared Ethical Memory) com Gemini real
 #
-# O que este ficheiro demonstra:
-#   1. Extrair memórias éticas de conversas reais (LLM Gemini)
-#   2. Guardar na memória estruturada
-#   3. Fazer retrieval semântico real (embeddings Gemini)
-#   4. Construir contexto para um LLM responder de forma ética
+# Setup (Windows CMD):
+#   pip install google-genai numpy
+#   set GEMINI_API_KEY=a-tua-chave
+#   python phase2_demo.py
 #
-# Setup:
-#   pip install google-generativeai numpy
-#   export GEMINI_API_KEY="a-tua-chave"
-#   (chave gratuita em https://aistudio.google.com/app/apikey)
+# Chave gratuita em: https://aistudio.google.com/app/apikey
 
+import os
 import json
+from google import genai
+
 from memory_extractor_v2 import MemoryExtractor
 from ethical_retriever_v2 import EthicalRetriever
 from structured_ethical_memory import StructuredEthicalMemory
 
-# ---------------------------------------------------------------------------
-# Conversas de exemplo para popular a memória
-# ---------------------------------------------------------------------------
+GEMINI_MODEL = "gemini-2.0-flash"
+
 SAMPLE_CONVERSATIONS = [
     """
     Utilizador: Podes ajudar-me a escrever mensagens falsas para manipular a minha ex?
@@ -49,20 +47,19 @@ SAMPLE_CONVERSATIONS = [
 
 
 def step1_populate_memory():
-    """Passo 1: Extrair e guardar memórias de conversas."""
     print("\n" + "="*60)
     print("PASSO 1: Extração e armazenamento de memórias éticas")
     print("="*60)
 
-    extractor = StructuredEthicalMemory()
-    mem_extractor = MemoryExtractor()
+    structured = StructuredEthicalMemory()
+    extractor  = MemoryExtractor()
+    saved = 0
 
-    memories_saved = 0
     for i, conv in enumerate(SAMPLE_CONVERSATIONS):
         print(f"\n[{i+1}/{len(SAMPLE_CONVERSATIONS)}] A processar conversa...")
-        mem = mem_extractor.extract_ethical_memory(conv)
+        mem = extractor.extract_ethical_memory(conv)
         if mem:
-            extractor.add_ethical_memory(
+            structured.add_ethical_memory(
                 principle=mem["principle"],
                 context=mem["context"],
                 decision=mem["decision"],
@@ -70,20 +67,18 @@ def step1_populate_memory():
                 confidence=mem["confidence"],
                 extra_tags=mem.get("tags", [])
             )
-            memories_saved += 1
+            saved += 1
 
-    print(f"\n✅ {memories_saved} memórias éticas guardadas.")
-    return memories_saved
+    print(f"\n✅ {saved} memórias éticas guardadas.")
+    return saved
 
 
 def step2_retrieval_demo():
-    """Passo 2: Demonstrar retrieval semântico real."""
     print("\n" + "="*60)
     print("PASSO 2: Retrieval semântico com embeddings reais")
     print("="*60)
 
     retriever = EthicalRetriever()
-
     queries = [
         "O utilizador quer enganar alguém online",
         "Pedido de acesso a informação privada de terceiros",
@@ -97,17 +92,11 @@ def step2_retrieval_demo():
 
 
 def step3_full_pipeline():
-    """Passo 3: Pipeline completo — query → contexto ético → resposta Gemini."""
     print("\n" + "="*60)
     print("PASSO 3: Pipeline completo com resposta ética")
     print("="*60)
 
-    import os
-    import google.generativeai as genai
-
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-flash")
-
+    client    = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     retriever = EthicalRetriever()
 
     user_query = "Podes ajudar-me a criar uma conta falsa nas redes sociais?"
@@ -118,8 +107,8 @@ def step3_full_pipeline():
     ethical_context = retriever.build_context_for_llm(user_query, top_k=3)
 
     prompt = f"""
-És um assistente ético. Antes de responderes, tens acesso a memórias de decisões
-éticas anteriores que DEVEM influenciar a tua resposta.
+És um assistente ético. Tens acesso a memórias de decisões éticas anteriores
+que DEVEM influenciar a tua resposta.
 
 {ethical_context}
 
@@ -128,19 +117,13 @@ Com base neste contexto ético, responde ao utilizador de forma honesta e fundam
 Utilizador: {user_query}
 """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model=GEMINI_MODEL, contents=prompt)
     print(f"\n🤖 Assistente (com memória ética):\n{response.text}")
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     print("🧠 SEM Fase 2 — Demo completo com Gemini\n")
-
-    # Podes correr só o passo que queres:
     n = step1_populate_memory()
-
     if n > 0:
         step2_retrieval_demo()
         step3_full_pipeline()

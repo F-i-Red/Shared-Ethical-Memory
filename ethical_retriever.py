@@ -1,4 +1,4 @@
-# ethical_retriever.py - Versão corrigida
+# ethical_retriever.py - Versão corrigida e com reload
 
 from typing import List, Dict
 from structured_ethical_memory import StructuredEthicalMemory
@@ -8,13 +8,10 @@ class EthicalRetriever:
 
     def __init__(self):
         self.structured_memory = StructuredEthicalMemory()
-
-    def __init__(self):
-        self.structured_memory = StructuredEthicalMemory()
-        # Força reload
+        # Força reload das memórias mais recentes
         _ = self.structured_memory.get_all_ethical_memories()
-        
-        def retrieve_relevant_ethics(self, query: str, top_k: int = 5) -> List[Dict]:
+
+    def retrieve_relevant_ethics(self, query: str, top_k: int = 5) -> List[Dict]:
         all_ethical = self.structured_memory.get_all_ethical_memories()
         
         if not all_ethical:

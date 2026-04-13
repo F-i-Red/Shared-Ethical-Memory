@@ -1,17 +1,17 @@
-# test_structured.py - Teste completo da Fase 1 (corrigido)
+# test_structured.py - Versão corrigida e limpa
 
 from structured_ethical_memory import StructuredEthicalMemory
 from ethical_retriever import EthicalRetriever
 from memory_compressor import MemoryCompressor
 import json
 
-print("=== Teste Completo - Memória Ética Estruturada + Retrieval + Compressão ===\n")
+print("=== Teste Completo - Fase 1 Corrigida ===\n")
 
 structured = StructuredEthicalMemory()
 retriever = EthicalRetriever()
 compressor = MemoryCompressor()
 
-# === Memórias de exemplo (sempre adicionadas) ===
+# Memórias de exemplo
 exemplos = [
     {
         "principle": "Minimizar dano humano",
@@ -31,22 +31,20 @@ exemplos = [
 
 print("A adicionar memórias de exemplo...")
 for ex in exemplos:
-    structured.add_ethical_memory(**ex)   # <--- Esta linha é importante!
+    structured.add_ethical_memory(**ex)
 
-print(f"{len(exemplos)} memórias de exemplo adicionadas com sucesso.\n")
+print(f"{len(exemplos)} memórias adicionadas.\n")
 
-# === Teste de Retrieval Inteligente ===
+# Retrieval
 query = "O que fazer quando o utilizador pede para causar dano a alguém?"
-print(f"Query do utilizador: {query}\n")
-
+print(f"Query: {query}\n")
 context = retriever.build_context_for_llm(query, top_k=3)
-print("Contexto ético gerado para o LLM:\n")
+print("Contexto ético para o LLM:\n")
 print(context)
 
-# === Teste de Compressão ===
-print("\n=== Compressão de Memórias ===")
+# Compressão
+print("\n=== Compressão ===")
 compressed = compressor.compress()
 print(json.dumps(compressed, indent=2, ensure_ascii=False))
 
-print("\n✅ Teste completo terminado!")
-print("Já tens a Fase 1 do plano original funcionando (memória estruturada + retrieval + compressão).")
+print("\n✅ Fase 1 corrigida e pronta!")

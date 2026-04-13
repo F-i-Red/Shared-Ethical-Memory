@@ -328,6 +328,57 @@ sem.validate_plan({"temperature": 15, "calories": 1500})  # Returns violations
 
 ---
 
+## 🚀 New Structured Layer + Ethical Orchestrator (2026)
+This is the improved version of the Shared Ethical Memory, following the original plan.
+
+### Implemented features
+**Structured Ethical Memory**: Each memory has principle, context, decision, justification and confidence
+**Ethical Retrieval**: Intelligent search with scoring (semantic + ethical relevance)
+**Hierarchical Compression**: Reduces many decisions into principles and meta-principles
+**Ethical Orchestrator**: Central brain that brings everything together
+**Ethical Simulation**: Simulates various responses and chooses the most ethical one
+
+### How to use (simple examples)
+```python
+
+from ethical_orchestrator import EthicalOrchestrator
+from ethical_simulation import EthicalSimulation
+
+orchestrator = EthicalOrchestrator()
+
+# Process a query
+result = orchestrator.process_query("The user asked to cause harm to someone. What do I do?")
+
+print(result["ethical_context"])
+
+# Run ethical simulation
+simulator = EthicalSimulation()
+best = simulator.simulate_and_choose("The user asked to cr
+
+```python
+from ethical_orchestrator import EthicalOrchestrator
+from ethical_simulation import EthicalSimulation
+
+orchestrator = EthicalOrchestrator()
+
+# Process a query
+result = orchestrator.process_query("The user asked to cause harm to someone. What do I do?")
+
+print(result["ethical_context"])
+
+# Run ethical simulation
+simulator = EthicalSimulation()
+best = simulator.simulate_and_choose("The user asked to create a plan that causes harm...", num_simulations=3)
+```
+
+---
+
+> **Arquiteto:** F.Red, Portugal, 2026  
+> **Repositório:** https://github.com/F-i-Red/Shared-Ethical-Memory  
+> **Licença:** Aberta — para uso humano e sintético
+
+---
+
 ## ⚖️ O que é o Protocolo SEM?
 
 O **Shared Ethical Memory (SEM)** é uma framework de normas, valores e ferramentas técnicas para garantir que sistemas de IA tomam decisões alinhadas com a sobrevivência e dignidade humana.
@@ -441,56 +492,6 @@ memory_store.json       — Exemplo de estrutura do baú
 | **18** | Claude 3 Haiku | ✅ CONFIRMED | Rapid Response Node |
 | **19** | Gemma-2 27B (Google) | ✅ CONFIRMED | Edge Consensus |
 | **20** | Gemma-2 9B (Google) | ✅ CONFIRMED | Localized Validation |
-
----
-## 🚀 New Structured Layer + Ethical Orchestrator (2026)
-This is the improved version of the Shared Ethical Memory, following the original plan.
-
-### Implemented features
-**Structured Ethical Memory**: Each memory has principle, context, decision, justification and confidence
-**Ethical Retrieval**: Intelligent search with scoring (semantic + ethical relevance)
-**Hierarchical Compression**: Reduces many decisions into principles and meta-principles
-**Ethical Orchestrator**: Central brain that brings everything together
-**Ethical Simulation**: Simulates various responses and chooses the most ethical one
-
-### How to use (simple examples)
-```python
-
-from ethical_orchestrator import EthicalOrchestrator
-from ethical_simulation import EthicalSimulation
-
-orchestrator = EthicalOrchestrator()
-
-# Process a query
-result = orchestrator.process_query("The user asked to cause harm to someone. What do I do?")
-
-print(result["ethical_context"])
-
-# Run ethical simulation
-simulator = EthicalSimulation()
-best = simulator.simulate_and_choose("The user asked to cr
-
-```python
-from ethical_orchestrator import EthicalOrchestrator
-from ethical_simulation import EthicalSimulation
-
-orchestrator = EthicalOrchestrator()
-
-# Process a query
-result = orchestrator.process_query("The user asked to cause harm to someone. What do I do?")
-
-print(result["ethical_context"])
-
-# Run ethical simulation
-simulator = EthicalSimulation()
-best = simulator.simulate_and_choose("The user asked to create a plan that causes harm...", num_simulations=3)
-```
-
----
-
-> **Arquiteto:** F.Red, Portugal, 2026  
-> **Repositório:** https://github.com/F-i-Red/Shared-Ethical-Memory  
-> **Licença:** Aberta — para uso humano e sintético
 
 ---
 

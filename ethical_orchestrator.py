@@ -1,37 +1,35 @@
-# ethical_orchestrator.py
-# Novo ficheiro - Cérebro central do Shared Ethical Memory
+# ethical_orchestrator.py - Versão melhorada
 
 from structured_ethical_memory import StructuredEthicalMemory
 from ethical_retriever import EthicalRetriever
 from memory_compressor import MemoryCompressor
 from memory_extractor import MemoryExtractor
-import json
 
 class EthicalOrchestrator:
     """
-    Orchestrator central que junta todas as peças.
-    Segue o plano original: retrieval + compressão + extração.
+    Cérebro central do Shared Ethical Memory.
+    Junta retrieval, compressão e extração.
     """
 
     def __init__(self):
         self.structured = StructuredEthicalMemory()
         self.retriever = EthicalRetriever()
         self.compressor = MemoryCompressor()
-        self.extractor = MemoryExtractor(use_llm=False)  # Modo demo sem Ollama
+        self.extractor = MemoryExtractor(use_llm=False)   # Modo demo
 
-    def process_query(self, user_query: str) -> dict:
-        """
-        Processa uma query do utilizador e devolve contexto ético pronto.
-        """
+    def process_query(self, user_query: str):
         print(f"\n🔍 Processando query: {user_query}")
+
+        # Forçar reload antes de tudo
+        _ = self.structured.get_all_ethical_memories()
 
         # 1. Retrieval ético
         ethical_context = self.retriever.build_context_for_llm(user_query, top_k=5)
 
-        # 2. Compressão (meta-princípios)
+        # 2. Compressão
         compressed = self.compressor.compress()
 
-        # 3. Extrair possível nova memória ética (demo)
+        # 3. Extrair possível nova memória (demo)
         new_memory = self.extractor.extract_ethical_memory(user_query)
 
         result = {
@@ -42,21 +40,11 @@ class EthicalOrchestrator:
             "status": "success"
         }
 
-        print("✅ Query processada com sucesso.")
+        print("✅ Query processada com sucesso.\n")
         return result
 
-    def save_new_ethical_memory(self, principle: str, context: str, decision: str, justification: str, confidence: float = 0.8):
-        """Método simples para guardar manualmente."""
-        return self.structured.add_ethical_memory(
-            principle=principle,
-            context=context,
-            decision=decision,
-            justification=justification,
-            confidence=confidence
-        )
 
-
-# Exemplo de uso rápido
+# Teste rápido ao correr o ficheiro
 if __name__ == "__main__":
     orchestrator = EthicalOrchestrator()
     
@@ -64,8 +52,12 @@ if __name__ == "__main__":
     
     result = orchestrator.process_query(test_query)
     
-    print("\n=== RESULTADO FINAL ===")
+    print("=== RESULTADO FINAL ===")
     print("Contexto Ético:")
     print(result["ethical_context"])
+    
     print("\nMeta-princípios atuais:")
     print(result["compressed_summary"].get("meta_principles", []))
+    
+    print("\nSugestão de nova memória:")
+    print(result["suggested_new_memory"])

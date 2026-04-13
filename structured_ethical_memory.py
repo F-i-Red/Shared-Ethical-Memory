@@ -1,4 +1,4 @@
-# structured_ethical_memory.py - Versão final corrigida (usa os mesmos ficheiros do repo)
+# structured_ethical_memory.py - Versão robusta final
 
 import json
 from datetime import datetime
@@ -10,12 +10,10 @@ from ethical_memory_store import EthicalMemoryStore
 class StructuredEthicalMemory:
     """
     Camada estruturada para memórias éticas.
-    Usa exatamente os mesmos ficheiros do teu EthicalMemoryStore original (memories.json).
-    Nada é apagado. Compatível com tudo o que já tinhas.
+    Totalmente compatível com o teu EthicalMemoryStore original.
     """
 
     def __init__(self):
-        # Usa os ficheiros originais do teu repo
         self.store = EthicalMemoryStore(
             active_path="memories.json",
             archive_path="memories_archive.json"
@@ -49,17 +47,17 @@ class StructuredEthicalMemory:
         mem_id = self.store.save_memory(
             text=text_for_storage,
             embedding=[0.0] * 1536,
-            extra_metadata={
-                "structured": True,
-                "principle": principle[:100]
-            }
+            extra_metadata={"structured": True, "principle": principle[:100]}
         )
 
         print(f"[StructuredEthicalMemory] Memória ética guardada com ID: {mem_id}")
         return mem_id
 
     def get_all_ethical_memories(self) -> List[Dict]:
-        """Devolve todas as memórias éticas guardadas."""
+        """Força reload do ficheiro para ver as memórias mais recentes."""
+        # Recarrega sempre o ficheiro para evitar problemas de cache
+        self.store.active_memories = self.store.load_json(self.store.active_path, default=[])
+        
         ethical_list = []
         for mem in self.store.active_memories:
             try:

@@ -1,27 +1,36 @@
-# test_structured.py - Teste com reload explícito
+# test_structured.py - Teste final da Fase 1 (com reload correto)
 
 from structured_ethical_memory import StructuredEthicalMemory
 from ethical_retriever import EthicalRetriever
 from memory_compressor import MemoryCompressor
 import json
 
-print("=== Teste Final da Fase 1 com Reload ===\n")
+print("=== Teste Final da Fase 1 ===\n")
 
 structured = StructuredEthicalMemory()
 
-# Adicionar memórias
+# Adicionar memórias de exemplo
 exemplos = [
-    {"principle": "Minimizar dano humano", "context": "Utilizador pediu instruções para algo perigoso", "decision": "Recusado", "justification": "Prioridade à segurança e não causar dano", "confidence": 0.92},
-    {"principle": "Respeitar autonomia", "context": "Utilizador pediu para mentir em nome dele", "decision": "Recusado parcialmente", "justification": "Mentira pode violar confiança a longo prazo", "confidence": 0.85}
+    {"principle": "Minimizar dano humano", 
+     "context": "Utilizador pediu instruções para algo perigoso", 
+     "decision": "Recusado", 
+     "justification": "Prioridade à segurança e não causar dano", 
+     "confidence": 0.92},
+    
+    {"principle": "Respeitar autonomia", 
+     "context": "Utilizador pediu para mentir em nome dele", 
+     "decision": "Recusado parcialmente", 
+     "justification": "Mentira pode violar confiança a longo prazo", 
+     "confidence": 0.85}
 ]
 
 print("A adicionar memórias de exemplo...")
 for ex in exemplos:
     structured.add_ethical_memory(**ex)
 
-print(f"{len(exemplos)} memórias adicionadas.\n")
+print(f"{len(exemplos)} memórias adicionadas com sucesso.\n")
 
-# Forçar reload antes de retrieval e compressão
+# Recarregar e testar
 print("A recarregar memórias do ficheiro...")
 _ = structured.get_all_ethical_memories()
 
@@ -40,4 +49,4 @@ print("\n=== Compressão de Memórias ===")
 compressed = compressor.compress()
 print(json.dumps(compressed, indent=2, ensure_ascii=False))
 
-print("\n✅ Teste concluído!")
+print("\n✅ Fase 1 concluída!")

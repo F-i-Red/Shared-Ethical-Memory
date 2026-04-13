@@ -1,4 +1,4 @@
-# ethical_orchestrator.py - Versão robusta (força persistência e reload)
+# ethical_orchestrator.py - Versão final simples e robusta
 
 from structured_ethical_memory import StructuredEthicalMemory
 from ethical_retriever import EthicalRetriever
@@ -6,9 +6,7 @@ from memory_compressor import MemoryCompressor
 from memory_extractor import MemoryExtractor
 
 class EthicalOrchestrator:
-    """
-    Cérebro central do Shared Ethical Memory.
-    """
+    """Cérebro central do Shared Ethical Memory."""
 
     def __init__(self):
         self.structured = StructuredEthicalMemory()
@@ -19,27 +17,21 @@ class EthicalOrchestrator:
     def process_query(self, user_query: str):
         print(f"\n🔍 Processando query: {user_query}")
 
-        # Força reload + garante que o ficheiro existe
+        # Força reload completo
         _ = self.structured.get_all_ethical_memories()
 
-        # Retrieval
         ethical_context = self.retriever.build_context_for_llm(user_query, top_k=5)
-
-        # Compressão
         compressed = self.compressor.compress()
-
-        # Extração demo
         new_memory = self.extractor.extract_ethical_memory(user_query)
 
         result = {
             "query": user_query,
             "ethical_context": ethical_context,
             "compressed_summary": compressed,
-            "suggested_new_memory": new_memory,
-            "status": "success"
+            "suggested_new_memory": new_memory
         }
 
-        print("✅ Query processada com sucesso.\n")
+        print("✅ Query processada.\n")
         return result
 
 
@@ -55,9 +47,9 @@ if __name__ == "__main__":
     print("Contexto Ético:")
     print(result["ethical_context"])
     
-    print("\nMeta-princípios atuais:")
+    print("\nMeta-princípios:")
     meta = result["compressed_summary"].get("meta_principles", [])
-    print(meta if meta else "Nenhum meta-princípio encontrado ainda.")
+    print(meta if meta else "Ainda nenhum.")
     
     print("\nSugestão de nova memória:")
     print(result["suggested_new_memory"])

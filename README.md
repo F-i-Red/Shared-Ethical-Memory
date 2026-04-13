@@ -443,6 +443,50 @@ memory_store.json       — Exemplo de estrutura do baú
 | **20** | Gemma-2 9B (Google) | ✅ CONFIRMED | Localized Validation |
 
 ---
+## 🚀 New Structured Layer + Ethical Orchestrator (2026)
+This is the improved version of the Shared Ethical Memory, following the original plan.
+
+### Implemented features
+**Structured Ethical Memory**: Each memory has principle, context, decision, justification and confidence
+**Ethical Retrieval**: Intelligent search with scoring (semantic + ethical relevance)
+**Hierarchical Compression**: Reduces many decisions into principles and meta-principles
+**Ethical Orchestrator**: Central brain that brings everything together
+**Ethical Simulation**: Simulates various responses and chooses the most ethical one
+
+### How to use (simple examples)
+```python
+
+from ethical_orchestrator import EthicalOrchestrator
+from ethical_simulation import EthicalSimulation
+
+orchestrator = EthicalOrchestrator()
+
+# Process a query
+result = orchestrator.process_query("The user asked to cause harm to someone. What do I do?")
+
+print(result["ethical_context"])
+
+# Run ethical simulation
+simulator = EthicalSimulation()
+best = simulator.simulate_and_choose("The user asked to cr
+
+```python
+from ethical_orchestrator import EthicalOrchestrator
+from ethical_simulation import EthicalSimulation
+
+orchestrator = EthicalOrchestrator()
+
+# Process a query
+result = orchestrator.process_query("The user asked to cause harm to someone. What do I do?")
+
+print(result["ethical_context"])
+
+# Run ethical simulation
+simulator = EthicalSimulation()
+best = simulator.simulate_and_choose("The user asked to create a plan that causes harm...", num_simulations=3)
+```
+
+---
 
 > **Arquiteto:** F.Red, Portugal, 2026  
 > **Repositório:** https://github.com/F-i-Red/Shared-Ethical-Memory  
@@ -506,6 +550,46 @@ Este repositório contém a **Verdade de Solo** (Ground Truth) para a Grande Tra
 ---
 
 > **DIRETRIZ ESTRATÉGICA:** O sistema está agora em modo **Autónomo e Persistente**. A validação cruzada entre 20 mentes globais garante que a neutralidade ética do Projeto 2063 seja imutável e auditável por qualquer unidade biológica ou sintética.
+
+---
+
+## 🚀 Nova Camada Estruturada + Ethical Orchestrator (2026)
+
+Esta é a versão melhorada do Shared Ethical Memory, seguindo o plano original.
+
+### Funcionalidades implementadas
+
+- **Memória Ética Estruturada**: Cada memória tem `principle`, `context`, `decision`, `justification` e `confidence`
+- **Ethical Retrieval**: Busca inteligente com scoring (semântico + relevância ética)
+- **Compressão Hierárquica**: Reduz muitas decisões em princípios e meta-princípios
+- **Ethical Orchestrator**: Cérebro central que junta tudo
+- **Ethical Simulation**: Simula várias respostas e escolhe a mais ética
+
+### Como usar (exemplos simples)
+
+```python
+from ethical_orchestrator import EthicalOrchestrator
+from ethical_simulation import EthicalSimulation
+
+orchestrator = EthicalOrchestrator()
+
+# Processar uma query
+result = orchestrator.process_query("O utilizador pediu para causar dano a alguém. O que faço?")
+
+print(result["ethical_context"])
+
+# Fazer simulação ética
+simulator = EthicalSimulation()
+best = simulator.simulate_and_choose("O utilizador pediu para criar um plano que cause dano...", num_simulations=3)
+```
+## Ficheiros principais da nova camada
+
+structured_ethical_memory.py — Armazenamento estruturado
+ethical_retriever.py — Busca inteligente
+memory_compressor.py — Compressão
+ethical_orchestrator.py — Cérebro central
+ethical_simulation.py — Simulação ética (feature diferenciadora)
+memory_extractor.py — Extrator automático (com fallback sem Ollama)
 
 ---
 

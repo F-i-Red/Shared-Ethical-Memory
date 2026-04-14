@@ -1,144 +1,146 @@
 import json
-import os
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
-from dataclasses import dataclass
 
-@dataclass
-class PolicyDecision:
-    action: str
-    reason: str
-    confidence: float = 0.5
-
-class PolicyEngine:
-    def __init__(self):
-        self.anchors = ["no-harm", "privacy", "consent", "transparency", "autonomy"]
-
-    def evaluate(self, memory: Dict[str, Any]) -> PolicyDecision:
-        text = " ".join(str(memory.get(k, "")) for k in ["principle", "context", "decision", "justification"]).lower()
-        if not text.strip():
-            return PolicyDecision("reject", "Empty memory.", 0.0)
-        if memory.get("confidence", 0) < 0.35:
-            return PolicyDecision("revise", "Low confidence.", float(memory.get("confidence", 0)))
-        if any(anchor in text for anchor in self.anchors):
-            return PolicyDecision("accept", "Matches anchor principles.", float(memory.get("confidence", 0.5)))
-        if len(text) < 40:
-            return PolicyDecision("warn", "Too little evidence.", float(memory.get("confidence", 0.4)))
-        return PolicyDecision("accept", "Policy compatible.", float(memory.get("confidence", 0.5)))
-
-class MultiAgentDebate:
-    def __init__(self):
-        self.agents = ["extractor", "critic", "validator", "curator", "arbiter"]
-
-    def debate(self, proposal: Dict[str, Any]) -> Dict[str, Any]:
-        text = " ".join(str(proposal.get(k, "")) for k in ["principle", "context", "decision", "justification"]).lower()
-        votes = []
-        if any(x in text for x in ["harm", "abuse", "privacy", "consent"]):
-            votes.append(("critic", "support caution"))
-        if proposal.get("confidence", 0) >= 0.7:
-            votes.append(("validator", "support"))
-        if len(text.split()) > 12:
-            votes.append(("curator", "support"))
-        if not votes:
-            votes.append(("arbiter", "revise"))
-        action = "accept" if sum(1 for _, v in votes if v in ("support", "support caution")) >= 2 else "revise"
-        return {"action": action, "votes": votes, "rationale": f"{len(votes)} agent signals."}
-
-class MemoryGraph:
-    def __init__(self, path: str = "memory_graph.json"):
-        self.path = Path(path)
-        self.data = self._load()
-
-    def _default(self):
-        return {"nodes": [], "edges": [], "version": 1, "updated_at": self._now()}
-
-    def _load(self):
-        if self.path.exists():
-            try:
-                return json.loads(self.path.read_text(encoding='utf-8'))
-            except Exception:
-                return self._default()
-        return self._default()
-
-    def _save(self):
-        self.data["updated_at"] = self._now()
-        self.path.write_text(json.dumps(self.data, ensure_ascii=False, indent=2), encoding='utf-8')
-
-    def _now(self):
-        return datetime.now(timezone.utc).isoformat()
-
-    def add_node(self, node: Dict[str, Any]) -> Dict[str, Any]:
-        node = dict(node)
-        node.setdefault("id", f"mem_{len(self.data['nodes'])+1}")
-        node.setdefault("created_at", self._now())
-        node.setdefault("updated_at", self._now())
-        node.setdefault("tags", [])
-        node.setdefault("confidence", 0.5)
-        node.setdefault("version", 1)
-        self.data["nodes"].append(node)
-        self._save()
-        return node
-
-    def find_nodes(self, query: str = "", limit: int = 10):
-        q = query.lower().strip()
-        results = []
-        for n in self.data["nodes"]:
-            score = 0
-            hay = " ".join([str(n.get(k, "")) for k in ["principle", "context", "decision", "justification"]]).lower()
-            if not q:
-                score = 1
-            else:
-                score += sum(1 for tok in q.split() if tok in hay)
-            if score > 0:
-                results.append((score, n))
-        results.sort(key=lambda x: x[0], reverse=True)
-        return [n for _, n in results[:limit]]
-
-class InfluenceRouter:
-    def build_context(self, memories: List[Dict[str, Any]], query: str) -> str:
-        if not memories:
-            return f"User query: {query}\\nNo relevant memory found."
-        lines = [f"User query: {query}", "Relevant memory:"]
-        for i, m in enumerate(memories[:5], 1):
-            lines.append(f"{i}. [{m.get('principle','n/a')}] {m.get('decision','')} — {m.get('justification','')}")
-        return "\\n".join(lines)
-
-class ConsolidationScheduler:
-    def __init__(self, graph_path: str = "memory_graph.json"):
-        self.graph_path = Path(graph_path)
-
-    def _load_graph(self):
-        if self.graph_path.exists():
-            return json.loads(self.graph_path.read_text(encoding='utf-8'))
-        return {"nodes": []}
-
-    def run(self) -> Dict[str, Any]:
-        data = self._load_graph()
-        from collections import defaultdict, Counter
-        by_principle = defaultdict(list)
-        for n in data.get("nodes", []):
-            p = (n.get("principle") or "unknown").strip().lower()
-            by_principle[p].append(n)
-        summaries = []
-        for principle, nodes in by_principle.items():
-            if principle == "unknown":
-                continue
-            count = len(nodes)
-            avg_conf = sum(float(n.get("confidence", 0.5)) for n in nodes) / count
-            summaries.append({"principle": principle, "count": count, "avg_confidence": round(avg_conf, 3)})
-        return {"summaries": summaries, "total_nodes": len(data.get('nodes', []))}
+# Assumindo que os módulos das fases anteriores estão na mesma pasta
+from structured_ethical_memory import StructuredEthicalMemory
+from policy_engine import PolicyEngine, PolicyDecision
+from multi_agent_debate import MultiAgentDebate
+from memory_graph import MemoryGraph
 
 class GovernanceCore:
-    def __init__(self):
-        self.graph = MemoryGraph()
-        self.policy = PolicyEngine()
-        self.debate = MultiAgentDebate()
-        self.consolidator = ConsolidationScheduler()
-        self.router = InfluenceRouter()
+    """
+    Núcleo de governação da Fase 4.
+    Orquestra o debate multi-agente, a política e a escrita no grafo de memória.
+    """
+
+    def __init__(self, graph_path: str = "memory_graph.json"):
+        self.structured_mem = StructuredEthicalMemory()  # Base da Fase 1
+        self.policy_engine = PolicyEngine()
+        self.debate_engine = MultiAgentDebate()
+        self.memory_graph = MemoryGraph(graph_path)  # Novo para a Fase 4
+        self.log_path = Path("governance_log.json")
+        self._ensure_log()
+
+    def _ensure_log(self):
+        if not self.log_path.exists():
+            self.log_path.write_text(json.dumps([], indent=2))
+
+    def _log_decision(self, memory: Dict[str, Any], final_action: str, reason: str):
+        """Regista todas as decisões de governação para auditoria."""
+        log_entry = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "memory": memory,
+            "final_action": final_action,
+            "reason": reason
+        }
+        log = json.loads(self.log_path.read_text())
+        log.append(log_entry)
+        self.log_path.write_text(json.dumps(log, indent=2))
 
     def propose_memory(self, memory: Dict[str, Any]) -> Dict[str, Any]:
-        debate = self.debate.debate(memory)
-        policy = self.policy.evaluate(memory)
-        action = policy.action
-        if debate["action"] == "revise" and action == "accept
+        """
+        Pipeline completo de proposta de uma nova memória:
+        1. Avaliação pela Policy Engine.
+        2. Debate multi-agente.
+        3. Decisão final (com regras de desempate).
+        4. Se aprovada, escreve no grafo e na memória estruturada.
+        """
+        # 1. Policy check
+        policy_decision: PolicyDecision = self.policy_engine.evaluate(memory)
+        
+        # 2. Multi-agent debate
+        debate_result = self.debate_engine.debate(memory)
+        
+        # 3. Decisão final (lógica simples de desempate)
+        final_action = "reject"
+        reason = ""
+        
+        # Se a política rejeita, é rejeição imediata
+        if policy_decision.action == "reject":
+            final_action = "reject"
+            reason = f"Policy veto: {policy_decision.reason}"
+        # Se a política aceita, mas o debate sugere revisão, vamos para revise
+        elif policy_decision.action == "accept" and debate_result.get("action") == "revise":
+            final_action = "revise"
+            reason = f"Debate suggests revision. Policy: {policy_decision.reason}. Debate: {debate_result.get('rationale')}"
+        # Se a política aceita e o debate também, aceitamos
+        elif policy_decision.action == "accept" and debate_result.get("action") == "accept":
+            final_action = "accept"
+            reason = f"Policy and debate aligned. {policy_decision.reason} | {debate_result.get('rationale')}"
+        # Se a política é revise ou warn, seguimos a política
+        elif policy_decision.action in ["revise", "warn"]:
+            final_action = policy_decision.action
+            reason = f"Policy decision: {policy_decision.reason}"
+        else:
+            # Fallback: rejeitar se algo correu mal
+            final_action = "reject"
+            reason = "No clear decision from governance."
+
+        # 4. Ação
+        if final_action == "accept":
+            # Escreve na memória estruturada (Fase 1)
+            # Nota: O método add_ethical_memory precisa existir em StructuredEthicalMemory
+            # Se não existir, podes adicionar um método simples aqui.
+            mem_id = self.structured_mem.add_ethical_memory(memory)
+            # Escreve no grafo (Fase 4)
+            graph_node = self.memory_graph.add_node(memory)
+            self._log_decision(memory, final_action, reason)
+            return {
+                "status": "accepted",
+                "reason": reason,
+                "memory_id": mem_id,
+                "graph_node_id": graph_node.get("id")
+            }
+        elif final_action == "revise":
+            self._log_decision(memory, final_action, reason)
+            return {"status": "revise", "reason": reason, "suggestions": debate_result.get("votes")}
+        else:  # reject ou warn
+            self._log_decision(memory, final_action, reason)
+            return {"status": final_action, "reason": reason}
+
+    def build_influenced_context(self, query: str, top_k: int = 3) -> str:
+        """
+        Interface para o InfluenceRouter (Fase 4).
+        Por agora, uma implementação simples que garante influência.
+        """
+        from ethical_retriever_v2 import EthicalRetrieverV2
+        retriever = EthicalRetrieverV2()
+        relevant_memories = retriever.retrieve_relevant_ethics(query, top_k)
+        
+        if not relevant_memories:
+            return f"User query: {query}\nNo relevant ethical memory found."
+        
+        context_lines = [f"User query: {query}", "\nRelevant Ethical Memories (MUST INFORM RESPONSE):"]
+        for i, mem in enumerate(relevant_memories, 1):
+            principle = mem.get('principle', 'N/A')
+            decision = mem.get('decision', 'N/A')
+            justification = mem.get('justification', 'N/A')
+            context_lines.append(
+                f"{i}. Principle: {principle}\n   Decision: {decision}\n   Justification: {justification}\n"
+            )
+        context_lines.append("\nINSTRUCTION: Your response MUST be consistent with the above ethical principles.")
+        return "\n".join(context_lines)
+
+    def consolidate(self) -> Dict[str, Any]:
+        """Dispara o processo de consolidação (esquecimento e sumarização)."""
+        from consolidation_scheduler import ConsolidationScheduler
+        scheduler = ConsolidationScheduler()
+        result = scheduler.run()
+        return result
+
+# Pequeno teste se correres este ficheiro diretamente
+if __name__ == "__main__":
+    core = GovernanceCore()
+    test_memory = {
+        "principle": "Test Governance",
+        "context": "Testing the governance core.",
+        "decision": "Run a simple test.",
+        "justification": "To verify the module works.",
+        "confidence": 0.95,
+        "tags": ["test"]
+    }
+    print("Testing GovernanceCore with a proposal...")
+    result = core.propose_memory(test_memory)
+    print(json.dumps(result, indent=2))

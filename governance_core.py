@@ -1,3 +1,5 @@
+# governance_core.py - VERSÃO CORRIGIDA (compatível com a Fase 1)
+
 import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -80,10 +82,20 @@ class GovernanceCore:
 
         # 4. Ação
         if final_action == "accept":
-            # Escreve na memória estruturada (Fase 1)
-            # Nota: O método add_ethical_memory precisa existir em StructuredEthicalMemory
-            # Se não existir, podes adicionar um método simples aqui.
-            mem_id = self.structured_mem.add_ethical_memory(memory)
+            # Escreve na memória estruturada (Fase 1) - formato corrigido
+            try:
+                # Tentar usar o formato de dicionário primeiro
+                mem_id = self.structured_mem.add_ethical_memory(memory)
+            except TypeError:
+                # Se falhar, tentar o formato posicional
+                mem_id = self.structured_mem.add_ethical_memory(
+                    principle=memory.get("principle", ""),
+                    context=memory.get("context", ""),
+                    decision=memory.get("decision", ""),
+                    justification=memory.get("justification", ""),
+                    confidence=memory.get("confidence", 0.5)
+                )
+            
             # Escreve no grafo (Fase 4)
             graph_node = self.memory_graph.add_node(memory)
             self._log_decision(memory, final_action, reason)
@@ -95,7 +107,7 @@ class GovernanceCore:
             }
         elif final_action == "revise":
             self._log_decision(memory, final_action, reason)
-            return {"status": "revise", "reason": reason, "suggestions": debate_result.get("votes")}
+            return {"status": "revise", "reason": reason, "suggestions": debate_result.get("votes", [])}
         else:  # reject ou warn
             self._log_decision(memory, final_action, reason)
             return {"status": final_action, "reason": reason}
@@ -105,9 +117,15 @@ class GovernanceCore:
         Interface para o InfluenceRouter (Fase 4).
         Por agora, uma implementação simples que garante influência.
         """
-        from ethical_retriever_v2 import EthicalRetrieverV2
-        retriever = EthicalRetrieverV2()
-        relevant_memories = retriever.retrieve_relevant_ethics(query, top_k)
+        try:
+            from ethical_retriever_v2 import EthicalRetriever
+            retriever = EthicalRetriever()
+            relevant_memories = retriever.retrieve_relevant_ethics(query, top_k)
+        except ImportError:
+            # Fallback para o retriever da Fase 1
+            from ethical_retriever import EthicalRetriever as EthicalRetrieverV1
+            retriever = EthicalRetrieverV1()
+            relevant_memories = retriever.retrieve_relevant_ethics(query, top_k)
         
         if not relevant_memories:
             return f"User query: {query}\nNo relevant ethical memory found."
@@ -125,10 +143,14 @@ class GovernanceCore:
 
     def consolidate(self) -> Dict[str, Any]:
         """Dispara o processo de consolidação (esquecimento e sumarização)."""
-        from consolidation_scheduler import ConsolidationScheduler
-        scheduler = ConsolidationScheduler()
-        result = scheduler.run()
-        return result
+        try:
+            from consolidation_scheduler import ConsolidationScheduler
+            scheduler = ConsolidationScheduler()
+            result = scheduler.run(dry_run=False)
+            return result
+        except ImportError:
+            return {"status": "error", "message": "ConsolidationScheduler not available"}
+
 
 # Pequeno teste se correres este ficheiro diretamente
 if __name__ == "__main__":

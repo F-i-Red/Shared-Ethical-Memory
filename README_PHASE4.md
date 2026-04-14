@@ -120,7 +120,7 @@ The API will be available at: http://localhost:8000
 ### Step 2: Populate the Memory Graph (First Time Only)
 Open a second terminal and run:
 ```
-cd C:\Users\Frank\Downloads\Shared-Ethical-Memory-main (2)\Shared-Ethical-Memory-main
+cd C:\Users\YOUR PC NAME\Downloads\Shared-Ethical-Memory-main\Shared-Ethical-Memory-main
 set GEMINI_API_KEY=your-api-key-here
 python populate_memories.py
 ```

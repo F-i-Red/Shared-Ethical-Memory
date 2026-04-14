@@ -13,8 +13,9 @@ class MemoryGraph:
     """
 
     def __init__(self, path: str = "memory_graph.json"):
-        self.path = Path(path)
+        self.path = Path(path).expanduser().absolute()  # Converte para absoluto
         self.data = self._load()
+        print(f"[MemoryGraph] Using path: {self.path}")  # Debug
 
     def _default(self):
         return {

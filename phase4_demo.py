@@ -12,12 +12,9 @@ if __name__ == "__main__":
     print("PHASE 4 — GOVERNANCE DEMO")
     for s in SAMPLES:
         result = core.propose_memory(s)
-        print("
-PROPOSAL:", s["principle"])
+        print("\\nPROPOSAL:", s["principle"])
         print(json.dumps(result, ensure_ascii=False, indent=2))
-    print("
-CONTEXT:")
+    print("\\nCONTEXT:")
     print(core.build_influenced_context("privacy and safety for user data"))
-    print("
-CONSOLIDATION:")
+    print("\\nCONSOLIDATION:")
     print(json.dumps(core.consolidate(), ensure_ascii=False, indent=2))

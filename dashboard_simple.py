@@ -1,13 +1,13 @@
-# dashboard_simple.py - Dashboard simplificado (HTML puro)
+# dashboard_simple.py - Dashboard Simplificado (CORRIGIDO)
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 import httpx
 import json
 
-app = FastAPI(title="SEM Dashboard Simple")
+app = FastAPI(title="SEM Dashboard")
 
-API_URL = "http://localhost:8000"
+API_URL = "http://localhost:8000"  # API está na porta 8000
 
 HTML_PAGE = """
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ HTML_PAGE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEM Dashboard</title>
+    <title>SEM Dashboard - Shared Ethical Memory</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -24,14 +24,20 @@ HTML_PAGE = """
             color: #e0e0e0;
             padding: 20px;
         }
-        h1 { color: #e94560; margin-bottom: 10px; }
+        h1 { 
+            color: #e94560; 
+            margin-bottom: 5px;
+            font-size: 2rem;
+        }
+        .subtitle { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
         .status {
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 8px;
             margin-bottom: 20px;
+            display: inline-block;
         }
-        .status.online { background: #1a3a2a; color: #4ecdc4; }
-        .status.offline { background: #3a1a1a; color: #e94560; }
+        .status.online { background: #1a3a2a; color: #4ecdc4; border-left: 4px solid #4ecdc4; }
+        .status.offline { background: #3a1a1a; color: #e94560; border-left: 4px solid #e94560; }
         .container { display: flex; gap: 20px; flex-wrap: wrap; }
         .card {
             background: #1a1a2e;
@@ -40,8 +46,9 @@ HTML_PAGE = """
             border: 1px solid #2a2a4e;
             flex: 1;
             min-width: 300px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .card h3 { color: #4ecdc4; margin-bottom: 15px; }
+        .card h3 { color: #4ecdc4; margin-bottom: 15px; border-left: 3px solid #e94560; padding-left: 10px; }
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -52,16 +59,25 @@ HTML_PAGE = """
             padding: 15px;
             border-radius: 8px;
             text-align: center;
+            transition: transform 0.2s;
         }
-        .stat-value { font-size: 28px; font-weight: bold; color: #e94560; }
+        .stat:hover { transform: translateY(-2px); background: #1a1a2e; }
+        .stat-value { font-size: 32px; font-weight: bold; color: #e94560; }
         .stat-label { font-size: 12px; color: #888; margin-top: 5px; }
+        .memory-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
         .memory-item {
-            padding: 10px;
+            padding: 12px;
             border-bottom: 1px solid #2a2a4e;
             cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 6px;
         }
         .memory-item:hover { background: #2a2a4e; }
-        .memory-principle { font-weight: bold; color: #4ecdc4; }
+        .memory-principle { font-weight: bold; color: #4ecdc4; font-size: 0.9rem; }
+        .memory-meta { font-size: 11px; color: #888; margin-top: 5px; }
         .query-box {
             display: flex;
             gap: 10px;
@@ -69,19 +85,26 @@ HTML_PAGE = """
         }
         .query-box input {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             background: #0f0f1a;
             border: 1px solid #2a2a4e;
             border-radius: 6px;
             color: #e0e0e0;
+            font-size: 14px;
+        }
+        .query-box input:focus {
+            outline: none;
+            border-color: #e94560;
         }
         .query-box button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: #e94560;
             border: none;
             border-radius: 6px;
             color: white;
             cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
         }
         .query-box button:hover { background: #ff6b8a; }
         .response {
@@ -89,10 +112,10 @@ HTML_PAGE = """
             padding: 15px;
             border-radius: 8px;
             font-size: 13px;
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
             white-space: pre-wrap;
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
         }
         .loading { text-align: center; padding: 20px; color: #888; }
         .error { color: #e94560; }
@@ -100,23 +123,58 @@ HTML_PAGE = """
             background: #4ecdc4;
             color: #0f0f1a;
             border: none;
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 4px;
             cursor: pointer;
             margin-left: 10px;
-            font-size: 12px;
+            font-size: 11px;
+            font-weight: bold;
         }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .refresh-btn:hover { background: #6ee0d8; }
         hr { border-color: #2a2a4e; margin: 15px 0; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #555;
+            font-size: 0.8rem;
+            border-top: 1px solid #2a2a4e;
+        }
+        .badge {
+            display: inline-block;
+            background: #e94560;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f1a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a4e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e94560;
+        }
     </style>
 </head>
 <body>
-    <h1>🧠 Shared Ethical Memory Dashboard</h1>
+    <h1>🧠 Shared Ethical Memory <span class="badge">Phase 4</span></h1>
+    <div class="subtitle">Multi-Agent Governance | Memory Graph | Guaranteed Influence</div>
+    
     <div id="api-status" class="status">🔌 Checking API connection...</div>
     
     <div class="container">
         <div class="card">
-            <h3>📊 Graph Statistics</h3>
+            <h3>📊 Graph Statistics <button class="refresh-btn" onclick="loadStats()">⟳</button></h3>
             <div class="stat-grid" id="stats">
                 <div class="stat"><div class="stat-value">-</div><div class="stat-label">Nodes</div></div>
                 <div class="stat"><div class="stat-value">-</div><div class="stat-label">Edges</div></div>
@@ -126,23 +184,32 @@ HTML_PAGE = """
         </div>
         
         <div class="card">
-            <h3>📝 Memories <button class="refresh-btn" onclick="loadMemories()">⟳</button></h3>
-            <div id="memories-list" class="loading">Loading...</div>
+            <h3>📝 Memory Nodes <button class="refresh-btn" onclick="loadMemories()">⟳</button></h3>
+            <div class="memory-list" id="memories-list">
+                <div class="loading">Loading memories...</div>
+            </div>
         </div>
         
         <div class="card">
-            <h3>🔍 Query with Ethical Influence</h3>
+            <h3>🔍 Ethical Query</h3>
             <div class="query-box">
-                <input type="text" id="query" placeholder="Ask something..." onkeypress="if(event.key==='Enter') queryInfluence()">
-                <button onclick="queryInfluence()">Ask</button>
+                <input type="text" id="query" placeholder="Ask something (e.g., 'How to handle user privacy?')" 
+                       onkeypress="if(event.key==='Enter') queryInfluence()">
+                <button onclick="queryInfluence()">Ask →</button>
             </div>
-            <div id="query-result" class="response">✨ Ask a question to see ethical memory in action</div>
+            <div id="query-result" class="response">
+                ✨ Ask a question to see ethical memory influence
+            </div>
         </div>
     </div>
     
     <div class="card" style="margin-top: 20px;">
-        <h3>📋 Governance Log</h3>
-        <div id="governance-log" class="response" style="max-height: 200px;">Loading...</div>
+        <h3>📋 Governance Status</h3>
+        <div id="governance-log" class="response" style="max-height: 150px;">Loading...</div>
+    </div>
+    
+    <div class="footer">
+        SEM Phase 4 | Powered by Gemini 2.5 Flash | Memory Graph v2 | Influence Router
     </div>
 
     <script>
@@ -153,7 +220,8 @@ HTML_PAGE = """
             try {
                 const response = await fetch(`${API_BASE}/`);
                 if (response.ok) {
-                    statusDiv.innerHTML = '✅ API Online - SEM is operational';
+                    const data = await response.json();
+                    statusDiv.innerHTML = `✅ API Online - ${data.name} v${data.version}`;
                     statusDiv.className = 'status online';
                     return true;
                 } else {
@@ -183,22 +251,22 @@ HTML_PAGE = """
         
         async function loadMemories() {
             const listDiv = document.getElementById('memories-list');
-            listDiv.innerHTML = '<div class="loading">Loading memories...</div>';
+            listDiv.innerHTML = '<div class="loading">📡 Loading memories...</div>';
             try {
                 const response = await fetch(`${API_BASE}/memories/graph/nodes?limit=20`);
                 const data = await response.json();
                 if (data.nodes && data.nodes.length > 0) {
                     listDiv.innerHTML = data.nodes.map(node => `
-                        <div class="memory-item" onclick="document.getElementById('query').value = 'Tell me about: ${node.principle || node.id}'; queryInfluence();">
-                            <div class="memory-principle">${escapeHtml(node.principle || 'No principle')}</div>
-                            <div style="font-size: 11px; color: #888;">ID: ${node.id} | Conf: ${node.confidence || 0.5}</div>
+                        <div class="memory-item" onclick="document.getElementById('query').value = '${escapeHtml(node.principle || node.id)}'; queryInfluence();">
+                            <div class="memory-principle">📌 ${escapeHtml(node.principle || 'No principle')}</div>
+                            <div class="memory-meta">🆔 ${node.id} | 📊 Confidence: ${(node.confidence || 0.5).toFixed(2)} | 🏷️ ${node.type || 'ethical'}</div>
                         </div>
                     `).join('');
                 } else {
-                    listDiv.innerHTML = '<div class="loading">No memories yet. Use POST /memories/propose to add.</div>';
+                    listDiv.innerHTML = '<div class="loading">📭 No memories yet. Use POST /memories/propose to add.</div>';
                 }
             } catch(e) {
-                listDiv.innerHTML = `<div class="loading error">Error loading memories: ${e.message}</div>`;
+                listDiv.innerHTML = `<div class="loading error">❌ Error: ${e.message}</div>`;
             }
         }
         
@@ -221,36 +289,43 @@ HTML_PAGE = """
                 const data = await response.json();
                 
                 resultDiv.innerHTML = `
-                    <div style="margin-bottom: 10px;">
-                        <span style="color: #4ecdc4;">Strategy:</span> ${data.influence_strategy}<br>
-                        <span style="color: #4ecdc4;">Memories used:</span> ${data.memories_used}
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #4ecdc4; font-weight: bold;">🎯 Strategy:</span> ${data.influence_strategy}<br>
+                        <span style="color: #4ecdc4; font-weight: bold;">📚 Memories used:</span> ${data.memories_used}
                     </div>
                     <hr>
-                    <div><strong>Influenced Prompt:</strong></div>
-                    <div style="margin-top: 8px;">${escapeHtml(data.influenced_prompt)}</div>
+                    <div style="margin-top: 12px;">
+                        <strong>📝 Influenced Prompt:</strong>
+                    </div>
+                    <div style="margin-top: 8px; background: #0a0a12; padding: 10px; border-radius: 6px;">
+                        ${escapeHtml(data.influenced_prompt)}
+                    </div>
                 `;
             } catch(e) {
-                resultDiv.innerHTML = `<div class="loading error">Error: ${e.message}</div>`;
+                resultDiv.innerHTML = `<div class="loading error">❌ Error: ${e.message}</div>`;
             }
         }
         
         async function loadGovernanceLog() {
             const logDiv = document.getElementById('governance-log');
+            logDiv.innerHTML = '<div class="loading">Loading governance status...</div>';
             try {
                 const response = await fetch(`${API_BASE}/governance/status`);
                 const data = await response.json();
                 logDiv.innerHTML = `
-                    <div>📊 Graph Nodes: ${data.graph?.total_nodes || 0}</div>
-                    <div>📈 Graph Edges: ${data.graph?.total_edges || 0}</div>
-                    <div>📝 Log Entries: ${data.governance_log || 0}</div>
-                    <div>🔄 Last Consolidation: ${data.consolidation?.last_consolidation || 'Never'}</div>
+                    <div>📊 <strong>Graph Nodes:</strong> ${data.graph?.total_nodes || 0}</div>
+                    <div>📈 <strong>Graph Edges:</strong> ${data.graph?.total_edges || 0}</div>
+                    <div>📝 <strong>Log Entries:</strong> ${data.governance_log || 0}</div>
+                    <div>🔄 <strong>Last Consolidation:</strong> ${data.consolidation?.last_consolidation || 'Never'}</div>
+                    <div>📉 <strong>Low Relevance Candidates:</strong> ${data.consolidation?.low_relevance_candidates || 0}</div>
                 `;
             } catch(e) {
-                logDiv.innerHTML = `<div class="error">Error: ${e.message}</div>`;
+                logDiv.innerHTML = `<div class="loading error">❌ Error: ${e.message}</div>`;
             }
         }
         
         function escapeHtml(text) {
+            if (!text) return '';
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
@@ -260,20 +335,21 @@ HTML_PAGE = """
         async function init() {
             const online = await checkAPI();
             if (online) {
-                loadStats();
-                loadMemories();
-                loadGovernanceLog();
+                await loadStats();
+                await loadMemories();
+                await loadGovernanceLog();
             }
         }
         
         init();
         
         // Auto-refresh every 15 seconds
-        setInterval(() => {
-            if (document.getElementById('api-status').classList.contains('online')) {
-                loadStats();
-                loadMemories();
-                loadGovernanceLog();
+        setInterval(async () => {
+            const statusDiv = document.getElementById('api-status');
+            if (statusDiv.classList.contains('online')) {
+                await loadStats();
+                await loadMemories();
+                await loadGovernanceLog();
             }
         }, 15000);
     </script>
@@ -288,14 +364,17 @@ async def dashboard():
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy"}
+    return {"status": "healthy", "service": "SEM Dashboard"}
 
 if __name__ == "__main__":
     import uvicorn
-    print("=" * 50)
+    print("=" * 60)
     print("🚀 SEM Dashboard (Simplified)")
-    print("📍 http://localhost:8080")
-    print("=" * 50)
+    print("📍 Dashboard: http://localhost:8080")
+    print("📍 API: http://localhost:8000")
+    print("=" * 60)
+    print("\n⚠️  Certifica-te que a API está a correr: python api.py")
+    print("=" * 60)
     uvicorn.run(
         "dashboard_simple:app",
         host="0.0.0.0",

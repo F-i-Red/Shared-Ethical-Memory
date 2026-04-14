@@ -250,6 +250,13 @@ async def search_memories(query: str = Body(..., embed=True), top_k: int = Query
     results = app.state.retriever.retrieve_relevant_ethics(query, top_k)
     return {"query": query, "results": results}
 
+@app.post("/memories/reload")
+async def reload_memories():
+    """Força a recarga do grafo de memórias a partir do disco."""
+    app.state.graph = MemoryGraph()  # Recria a instância
+    app.state.governance.memory_graph = app.state.graph
+    return {"status": "reloaded", "nodes": len(app.state.graph.data.get("nodes", []))}
+    
 # ============================================================
 # Execução (apenas se correr diretamente)
 # ============================================================

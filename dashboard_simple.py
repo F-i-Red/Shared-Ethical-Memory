@@ -297,7 +297,7 @@ if __name__ == "__main__":
     print("📍 http://localhost:8080")
     print("=" * 50)
     uvicorn.run(
-        "dashboard_simple:dashboard_app",
+        "dashboard_simple:app",
         host="0.0.0.0",
         port=8080,
         reload=False

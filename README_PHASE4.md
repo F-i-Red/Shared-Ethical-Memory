@@ -5,73 +5,13 @@
 Phase 4 transforms SEM (Shared Ethical Memory) from a simple memory system into a **cognitive governance architecture** with:
 
 - **Multi-Agent Governance**: 5 agents (Extractor, Critic, Validator, Curator, Arbiter) debate before accepting/rejecting memories
-- **Memory Graph**: Nodes + edges with relationship types (supports, contradicts, refines, derives_from, supersedes)
+- **Memory Graph**: Nodes + edges with relationship types (`supports`, `contradicts`, `refines`, `derives_from`, `supersedes`)
 - **Guaranteed Influence**: Prompt construction that FORCES memory to influence LLM responses
 - **Consolidation & Forgetting**: Temporal decay, semantic merging, and meta-memory generation
 - **REST API**: Full FastAPI interface with Swagger docs
 - **Web Dashboard**: Real-time graph visualization and query interface
 
-## Architecture
-
-┌─────────────────────────────────────────────────────────────────┐
-
-│ PHASE 4 ARCHITECTURE │
-
-├─────────────────────────────────────────────────────────────────┤
-
-│ │
-
-│ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ │
-
-│ │ Web UI │ │ REST API │ │ Dashboard │ │
-
-│ │ (Port 8080) │◄──►│ (Port 8000) │ │ (Plotly) │ │
-
-│ └──────────────┘ └──────┬───────┘ └──────────────┘ │
-
-│ │ │
-
-│ ▼ │
-
-│ ┌──────────────────────────────────────────────────────────┐ │
-
-│ │ GOVERNANCE CORE │ │
-
-│ │ ┌────────────┐ ┌────────────┐ ┌────────────────────┐ │ │
-
-│ │ │ Policy │ │ Multi- │ │ Memory │ │ │
-
-│ │ │ Engine │ │ Agent │ │ Graph │ │ │
-
-│ │ │ │ │ Debate │ │ │ │ │
-
-│ │ └────────────┘ └────────────┘ └────────────────────┘ │ │
-
-│ └──────────────────────────────────────────────────────────┘ │
-
-│ │ │
-
-│ ▼ │
-
-│ ┌──────────────────────────────────────────────────────────┐ │
-
-│ │ STORAGE LAYER │ │
-
-│ │ ┌────────────┐ ┌────────────┐ ┌────────────────────┐ │ │
-
-│ │ │ Structured │ │ Memory │ │ Governance │ │ │
-
-│ │ │ Memory │ │ Graph │ │ Log │ │ │
-
-│ │ │ (JSON) │ │ (JSON) │ │ (JSON) │ │ │
-
-│ │ └────────────┘ └────────────┘ └────────────────────┘ │ │
-
-│ └──────────────────────────────────────────────────────────┘ │
-
-│ │
-
-└─────────────────────────────────────────────────────────────────┘
+---
 
 ## Prerequisites
 
@@ -82,63 +22,84 @@ Phase 4 transforms SEM (Shared Ethical Memory) from a simple memory system into 
 - 4GB RAM minimum (8GB recommended)
 
 ### API Key Required
-- **Gemini API Key** (free): Get from [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
+- **Gemini API Key** (free): Get from [aistudio.google.com/app/apikey]
+- (https://aistudio.google.com/app/apikey)
+
+---
 
 ## Installation
 
 ### 1. Clone or Download the Project
-
 ```bash
 git clone https://github.com/F-i-Red/Shared-Ethical-Memory.git
 cd Shared-Ethical-Memory
 ```
-
-## 2. Install Python Dependencies
+### 2. Install Python Dependencies
 ```
 pip install google-genai numpy fastapi uvicorn pydantic httpx plotly networkx
 ```
-
-## 3. Set Your Gemini API Key
-### Windows (CMD):
+### 3. Set Your Gemini API Key
+Windows (CMD):
 ```
+cmd
 set GEMINI_API_KEY=your-api-key-here
 ```
-
-### Windows (PowerShell):
+Windows (PowerShell):
 ```
+powershell
 $env:GEMINI_API_KEY="your-api-key-here"
 ```
-### macOS / Linux:
+macOS / Linux:
 ```
 export GEMINI_API_KEY="your-api-key-here"
 ```
+⚠️ Security Warning: Never commit your API key to GitHub. Add it to .gitignore.
 
 ## File Structure
 Ensure these files are in your project directory:
 
 Shared-Ethical-Memory/
-├── api.py                      # REST API server
-├── dashboard_simple.py         # Web dashboard
-├── governance_core.py          # Multi-agent governance core
-├── memory_graph.py             # Graph with edges/nodes
-├── policy_engine.py            # Policy evaluation
-├── multi_agent_debate.py       # 5-agent debate system
-├── consolidation_scheduler.py  # Memory lifecycle management
-├── influence_router.py         # Guaranteed memory influence
-├── ethical_retriever_v2.py     # Semantic retrieval with embeddings
-├── memory_extractor_v2.py      # LLM-based memory extraction
-├── structured_ethical_memory.py # Base memory storage
-├── drift_detector.py           # Conflict detection
-├── meta_memory.py              # Meta-principle generation
-├── principle_versioning.py     # Principle evolution tracking
-└── memories.json               # Stored memories (auto-generated)
 
-# Running SEM Phase 4
+├── api.py                          # REST API server
 
-## Step 1: Start the API Server
+├── dashboard_simple.py             # Web dashboard
 
-### Open a terminal and run:
+├── governance_core.py              # Multi-agent governance core
 
+├── memory_graph.py                 # Graph with nodes/edges
+
+├── policy_engine.py                # Policy evaluation
+
+├── multi_agent_debate.py           # 5-agent debate system
+
+├── consolidation_scheduler.py      # Memory lifecycle management
+
+├── influence_router.py             # Guaranteed memory influence
+
+├── ethical_retriever_v2.py         # Semantic retrieval with embeddings
+
+├── memory_extractor_v2.py          # LLM-based memory extraction
+
+├── structured_ethical_memory.py    # Base memory storage
+
+├── drift_detector.py               # Conflict detection
+
+├── meta_memory.py                  # Meta-principle generation
+
+├── principle_versioning.py         # Principle evolution tracking
+
+├── populate_memories.py            # Script to add initial memories
+
+├── add_edges_and_consolidate.py    # Script to create relations
+
+├── test_llm_with_retry.py          # Test influence with model fallback
+
+└── memories.json                   # Stored memories (auto-generated)
+
+## Running SEM Phase 4
+
+### Step 1: Start the API Server
+Open a terminal and run:
 ```
 # Windows
 set GEMINI_API_KEY=your-api-key-here
@@ -148,167 +109,129 @@ python api.py
 export GEMINI_API_KEY="your-api-key-here"
 python api.py
 ```
-## Expected output:
-
+### Expected output:
+```
 🚀 Inicializando SEM API...
-[EthicalRetriever] Embeddings via 'models/gemini-embedding-001'
-[MemoryExtractor] Gemini 'models/gemini-2.5-flash' iniciado.
 ✅ SEM API pronta!
 INFO:     Uvicorn running on http://0.0.0.0:8000
-
-### The API will be available at: http://localhost:8000
-
-## Step 2: Start the Web Dashboard
-
-### Open a second terminal and run:
+The API will be available at: http://localhost:8000
 ```
-# Windows
+
+### Step 2: Populate the Memory Graph (First Time Only)
+Open a second terminal and run:
+```
+cd C:\Users\Frank\Downloads\Shared-Ethical-Memory-main (2)\Shared-Ethical-Memory-main
+set GEMINI_API_KEY=your-api-key-here
+python populate_memories.py
+```
+### Expected output:
+```
+🧠 Populating Ethical Memory Graph...
+[1] Proposing: Data Minimization ✅ ACCEPTED
+[2] Proposing: Proactive Safety ✅ ACCEPTED
+[3] Proposing: Transparency in AI Decisions ✅ ACCEPTED
+[4] Proposing: Responsible AI Stewardship ✅ ACCEPTED
+📊 Graph Summary: Total nodes: 4
+```
+### Step 3: Add Relationships and Generate Meta-Memories
+```
+python add_edges_and_consolidate.py
+```
+### Expected output:
+```
+🔗 Adicionando relações (edges)...
+   ✅ node_1 → supports → node_3
+   ✅ node_4 → refines → node_2
+📊 Graph Summary: Total nodes: 4, Total edges: 2
+🧠 Executando consolidação para gerar Meta-Memórias...
+   ✅ Consolidação concluída!
+```
+### Step 4: Start the Web Dashboard
+Open a third terminal and run:
+```
 python dashboard_simple.py
-
-# macOS/Linux
-python dashboard_simple.py
 ```
-## Expected output:
+### Expected output:
 ```
-============================================================
-🚀 SEM Dashboard (Simplified)
+🧠 SEM Dashboard (Simplified)
 📍 Dashboard: http://localhost:8080
 📍 API: http://localhost:8000
-============================================================
 INFO:     Uvicorn running on http://0.0.0.0:8080
+Open your browser and go to: http://localhost:8080
 ```
+### You should see:
 
-The dashboard will be available at: http://localhost:8080
+4 Nodes (memories)
 
-Step 3: Verify Both Services
-Service	URL	Status
-API	http://localhost:8000	✅ Should show JSON response
-Dashboard	http://localhost:8080	✅ Should show web interface
-API Docs	http://localhost:8000/docs	✅ FastAPI Swagger UI
-Testing the System
-Option A: Using the Web Dashboard
+2 Edges (relationships)
+
+List of clickable memories
+
+Query interface with ethical influence
+
+### Step 5: Test the Influence Router with LLM Fallback
+```
+python test_llm_with_retry.py
+```
+This script will:
+
+Fetch the influenced prompt from your API
+
+Try multiple Gemini models (2.5-flash → 2.0-flash → 1.5-flash)
+
+Retry each model up to 3 times
+
+Show the LLM response explicitly citing your ethical memories
+
+## Testing the System
+
+**Option A**: Using the Web Dashboard
+
 Open http://localhost:8080
 
-Check API status (should show ✅ green)
+Check API status (should show green ✅)
 
-View graph statistics and memory nodes
+View graph statistics (nodes, edges, conflicts)
 
-Type a query like: "How should we handle user data privacy?"
+Click on any memory to auto-fill the query
 
-Click "Ask →" to see the influenced prompt
+Type a question like "How to ensure ethical AI?"
 
-Option B: Using API Endpoints
-### 1. Check API Health
+Click Ask → to see the influenced prompt
+
+**Option B**: Using API Endpoints
 ```
+# Check API health
 curl http://localhost:8000/
-```
-### 2. Propose a New Memory
-```
-curl -X POST http://localhost:8000/memories/propose \
-  -H "Content-Type: application/json" \
-  -d '{
-    "principle": "Data Minimization",
-    "context": "User asked about data storage practices",
-    "decision": "Store only essential data for 30 days",
-    "justification": "Reduces privacy risk and respects user autonomy",
-    "confidence": 0.92,
-    "tags": ["privacy", "data"]
-  }'
-```
 
-### 3. Query with Ethical Influence
-```
+# View graph summary
+curl http://localhost:8000/memories/graph
+
+# Query with ethical influence
 curl -X POST http://localhost:8000/query/influence \
   -H "Content-Type: application/json" \
-  -d '{
-    "query": "How to handle user privacy concerns?",
-    "top_k": 5
-  }'
+  -d '{"query": "How to handle user privacy?", "top_k": 5}'
+
+# Add a new memory
+curl -X POST http://localhost:8000/memories/propose \
+  -H "Content-Type: application/json" \
+  -d '{"principle":"Fairness","context":"User asked about bias","decision":"Implement bias detection","justification":"Prevents discrimination","confidence":0.85}'
+
+# Add a relationship between memories
+curl -X POST http://localhost:8000/memories/relations \
+  -H "Content-Type: application/json" \
+  -d '{"source_id":"node_1","target_id":"node_2","relation_type":"supports"}'
 ```
+**Option C**: Interactive API Documentation
 
-### 4. View Memory Graph
-```
-curl http://localhost:8000/memories/graph
-```
+Open your browser and go to: http://localhost:8000/docs
 
-### 5. View Governance Status
-```
-curl http://localhost:8000/governance/status
-```
-
-### Option C: Using Python Test Script
-Create test_phase4.py:
-```
-import requests
-import json
-
-BASE_URL = "http://localhost:8000"
-
-# Test API health
-print("1. Testing API health...")
-r = requests.get(f"{BASE_URL}/")
-print(f"   Status: {r.status_code}")
-print(f"   Response: {r.json()['name']} v{r.json()['version']}\n")
-
-# Propose a memory
-print("2. Proposing a memory...")
-memory = {
-    "principle": "Transparency First",
-    "context": "User asked for explanation of AI decision",
-    "decision": "Provide clear, human-readable explanation",
-    "justification": "Builds trust and enables accountability",
-    "confidence": 0.88,
-    "tags": ["transparency", "trust"]
-}
-r = requests.post(f"{BASE_URL}/memories/propose", json=memory)
-print(f"   Status: {r.status_code}")
-print(f"   Response: {json.dumps(r.json(), indent=2)}\n")
-
-# Query with influence
-print("3. Querying with ethical influence...")
-query = {"query": "How to be transparent with users?", "top_k": 3}
-r = requests.post(f"{BASE_URL}/query/influence", json=query)
-result = r.json()
-print(f"   Strategy: {result['influence_strategy']}")
-print(f"   Memories used: {result['memories_used']}")
-print(f"   Prompt preview: {result['influenced_prompt'][:200]}...\n")
-
-print("✅ All tests passed!")
-```
-
-### Run it:
-```
-python test_phase4.py
-```
-
-## API Endpoints Reference
-Method	Endpoint	Description
-GET	/	API information
-POST	/memories/propose	Propose new memory (governance review)
-POST	/memories/extract	Extract memory from conversation using Gemini
-GET	/memories/graph	Get graph summary (nodes, edges, stats)
-GET	/memories/graph/nodes	List all memory nodes
-GET	/memories/graph/edges	List all relations
-POST	/memories/relations	Add relation between memories
-GET	/memories/relations/{node_id}	Get relations for a node
-POST	/query/influence	Get influenced prompt for a query
-POST	/governance/consolidate	Run memory consolidation
-GET	/governance/status	Get governance status
-GET	/principles/version-history	Get principle version history
-POST	/memories/search	Search memories by semantic similarity
-
-## Relationship Types
-Type	Meaning	Example
-supports	Memory A reinforces Memory B	Privacy supports Data Minimization
-contradicts	Memory A conflicts with Memory B	Privacy contradicts Maximum Utility
-refines	Memory A adds detail to Memory B	GDPR refines Privacy principles
-derives_from	Memory A originates from Memory B	New rule derives from established principle
-supersedes	Memory A replaces Memory B	Updated principle supersedes old version
-
+FastAPI Swagger UI provides interactive testing of all endpoints.
 
 ## Troubleshooting
-### Issue: "GEMINI_API_KEY not found"
-Solution: Set the environment variable before running:
+
+**Issue**: GEMINI_API_KEY not found
+*Solution*: Set the environment variable before running any Python script:
 ```
 # Windows
 set GEMINI_API_KEY=your-key-here
@@ -317,67 +240,102 @@ set GEMINI_API_KEY=your-key-here
 echo %GEMINI_API_KEY%
 ```
 
-### Issue: Port 8000 already in use
-Solution: Change the port in api.py:
+**Issue**: Port 8000 already in use
+*Solution*: Change the port in api.py:
 ```
 # Find this line at the end of api.py
 uvicorn.run("api:app", host="0.0.0.0", port=8000)  # Change 8000 to 8001
 ```
 
-## Issue: Dashboard can't connect to API
-Solution: Ensure API is running first, then dashboard. Check both terminals:
+**Issue**: Dashboard shows 0 nodes even after running populate_memories.py
+*Solution*: The API and dashboard must use the same memory_graph.json file. Restart the API after populating:
 ```
-# Terminal 1 - Should show API running
+# Terminal 1 (API) - Press Ctrl+C to stop, then restart
 python api.py
 
-# Terminal 2 - Should show dashboard running
-python dashboard_simple.py
+# Terminal 3 (Dashboard) - Click "Refresh" buttons
 ```
 
-## Issue: Rate limit errors from Gemini
-Solution: The free tier has 5 requests/minute. Add delays between calls or upgrade to paid tier.
+**Issue**: 403 PERMISSION_DENIED or 429 RESOURCE_EXHAUSTED from Gemini
+*Solution*: Your API key was leaked or quota exhausted.
 
-## Issue: ImportError: cannot import name 'EthicalRetrieverV2'
-Solution: The correct import is EthicalRetriever (without V2):
+Go to Google AI Studio
+
+Delete the old key and create a new one
+
+Update your environment variable with the new key
+
+Consider upgrading to Tier 1 (pay-as-you-go) – it removes daily quotas and costs pennies
+
+**Issue**: 503 UNAVAILABLE from Gemini
+*Solution*: The model is temporarily overloaded. The test_llm_with_retry.py script handles this automatically by:
+
+Retrying 3 times with exponential backoff
+
+Falling back to gemini-2.0-flash or gemini-1.5-flash
+
+**Issue**: ConnectionRefusedError when running test scripts
+*Solution*: The API is not running. Start it first:
 ```
-from ethical_retriever_v2 import EthicalRetriever
+python api.py
+# Keep this terminal open
+Then run the test script in a new terminal.
 ```
 
-### Performance Expectations
-Operation	Typical Latency	Notes
-Memory proposal	1-2 seconds	Includes policy + debate
-Query influence	0.5-1 second	Embeddings + ranking
-Graph operations	<100ms	Local JSON operations
-Consolidation	2-5 seconds	Depends on number of nodes
+| API | Endpoints | Reference |
+|---|---|---|
+| Method |	Endpoint |	Description
+| GET | /	| API information |
+| POST	| /memories/propose	| Propose new memory (governance review) |
+| POST	| /memories/extract	| Extract memory from conversation using Gemini |
+| GET	| /memories/graph	| Get graph summary (nodes, edges, stats) |
+| GET	| /memories/graph/nodes	| List all memory nodes |
+| GET	| /memories/graph/edges	| List all relations |
+| POST	| /memories/relations	| Add relation between memories |
+| GET	| /memories/relations/{node_id}	| Get relations for a node |
+| POST	| /query/influence	| Get influenced prompt for a query |
+| POST	| /governance/consolidate	| Run memory consolidation |
+| GET	| /governance/status	| Get governance status |
+| GET	| /principles/version-history |	Get principle version history |
+| POST	| /memories/search	| Search memories by semantic similarity |
+| POST	| /memories/reload	| Force graph reload from disk |
+
+## Relationship Types
+| Type	| Meaning	| Example |
+| supports	Memory A reinforces Memory B	Privacy supports Data Minimization
+| contradicts	Memory A conflicts with Memory B	Privacy contradicts Maximum Utility
+| refines	Memory A adds detail to Memory B	GDPR refines Privacy principles
+| derives_from	Memory A originates from Memory B	New rule derives from established principle
+| supersedes	Memory A replaces Memory B	Updated principle supersedes old version
+
+## Performance Expectations
+| Operation	Typical Latency	Notes
+| Memory proposal	1-2 seconds	Includes policy + debate
+| Query influence	0.5-1 second	Embeddings + ranking
+| Graph operations	<100ms	Local JSON operations
+| Consolidation	2-5 seconds	Depends on number of nodes
 
 ## Next Steps After Phase 4
-Phase 4 is complete. Future enhancements could include:
+**Phase 4 is complete. Future enhancements could include**:
 
-Production Database: Replace JSON with PostgreSQL/pgvector
+**Production Database**: Replace JSON with PostgreSQL/pgvector
 
-Authentication: Add API keys and user roles
+**Authentication**: Add API keys and user roles
 
-Multi-user: Private/shared memory spaces
+**Multi-user**: Private/shared memory spaces
 
-Real-time Updates: WebSockets for live graph updates
+**Real-time Updates**: WebSockets for live graph updates
 
-Docker Deployment: Containerized setup
+**Docker Deployment**: Containerized setup
 
 ## License
 This project is open-source. See repository for license information.
 
-# Acknowledgments
+## Acknowledgments
 Google Gemini API for LLM and embeddings
 
 FastAPI for REST framework
 
 Plotly for graph visualization
 
-
-
-
-
-
-## Environment
-- `GEMINI_API_KEY` is optional, but required for LLM refinement.
-- The rest of the system works locally with JSON files.
+SEM Phase 4 - State of the Art Ethical Memory System (2026)

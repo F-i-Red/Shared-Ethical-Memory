@@ -1,15 +1,15 @@
 # governance_core.py - VERSÃO COMPLETA E CORRIGIDA
 
+import os
 import json
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
+from dataclasses import dataclass
 
-# Assumindo que os módulos das fases anteriores estão na mesma pasta
-from structured_ethical_memory import StructuredEthicalMemory
-from policy_engine import PolicyEngine, PolicyDecision
-from multi_agent_debate import MultiAgentDebate
-from memory_graph import MemoryGraph
+# Definir caminho absoluto para o ficheiro do grafo
+PROJECT_ROOT = Path(__file__).parent.absolute()
+GRAPH_PATH = PROJECT_ROOT / "memory_graph.json"
 
 
 class GovernanceCore:
@@ -18,12 +18,14 @@ class GovernanceCore:
     Orquestra o debate multi-agente, a política e a escrita no grafo de memória.
     """
 
-    def __init__(self, graph_path: str = "memory_graph.json"):
-        self.structured_mem = StructuredEthicalMemory()  # Base da Fase 1
+    def __init__(self, graph_path: str = None):
+        if graph_path is None:
+            graph_path = str(GRAPH_PATH)
+        self.structured_mem = StructuredEthicalMemory()
         self.policy_engine = PolicyEngine()
         self.debate_engine = MultiAgentDebate()
-        self.memory_graph = MemoryGraph(graph_path)  # Novo para a Fase 4
-        self.log_path = Path("governance_log.json")
+        self.memory_graph = MemoryGraph(graph_path)  # Usa o caminho absoluto
+        self.log_path = PROJECT_ROOT / "governance_log.json"
         self._ensure_log()
 
     def _ensure_log(self):

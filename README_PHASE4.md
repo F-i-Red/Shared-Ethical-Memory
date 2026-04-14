@@ -308,6 +308,7 @@ Then run the test script in a new terminal.
 
 ## Relationship Types
 | Type	| Meaning	| Example |
+|---|---|---|
 | supports |	Memory A reinforces Memory B |	Privacy supports Data Minimization |
 | contradicts	| Memory A conflicts with Memory B |	Privacy contradicts Maximum Utility |
 | refines |	Memory A adds detail to Memory B |	GDPR refines Privacy principles |
@@ -316,6 +317,7 @@ Then run the test script in a new terminal.
 
 ## Performance Expectations
 | Operation |	Typical Latency |	Notes |
+|---|---|---|
 | Memory proposal |	1-2 seconds |	Includes policy + debate |
 | Query influence |	0.5-1 second |	Embeddings + ranking |
 | Graph operations |	<100ms |	Local JSON operations |

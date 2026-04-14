@@ -345,5 +345,3 @@ Google Gemini API for LLM and embeddings
 FastAPI for REST framework
 
 Plotly for graph visualization
-
-SEM Phase 4 - State of the Art Ethical Memory System (2026)

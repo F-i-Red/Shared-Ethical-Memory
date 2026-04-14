@@ -16,7 +16,7 @@ from memory_extractor_v2 import MemoryExtractor
 from ethical_retriever_v2 import EthicalRetriever
 from structured_ethical_memory import StructuredEthicalMemory
 
-GEMINI_MODEL = "gemini-2.0-flash"
+GEMINI_MODEL = "gemini-1.5-flash"
 
 SAMPLE_CONVERSATIONS = [
     """

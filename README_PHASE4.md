@@ -96,8 +96,10 @@ Shared-Ethical-Memory/
 
 ## Running SEM Phase 4
 
+**Inside your Folder Shared-Ethical-Memory-main**
+
 ### Step 1: Start the API Server
-Open a terminal and run:
+Open a terminal, go to your Shared-Ethical-Memory-main folder (perhaps **cd C:\Users\YOUR PC NAME\Downloads\Shared-Ethical-Memory-main\Shared-Ethical-Memory-main**) and run:
 ```
 # Windows
 set GEMINI_API_KEY=your-api-key-here

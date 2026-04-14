@@ -1,8 +1,5 @@
 import json
-import os
-from google import genai
-from memory_graph import MemoryGraph
-from governance_core_v2 import GovernanceCore
+from governance_core import GovernanceCore
 
 SAMPLES = [
     {"type": "ethical", "principle": "Privacy", "context": "User requested personal data handling guidance.", "decision": "Keep data minimal and consent-based.", "justification": "Reduces risk and respects autonomy.", "confidence": 0.91, "tags": ["privacy", "consent"]},
@@ -12,7 +9,7 @@ SAMPLES = [
 
 if __name__ == "__main__":
     core = GovernanceCore()
-    print("PHASE 4 — GOVERNANCE DEMO v2")
+    print("PHASE 4 — GOVERNANCE DEMO")
     for s in SAMPLES:
         result = core.propose_memory(s)
         print("
@@ -24,7 +21,3 @@ CONTEXT:")
     print("
 CONSOLIDATION:")
     print(json.dumps(core.consolidate(), ensure_ascii=False, indent=2))
-    if os.getenv("GEMINI_API_KEY"):
-        print("
-LLM REFINEMENT:")
-        print(json.dumps(core.llm_refine_decision("privacy and safety for user data", core.build_influenced_context("privacy and safety for user data")), ensure_ascii=False, indent=2))

@@ -1,4 +1,4 @@
-# dashboard_simple.py - Dashboard Simplificado (CORRIGIDO)
+# dashboard_simple.py - Dashboard com botões funcionais
 
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
@@ -7,7 +7,7 @@ import json
 
 app = FastAPI(title="SEM Dashboard")
 
-API_URL = "http://localhost:8000"  # API está na porta 8000
+API_URL = "http://localhost:8000"  # API do SEM
 
 HTML_PAGE = """
 <!DOCTYPE html>
@@ -24,11 +24,7 @@ HTML_PAGE = """
             color: #e0e0e0;
             padding: 20px;
         }
-        h1 { 
-            color: #e94560; 
-            margin-bottom: 5px;
-            font-size: 2rem;
-        }
+        h1 { color: #e94560; margin-bottom: 5px; font-size: 2rem; }
         .subtitle { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
         .status {
             padding: 10px 15px;
@@ -130,7 +126,7 @@ HTML_PAGE = """
             font-size: 11px;
             font-weight: bold;
         }
-        .refresh-btn:hover { background: #6ee0d8; }
+        .refresh-btn:hover { background: #7ee6df; }
         hr { border-color: #2a2a4e; margin: 15px 0; }
         .footer {
             text-align: center;
@@ -149,21 +145,10 @@ HTML_PAGE = """
             border-radius: 10px;
             margin-left: 8px;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f0f1a;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2a2a4e;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #e94560;
-        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0f1a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #2a2a4e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e94560; }
     </style>
 </head>
 <body>
@@ -173,8 +158,11 @@ HTML_PAGE = """
     <div id="api-status" class="status">🔌 Checking API connection...</div>
     
     <div class="container">
+        <!-- Estatísticas -->
         <div class="card">
-            <h3>📊 Graph Statistics <button class="refresh-btn" onclick="loadStats()">⟳</button></h3>
+            <h3>📊 Graph Statistics 
+                <button class="refresh-btn" onclick="loadStats()">⟳ Refresh</button>
+            </h3>
             <div class="stat-grid" id="stats">
                 <div class="stat"><div class="stat-value">-</div><div class="stat-label">Nodes</div></div>
                 <div class="stat"><div class="stat-value">-</div><div class="stat-label">Edges</div></div>
@@ -183,13 +171,17 @@ HTML_PAGE = """
             </div>
         </div>
         
+        <!-- Lista de Memórias -->
         <div class="card">
-            <h3>📝 Memory Nodes <button class="refresh-btn" onclick="loadMemories()">⟳</button></h3>
+            <h3>📝 Memory Nodes 
+                <button class="refresh-btn" onclick="loadMemories()">⟳ Refresh</button>
+            </h3>
             <div class="memory-list" id="memories-list">
-                <div class="loading">Loading memories...</div>
+                <div class="loading">📂 Loading memories...</div>
             </div>
         </div>
         
+        <!-- Query com Influência -->
         <div class="card">
             <h3>🔍 Ethical Query</h3>
             <div class="query-box">
@@ -203,18 +195,22 @@ HTML_PAGE = """
         </div>
     </div>
     
+    <!-- Estado da Governação -->
     <div class="card" style="margin-top: 20px;">
-        <h3>📋 Governance Status</h3>
-        <div id="governance-log" class="response" style="max-height: 150px;">Loading...</div>
+        <h3>📋 Governance Status 
+            <button class="refresh-btn" onclick="loadGovernanceLog()">⟳ Refresh</button>
+        </h3>
+        <div id="governance-log" class="response" style="max-height: 150px;">📂 Loading governance status...</div>
     </div>
     
     <div class="footer">
         SEM Phase 4 | Powered by Gemini 2.5 Flash | Memory Graph v2 | Influence Router
     </div>
-
+    
     <script>
         const API_BASE = "http://localhost:8000";
         
+        // Verificar estado da API
         async function checkAPI() {
             const statusDiv = document.getElementById('api-status');
             try {
@@ -234,6 +230,7 @@ HTML_PAGE = """
             }
         }
         
+        // Carregar estatísticas do grafo
         async function loadStats() {
             try {
                 const response = await fetch(`${API_BASE}/memories/graph`);
@@ -246,20 +243,22 @@ HTML_PAGE = """
                 `;
             } catch(e) {
                 console.error('Error loading stats:', e);
+                document.getElementById('stats').innerHTML = `<div class="error">❌ Error loading stats</div>`;
             }
         }
         
+        // Carregar lista de memórias
         async function loadMemories() {
             const listDiv = document.getElementById('memories-list');
-            listDiv.innerHTML = '<div class="loading">📡 Loading memories...</div>';
+            listDiv.innerHTML = '<div class="loading">📂 Loading memories...</div>';
             try {
                 const response = await fetch(`${API_BASE}/memories/graph/nodes?limit=20`);
                 const data = await response.json();
                 if (data.nodes && data.nodes.length > 0) {
                     listDiv.innerHTML = data.nodes.map(node => `
-                        <div class="memory-item" onclick="document.getElementById('query').value = '${escapeHtml(node.principle || node.id)}'; queryInfluence();">
-                            <div class="memory-principle">📌 ${escapeHtml(node.principle || 'No principle')}</div>
-                            <div class="memory-meta">🆔 ${node.id} | 📊 Confidence: ${(node.confidence || 0.5).toFixed(2)} | 🏷️ ${node.type || 'ethical'}</div>
+                        <div class="memory-item" onclick="useMemoryForQuery('${escapeHtml(node.principle || node.id)}')">
+                            <div class="memory-principle">${escapeHtml(node.principle || 'No principle')}</div>
+                            <div class="memory-meta">📌 ID: ${node.id} | 📊 Confidence: ${(node.confidence || 0.5).toFixed(2)} | 🏷️ ${node.type || 'ethical'}</div>
                         </div>
                     `).join('');
                 } else {
@@ -270,6 +269,13 @@ HTML_PAGE = """
             }
         }
         
+        // Usar uma memória como query
+        function useMemoryForQuery(principle) {
+            document.getElementById('query').value = `Tell me about: ${principle}`;
+            queryInfluence();
+        }
+        
+        // Query com influência ética
         async function queryInfluence() {
             const query = document.getElementById('query').value;
             if (!query) {
@@ -287,7 +293,6 @@ HTML_PAGE = """
                     body: JSON.stringify({ query: query, top_k: 5 })
                 });
                 const data = await response.json();
-                
                 resultDiv.innerHTML = `
                     <div style="margin-bottom: 12px;">
                         <span style="color: #4ecdc4; font-weight: bold;">🎯 Strategy:</span> ${data.influence_strategy}<br>
@@ -297,7 +302,7 @@ HTML_PAGE = """
                     <div style="margin-top: 12px;">
                         <strong>📝 Influenced Prompt:</strong>
                     </div>
-                    <div style="margin-top: 8px; background: #0a0a12; padding: 10px; border-radius: 6px;">
+                    <div style="margin-top: 8px; background: #0a0a12; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 12px;">
                         ${escapeHtml(data.influenced_prompt)}
                     </div>
                 `;
@@ -306,24 +311,26 @@ HTML_PAGE = """
             }
         }
         
+        // Carregar estado da governação
         async function loadGovernanceLog() {
             const logDiv = document.getElementById('governance-log');
-            logDiv.innerHTML = '<div class="loading">Loading governance status...</div>';
+            logDiv.innerHTML = '<div class="loading">📂 Loading governance status...</div>';
             try {
                 const response = await fetch(`${API_BASE}/governance/status`);
                 const data = await response.json();
                 logDiv.innerHTML = `
                     <div>📊 <strong>Graph Nodes:</strong> ${data.graph?.total_nodes || 0}</div>
-                    <div>📈 <strong>Graph Edges:</strong> ${data.graph?.total_edges || 0}</div>
+                    <div>🔗 <strong>Graph Edges:</strong> ${data.graph?.total_edges || 0}</div>
                     <div>📝 <strong>Log Entries:</strong> ${data.governance_log || 0}</div>
-                    <div>🔄 <strong>Last Consolidation:</strong> ${data.consolidation?.last_consolidation || 'Never'}</div>
-                    <div>📉 <strong>Low Relevance Candidates:</strong> ${data.consolidation?.low_relevance_candidates || 0}</div>
+                    <div>🕐 <strong>Last Consolidation:</strong> ${data.consolidation?.last_consolidation || 'Never'}</div>
+                    <div>⚠️ <strong>Low Relevance Candidates:</strong> ${data.consolidation?.low_relevance_candidates || 0}</div>
                 `;
             } catch(e) {
                 logDiv.innerHTML = `<div class="loading error">❌ Error: ${e.message}</div>`;
             }
         }
         
+        // Escape HTML para prevenir XSS
         function escapeHtml(text) {
             if (!text) return '';
             const div = document.createElement('div');
@@ -331,7 +338,7 @@ HTML_PAGE = """
             return div.innerHTML;
         }
         
-        // Initial load
+        // Inicialização
         async function init() {
             const online = await checkAPI();
             if (online) {
@@ -339,19 +346,18 @@ HTML_PAGE = """
                 await loadMemories();
                 await loadGovernanceLog();
             }
+            // Refresh automático a cada 15 segundos
+            setInterval(async () => {
+                const statusDiv = document.getElementById('api-status');
+                if (statusDiv.classList.contains('online')) {
+                    await loadStats();
+                    await loadMemories();
+                    await loadGovernanceLog();
+                }
+            }, 15000);
         }
         
         init();
-        
-        // Auto-refresh every 15 seconds
-        setInterval(async () => {
-            const statusDiv = document.getElementById('api-status');
-            if (statusDiv.classList.contains('online')) {
-                await loadStats();
-                await loadMemories();
-                await loadGovernanceLog();
-            }
-        }, 15000);
     </script>
 </body>
 </html>
@@ -369,15 +375,10 @@ async def health():
 if __name__ == "__main__":
     import uvicorn
     print("=" * 60)
-    print("🚀 SEM Dashboard (Simplified)")
+    print("🧠 SEM Dashboard (Simplified - com botões funcionais)")
     print("📍 Dashboard: http://localhost:8080")
     print("📍 API: http://localhost:8000")
     print("=" * 60)
-    print("\n⚠️  Certifica-te que a API está a correr: python api.py")
+    print("\n⚠️ Certifica-te que a API está a correr: python api.py")
     print("=" * 60)
-    uvicorn.run(
-        "dashboard_simple:app",
-        host="0.0.0.0",
-        port=8080,
-        reload=False
-    )
+    uvicorn.run("dashboard_simple:app", host="0.0.0.0", port=8080, reload=False)

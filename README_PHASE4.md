@@ -21,7 +21,7 @@ This phase adds a governance layer on top of the existing SEM pipeline.
 
 ## Run
 ```bash
-python phase4_demo_v2.py
+python phase4_demo.py
 ```
 
 ## Environment

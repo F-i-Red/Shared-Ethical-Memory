@@ -41,12 +41,10 @@ pip install google-genai numpy fastapi uvicorn pydantic httpx plotly networkx
 ### 3. Set Your Gemini API Key
 Windows (CMD):
 ```
-cmd
 set GEMINI_API_KEY=your-api-key-here
 ```
 Windows (PowerShell):
 ```
-powershell
 $env:GEMINI_API_KEY="your-api-key-here"
 ```
 macOS / Linux:

@@ -231,6 +231,7 @@ FastAPI Swagger UI provides interactive testing of all endpoints.
 ## Troubleshooting
 
 **Issue**: GEMINI_API_KEY not found
+
 *Solution*: Set the environment variable before running any Python script:
 ```
 # Windows
@@ -241,6 +242,7 @@ echo %GEMINI_API_KEY%
 ```
 
 **Issue**: Port 8000 already in use
+
 *Solution*: Change the port in api.py:
 ```
 # Find this line at the end of api.py
@@ -248,6 +250,7 @@ uvicorn.run("api:app", host="0.0.0.0", port=8000)  # Change 8000 to 8001
 ```
 
 **Issue**: Dashboard shows 0 nodes even after running populate_memories.py
+
 *Solution*: The API and dashboard must use the same memory_graph.json file. Restart the API after populating:
 ```
 # Terminal 1 (API) - Press Ctrl+C to stop, then restart
@@ -257,6 +260,7 @@ python api.py
 ```
 
 **Issue**: 403 PERMISSION_DENIED or 429 RESOURCE_EXHAUSTED from Gemini
+
 *Solution*: Your API key was leaked or quota exhausted.
 
 Go to Google AI Studio
@@ -268,6 +272,7 @@ Update your environment variable with the new key
 Consider upgrading to Tier 1 (pay-as-you-go) – it removes daily quotas and costs pennies
 
 **Issue**: 503 UNAVAILABLE from Gemini
+
 *Solution*: The model is temporarily overloaded. The test_llm_with_retry.py script handles this automatically by:
 
 Retrying 3 times with exponential backoff
@@ -275,6 +280,7 @@ Retrying 3 times with exponential backoff
 Falling back to gemini-2.0-flash or gemini-1.5-flash
 
 **Issue**: ConnectionRefusedError when running test scripts
+
 *Solution*: The API is not running. Start it first:
 ```
 python api.py

@@ -1,4 +1,4 @@
-# governance_core.py - VERSÃO COMPLETA E CORRIGIDA
+# governance_core.py - VERSÃO COMPLETA COM IMPORTAÇÕES
 
 import os
 import json
@@ -7,10 +7,32 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 from dataclasses import dataclass
 
+# Importações dos módulos das fases anteriores
+from structured_ethical_memory import StructuredEthicalMemory
+from policy_engine import PolicyEngine
+from multi_agent_debate import MultiAgentDebate
+from memory_graph import MemoryGraph
+
+# ============================================================
+# PolicyDecision (se não existir no policy_engine.py)
+# ============================================================
+
+@dataclass
+class PolicyDecision:
+    action: str  # accept, reject, revise, warn
+    reason: str
+    confidence: float = 0.5
+
+# ============================================================
 # Definir caminho absoluto para o ficheiro do grafo
+# ============================================================
+
 PROJECT_ROOT = Path(__file__).parent.absolute()
 GRAPH_PATH = PROJECT_ROOT / "memory_graph.json"
 
+# ============================================================
+# Classe GovernanceCore
+# ============================================================
 
 class GovernanceCore:
     """
@@ -21,12 +43,17 @@ class GovernanceCore:
     def __init__(self, graph_path: str = None):
         if graph_path is None:
             graph_path = str(GRAPH_PATH)
+        
+        print(f"[GovernanceCore] Initializing...")
+        print(f"[GovernanceCore] Graph path: {graph_path}")
+        
         self.structured_mem = StructuredEthicalMemory()
         self.policy_engine = PolicyEngine()
         self.debate_engine = MultiAgentDebate()
-        self.memory_graph = MemoryGraph(graph_path)  # Usa o caminho absoluto
+        self.memory_graph = MemoryGraph(graph_path)
         self.log_path = PROJECT_ROOT / "governance_log.json"
         self._ensure_log()
+        print(f"[GovernanceCore] Ready!")
 
     def _ensure_log(self):
         if not self.log_path.exists():
@@ -50,17 +77,11 @@ class GovernanceCore:
 
     def add_relation(self, source_id: str, target_id: str, relation_type: str, 
                      metadata: Optional[Dict] = None) -> Optional[Dict]:
-        """
-        Adiciona uma relação entre duas memórias existentes.
-        relation_type: supports, contradicts, refines, derives_from, supersedes
-        """
+        """Adiciona uma relação entre duas memórias existentes."""
         return self.memory_graph.add_edge(source_id, target_id, relation_type, metadata)
 
     def auto_detect_relations(self, memory_id: str) -> List[Dict]:
-        """
-        Automaticamente deteta relações entre uma nova memória e as existentes.
-        Usa similaridade semântica e análise de princípios.
-        """
+        """Deteta automaticamente relações entre uma nova memória e as existentes."""
         new_node = self.memory_graph.get_node(memory_id)
         if not new_node:
             return []
@@ -72,14 +93,11 @@ class GovernanceCore:
             if node["id"] == memory_id:
                 continue
 
-            # Detetar contradição (princípios opostos)
             if self._are_contradictory(new_node, node):
                 edge = self.memory_graph.add_edge(memory_id, node["id"], "contradicts", 
                                                    {"auto_detected": True, "method": "principle_analysis"})
                 if edge:
                     relations.append({"type": "contradicts", "target": node["id"]})
-
-            # Detetar suporte (princípios similares)
             elif self._are_similar(new_node, node):
                 edge = self.memory_graph.add_edge(memory_id, node["id"], "supports",
                                                    {"auto_detected": True, "method": "semantic_similarity"})
@@ -96,10 +114,8 @@ class GovernanceCore:
             ("refuse", "allow"),
             ("restrict", "freedom"),
         ]
-
         p1 = node1.get("principle", "").lower()
         p2 = node2.get("principle", "").lower()
-
         for a, b in contradiction_pairs:
             if (a in p1 and b in p2) or (a in p2 and b in p1):
                 return True
@@ -109,14 +125,11 @@ class GovernanceCore:
         """Deteta se dois princípios são similares (suportam-se)."""
         words1 = set(node1.get("principle", "").lower().split())
         words2 = set(node2.get("principle", "").lower().split())
-
         if not words1 or not words2:
             return False
-
         overlap = len(words1 & words2)
         union = len(words1 | words2)
         similarity = overlap / union if union > 0 else 0
-
         return similarity > 0.5
 
     # ============================================================
@@ -124,19 +137,11 @@ class GovernanceCore:
     # ============================================================
 
     def propose_memory(self, memory: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Pipeline completo de proposta de uma nova memória:
-        1. Avaliação pela Policy Engine.
-        2. Debate multi-agente.
-        3. Decisão final (com regras de desempate).
-        4. Se aprovada, escreve no grafo e na memória estruturada.
-        """
+        """Pipeline completo de proposta de uma nova memória."""
         # 1. Policy check
-        policy_decision: PolicyDecision = self.policy_engine.evaluate(memory)
-
+        policy_decision = self.policy_engine.evaluate(memory)
         # 2. Multi-agent debate
         debate_result = self.debate_engine.debate(memory)
-
         # 3. Decisão final
         final_action = "reject"
         reason = ""
@@ -159,7 +164,6 @@ class GovernanceCore:
 
         # 4. Ação
         if final_action == "accept":
-            # Escreve na memória estruturada (Fase 1)
             try:
                 mem_id = self.structured_mem.add_ethical_memory(memory)
             except TypeError:
@@ -170,14 +174,9 @@ class GovernanceCore:
                     justification=memory.get("justification", ""),
                     confidence=memory.get("confidence", 0.5)
                 )
-
-            # Escreve no grafo (Fase 4)
             graph_node = self.memory_graph.add_node(memory)
             self._log_decision(memory, final_action, reason)
-            
-            # Auto-detetar relações com memórias existentes
             auto_relations = self.auto_detect_relations(graph_node.get("id"))
-            
             return {
                 "status": "accepted",
                 "reason": reason,
@@ -232,7 +231,10 @@ class GovernanceCore:
             return {"status": "error", "message": "ConsolidationScheduler not available"}
 
 
+# ============================================================
 # Teste rápido
+# ============================================================
+
 if __name__ == "__main__":
     core = GovernanceCore()
     test_memory = {

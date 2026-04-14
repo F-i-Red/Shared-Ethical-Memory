@@ -41,6 +41,81 @@ class GovernanceCore:
         log.append(log_entry)
         self.log_path.write_text(json.dumps(log, indent=2))
 
+# Adicionar este método ao GovernanceCore (dentro da classe)
+
+def add_relation(self, source_id: str, target_id: str, relation_type: str, 
+                 metadata: Optional[Dict] = None) -> Optional[Dict]:
+    """
+    Adiciona uma relação entre duas memórias existentes.
+    relation_type: supports, contradicts, refines, derives_from, supersedes
+    """
+    return self.memory_graph.add_edge(source_id, target_id, relation_type, metadata)
+
+def auto_detect_relations(self, memory_id: str) -> List[Dict]:
+    """
+    Automaticamente deteta relações entre uma nova memória e as existentes.
+    Usa similaridade semântica e análise de princípios.
+    """
+    new_node = self.memory_graph.get_node(memory_id)
+    if not new_node:
+        return []
+    
+    all_nodes = self.memory_graph.data["nodes"]
+    relations = []
+    
+    for node in all_nodes:
+        if node["id"] == memory_id:
+            continue
+        
+        # Detetar contradição (princípios opostos)
+        if self._are_contradictory(new_node, node):
+            edge = self.memory_graph.add_edge(memory_id, node["id"], "contradicts", 
+                                               {"auto_detected": True, "method": "principle_analysis"})
+            if edge:
+                relations.append({"type": "contradicts", "target": node["id"]})
+        
+        # Detetar suporte (princípios similares)
+        elif self._are_similar(new_node, node):
+            edge = self.memory_graph.add_edge(memory_id, node["id"], "supports",
+                                               {"auto_detected": True, "method": "semantic_similarity"})
+            if edge:
+                relations.append({"type": "supports", "target": node["id"]})
+    
+    return relations
+
+def _are_contradictory(self, node1: Dict, node2: Dict) -> bool:
+    """Deteta se dois princípios são contraditórios."""
+    # Palavras que indicam contradição
+    contradiction_pairs = [
+        ("privacy", "transparency"),  # Às vezes conflitam
+        ("minimize", "maximize"),
+        ("refuse", "allow"),
+        ("restrict", "freedom"),
+    ]
+    
+    p1 = node1.get("principle", "").lower()
+    p2 = node2.get("principle", "").lower()
+    
+    for a, b in contradiction_pairs:
+        if (a in p1 and b in p2) or (a in p2 and b in p1):
+            return True
+    return False
+
+def _are_similar(self, node1: Dict, node2: Dict) -> bool:
+    """Deteta se dois princípios são similares (suportam-se)."""
+    # Similaridade simples de palavras-chave
+    words1 = set(node1.get("principle", "").lower().split())
+    words2 = set(node2.get("principle", "").lower().split())
+    
+    if not words1 or not words2:
+        return False
+    
+    overlap = len(words1 & words2)
+    union = len(words1 | words2)
+    similarity = overlap / union if union > 0 else 0
+    
+    return similarity > 0.5  # Threshold de 50%
+    
     def propose_memory(self, memory: Dict[str, Any]) -> Dict[str, Any]:
         """
         Pipeline completo de proposta de uma nova memória:

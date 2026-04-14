@@ -308,18 +308,18 @@ Then run the test script in a new terminal.
 
 ## Relationship Types
 | Type	| Meaning	| Example |
-| supports	Memory A reinforces Memory B	Privacy supports Data Minimization
-| contradicts	Memory A conflicts with Memory B	Privacy contradicts Maximum Utility
-| refines	Memory A adds detail to Memory B	GDPR refines Privacy principles
-| derives_from	Memory A originates from Memory B	New rule derives from established principle
-| supersedes	Memory A replaces Memory B	Updated principle supersedes old version
+| supports |	Memory A reinforces Memory B |	Privacy supports Data Minimization |
+| contradicts	| Memory A conflicts with Memory B |	Privacy contradicts Maximum Utility |
+| refines |	Memory A adds detail to Memory B |	GDPR refines Privacy principles |
+| derives_from |	Memory A originates from Memory B |	New rule derives from established principle |
+| supersedes |	Memory A replaces Memory B |	Updated principle supersedes old version |
 
 ## Performance Expectations
-| Operation	Typical Latency	Notes
-| Memory proposal	1-2 seconds	Includes policy + debate
-| Query influence	0.5-1 second	Embeddings + ranking
-| Graph operations	<100ms	Local JSON operations
-| Consolidation	2-5 seconds	Depends on number of nodes
+| Operation |	Typical Latency |	Notes |
+| Memory proposal |	1-2 seconds |	Includes policy + debate |
+| Query influence |	0.5-1 second |	Embeddings + ranking |
+| Graph operations |	<100ms |	Local JSON operations |
+| Consolidation |	2-5 seconds |	Depends on number of nodes |
 
 ## Next Steps After Phase 4
 **Phase 4 is complete. Future enhancements could include**:

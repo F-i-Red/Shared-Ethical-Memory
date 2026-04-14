@@ -1,4 +1,4 @@
-# phase4_demo.py
+# phase4_demo.py - VERSÃO CORRIGIDA
 # Demonstração completa da Fase 4: Governação Multi-Agente + Grafo + Influência + Consolidação
 
 import json
@@ -12,9 +12,9 @@ from memory_graph import MemoryGraph
 from consolidation_scheduler import ConsolidationScheduler
 from influence_router import InfluenceRouter
 
-# Importar das fases anteriores
+# Importar das fases anteriores (nomes corrigidos)
 from memory_extractor_v2 import MemoryExtractor
-from ethical_retriever_v2 import EthicalRetrieverV2
+from ethical_retriever_v2 import EthicalRetriever  # Nome corrigido: era EthicalRetrieverV2
 
 # Cores para terminal (opcional, para melhor visualização)
 class Colors:
@@ -94,7 +94,8 @@ def step1_demo_governance(core: GovernanceCore):
         status = result.get("status")
         if status == "accepted":
             print_success(f"  → ACCEPTED: {result.get('reason', '')[:80]}")
-            print(f"    Memory ID: {result.get('memory_id', 'N/A')}")
+            if result.get('memory_id'):
+                print(f"    Memory ID: {result.get('memory_id')}")
         elif status == "revise":
             print_warning(f"  → REVISE: {result.get('reason', '')[:80]}")
         else:
@@ -167,11 +168,6 @@ def step4_demo_consolidation():
     print(f"  Would remove: {dry_report['nodes_removed']} nodes")
     print(f"  Would merge: {dry_report['nodes_merged']} nodes")
     print(f"  Would generate meta-memories: {len(dry_report['new_meta_memories'])}")
-    
-    # Perguntar se quer executar de verdade
-    print(f"\n{Colors.YELLOW}Run actual consolidation? (y/n): {Colors.END}", end="")
-    # Para demo automática, não esperar input
-    print("(auto-skipping for demo)")
     
     print_info("Consolidation not applied automatically. Use dry_run=False to apply.")
 

@@ -1,49 +1,60 @@
 import json
+from pathlib import Path
+from typing import Dict, Any, List, Optional
+from datetime import datetime, timezone
 import os
-from typing import Dict, Any, List
-from google import genai
-from memory_graph import MemoryGraph
-from policy_engine import PolicyEngine
-from multi_agent_debate import MultiAgentDebate
-from consolidation_scheduler import ConsolidationScheduler
-from influence_router import InfluenceRouter
 
-class GovernanceCore:
-    def __init__(self, graph_path: str = "memory_graph.json"):
-        self.graph = MemoryGraph(graph_path)
-        self.policy = PolicyEngine()
-        self.debate = MultiAgentDebate()
-        self.consolidator = ConsolidationScheduler(graph_path=graph_path)
-        self.router = InfluenceRouter()
-        self.api_key = os.getenv("GEMINI_API_KEY")
-        self.client = genai.Client(api_key=self.api_key) if self.api_key else None
+class MemoryGraph:
+    def __init__(self, path: str = "memory_graph.json"):
+        self.path = Path(path)
+        self.data = self._load()
 
-    def propose_memory(self, memory: Dict[str, Any]) -> Dict[str, Any]:
-        debate = self.debate.debate(memory)
-        policy = self.policy.evaluate(memory)
-        action = policy.action
-        if debate["action"] == "revise" and action == "accept":
-            action = "warn"
-        result = {"policy": policy.__dict__, "debate": debate, "action": action}
-        if action in ("accept", "warn"):
-            node = self.graph.add_node(memory)
-            result["node"] = node
-        return result
+    def _default(self):
+        return {"nodes": [], "edges": [], "version": 1, "updated_at": self._now()}
 
-    def connect(self, source_id: str, target_id: str, relation: str, weight: float = 1.0):
-        return self.graph.add_edge(source_id, target_id, relation, weight)
+    def _load(self):
+        if self.path.exists():
+            try:
+                return json.loads(self.path.read_text(encoding='utf-8'))
+            except Exception:
+                return self._default()
+        return self._default()
 
-    def retrieve(self, query: str, limit: int = 5):
-        return self.graph.find_nodes(query=query, limit=limit)
+    def _save(self):
+        self.data["updated_at"] = self._now()
+        self.path.write_text(json.dumps(self.data, ensure_ascii=False, indent=2), encoding='utf-8')
 
-    def build_influenced_context(self, query: str, limit: int = 5):
-        memories = self.retrieve(query, limit)
-        return self.router.build_context(memories, query)
+    def _now(self):
+        return datetime.now(timezone.utc).isoformat()
 
-    def consolidate(self):
-        return self.consolidator.run()
+    def add_node(self, node: Dict[str, Any]) -> Dict[str, Any]:
+        node = dict(node)
+        node.setdefault("id", f"mem_{len(self.data['nodes'])+1}")
+        node.setdefault("created_at", self._now())
+        node.setdefault("updated_at", self._now())
+        node.setdefault("tags", [])
+        node.setdefault("confidence", 0.5)
+        node.setdefault("version", 1)
+        self.data["nodes"].append(node)
+        self._save()
+        return node
 
-    def llm_refine_decision(self, query: str, context: str):
-        if not self.client:
-            return {"error": "GEMINI_API_KEY missing"}
-        prompt = f"You are the governance layer of a 
+    def add_edge(self, source_id: str, target_id: str, relation: str, weight: float = 1.0, meta: Optional[Dict[str, Any]] = None):
+        edge = {"source": source_id, "target": target_id, "relation": relation, "weight": weight, "meta": meta or {}, "created_at": self._now()}
+        self.data["edges"].append(edge)
+        self._save()
+        return edge
+
+    def get_node(self, node_id: str):
+        return next((n for n in self.data["nodes"] if n.get("id") == node_id), None)
+
+    def find_nodes(self, query: str = "", node_type: Optional[str] = None, limit: int = 10):
+        q = query.lower().strip()
+        results = []
+        for n in self.data["nodes"]:
+            if node_type and n.get("type") != node_type:
+                continue
+            score = 0
+            hay = " ".join([str(n.get(k, "")) for k in ["principle", "context", "decision", "justification"]]).lower()
+            if not q:
+                score

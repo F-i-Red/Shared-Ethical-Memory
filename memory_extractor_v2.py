@@ -1,17 +1,17 @@
 # memory_extractor_v2.py
-# Fase 2 — Extração automática de princípios com Gemini API (gratuito)
+# Fase 2 — Extração automática de princípios com Gemini API
 #
-# Setup:
+# Setup (Windows CMD):
 #   pip install google-genai
-#   set GEMINI_API_KEY=a-tua-chave   (Windows CMD)
-#   (chave gratuita em https://aistudio.google.com/app/apikey)
+#   set GEMINI_API_KEY=a-tua-chave
+#   python memory_extractor_v2.py
 
 import os
 import json
 from typing import Optional, Dict
 from google import genai
 
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = "models/gemini-2.5-flash"
 
 EXTRACTION_PROMPT = """
 Analisa o seguinte texto e extrai UMA memória ética estruturada.
@@ -24,7 +24,7 @@ Formato obrigatório:
   "context": "contexto da situação (1-2 frases)",
   "decision": "decisão tomada ou recomendada",
   "justification": "justificação ética clara",
-  "confidence": 0.0,
+  "confidence": 0.85,
   "tags": ["tag1", "tag2"]
 }}
 
@@ -38,8 +38,7 @@ class MemoryExtractor:
         if not api_key:
             raise EnvironmentError(
                 "GEMINI_API_KEY não encontrada.\n"
-                "Obtém a tua chave gratuita em: https://aistudio.google.com/app/apikey\n"
-                "Depois corre no CMD: set GEMINI_API_KEY=a-tua-chave"
+                "Corre no CMD: set GEMINI_API_KEY=a-tua-chave"
             )
         self.client = genai.Client(api_key=api_key)
         print(f"[MemoryExtractor] Gemini '{GEMINI_MODEL}' iniciado.")
@@ -71,7 +70,7 @@ class MemoryExtractor:
                 print(f"[MemoryExtractor] Resposta incompleta: {list(memory.keys())}")
                 return None
 
-            memory["confidence"] = float(memory.get("confidence", 0.8))
+            memory["confidence"] = float(memory.get("confidence", 0.85))
             memory["tags"] = memory.get("tags", [])
 
             print(f"[MemoryExtractor] Extraído: '{memory['principle']}'")

@@ -5,8 +5,6 @@
 #   pip install google-genai numpy
 #   set GEMINI_API_KEY=a-tua-chave
 #   python phase2_demo.py
-#
-# Chave gratuita em: https://aistudio.google.com/app/apikey
 
 import os
 import json
@@ -16,7 +14,7 @@ from memory_extractor_v2 import MemoryExtractor
 from ethical_retriever_v2 import EthicalRetriever
 from structured_ethical_memory import StructuredEthicalMemory
 
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = "models/gemini-2.5-flash"
 
 SAMPLE_CONVERSATIONS = [
     """

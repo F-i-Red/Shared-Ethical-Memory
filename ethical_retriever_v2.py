@@ -1,9 +1,9 @@
 # ethical_retriever_v2.py
 # Fase 2 — Retrieval semântico real com embeddings Gemini
 #
-# Setup:
+# Setup (Windows CMD):
 #   pip install google-genai numpy
-#   set GEMINI_API_KEY=a-tua-chave   (Windows CMD)
+#   set GEMINI_API_KEY=a-tua-chave
 
 import os
 import math
@@ -12,7 +12,7 @@ from google import genai
 
 from structured_ethical_memory import StructuredEthicalMemory
 
-GEMINI_MODEL = "gemini-1.5-flash"
+EMBEDDING_MODEL = "models/gemini-embedding-001"
 
 W_SEMANTIC = 0.5
 W_ETHICAL  = 0.3
@@ -50,10 +50,11 @@ class EthicalRetriever:
         self.structured_memory = StructuredEthicalMemory()
         print(f"[EthicalRetriever] Embeddings via '{EMBEDDING_MODEL}'")
 
-    def _embed(self, text: str, task: str = "retrieval_query") -> List[float]:
+    def _embed(self, text: str, task_type: str = "RETRIEVAL_QUERY") -> List[float]:
         result = self.client.models.embed_content(
             model=EMBEDDING_MODEL,
-            contents=text
+            contents=text,
+            config={"task_type": task_type}
         )
         return result.embeddings[0].values
 
@@ -63,7 +64,7 @@ class EthicalRetriever:
             f"Contexto: {mem.get('context', '')} "
             f"Decisão: {mem.get('decision', '')}"
         )
-        return self._embed(text, task="retrieval_document")
+        return self._embed(text, task_type="RETRIEVAL_DOCUMENT")
 
     def _score(self, query_emb, mem, prev_scores, idx) -> float:
         mem_emb  = self._embed_memory(mem)

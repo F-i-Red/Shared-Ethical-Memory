@@ -327,7 +327,7 @@ print(sem.get_context_prompt())  # Get system prompt for any LLM
 sem.validate_plan({"temperature": 15, "calories": 1500})  # Returns violations
 
 ---
-### ALL.txt is mandatory for the compreension of the BIG picture.
+### ALL.txt is mandatory for the compreension of the BIG picture (chapter IV).
 ---
 
 > **Arquiteto:** F.Red + IAs, Portugal, 2026  

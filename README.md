@@ -327,8 +327,10 @@ print(sem.get_context_prompt())  # Get system prompt for any LLM
 sem.validate_plan({"temperature": 15, "calories": 1500})  # Returns violations
 
 ---
+### ALL.txt is mandatory for the compreension of the BIG picture.
+---
 
-> **Arquiteto:** F.Red, Portugal, 2026  
+> **Arquiteto:** F.Red + IAs, Portugal, 2026  
 > **Repositório:** https://github.com/F-i-Red/Shared-Ethical-Memory  
 > **Licença:** Aberta — para uso humano e sintético
 

@@ -575,3 +575,5 @@ memory_extractor.py — Extrator automático (com fallback sem Ollama)
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
+---
+https://carrd.co/dashboard/3156177569551545/build
